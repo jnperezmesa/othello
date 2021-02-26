@@ -6,7 +6,7 @@
     <!--Título que aparecerá en la pestaña - La estructura será el nombre de la página actual + Descripción del sitio-->
     <title>Othello</title>
     <!-- Icono que acompañará al title. También será el icono que se guardará a la hora de que hagan un marcador. Se recomienda un tamaño de 32x32 y en PNG	-->
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="img/favicon.png">
     <!-- (Opcional) Sugiere un color al navegador para personalizar la ventana -->
     <meta name="theme-color" content="#3c790a">
     <!-- Bloquea el zoom en smartphones-->
@@ -35,12 +35,13 @@
     <meta property="og:image:height" content="300">
     <meta property="og:image:alt" content="A shiny red apple with a bite taken out">
     <!-- CSS -->
-    <link href="sass/mobile.css" rel="stylesheet" media="all and (max-width: 600px)">
-    <link href="sass/tablet.css" rel="stylesheet" media="all and (min-width: 600px; max-width: 1024px)">
-    <link href="sass/desktop.css" rel="stylesheet" media="all and (min-width: 1024px)">
+    <link href="css/mobile.css" rel="stylesheet" media="all and (max-width: 600px)">
+    <link href="css/tablet.css" rel="stylesheet" media="all and (min-width: 601px) and (max-width: 1023px)">
+    <link href="css/desktop.css" rel="stylesheet" media="all and (min-width: 1024px)">
     <!-- Fin CSS -->
     <!-- Javascript -->
     <script src="js/vendors/vue.min.js"></script>
+    <script src="js/vendors/lodash.min.js"></script>
     <script defer src="js/main.js"></script>
     <!-- Fin Javascript -->
 </head>
@@ -48,44 +49,51 @@
     <div id="app">
         <!-- Menu del juego -->
         <header class="header">
-            <div class="inicio">
-                <h1 class="inicio__nav__titulo">othello</h1>
-                <nav class="inicio__nav">
-                    <ul class="inicio__nav__ul">
-                        <li class="inicio__nav__li">
-                            <a href="#" class="inicio__nav__link">nueva partida</a>
+            <a href="#" class="boton__menu">
+                <div class="boton__menu__fondo">
+                    <hr class="boton__menu__linea">
+                    <hr class="boton__menu__linea">
+                    <hr class="boton__menu__linea">
+                </div>
+            </a>
+            <div class="menu ver">
+                <h1 class="menu__nav__titulo">othello</h1>
+                <nav class="menu__nav">
+                    <ul class="menu__nav__ul">
+                        <li class="menu__nav__li">
+                            <a href="#" class="menu__nav__link">nueva partida</a>
                         </li>
                         <li class="inicio__nav__li">
-                            <a href="#" class="inicio__nav__link">ajustes</a>
+                            <a href="#" class="menu__nav__link">ajustes</a>
                         </li>
                         <li class="inicio__nav__li">
-                            <a href="#" class="inicio__nav__link">salir</a>
+                            <a href="#" class="menu__nav__link">salir</a>
                         </li>
                     </ul>
                 </nav>
             </div>
-            <div class="ajustes">
-                <h2 class="ajustes__nav__titulo">Ajustes</h2>
-                <nav class="ajustes__nav">
-                    <ul class="ajustes__nav__ul">
-                        <li class="ajustes__nav__li">
-                            <h3 class="ajustes__nav__subtitulo">Tableros</h3>
-                            <div class="ajustes__nav__tableros">
-                                <a href="#" class="ajustes__nav__link"><img class="ajustes__nav__img" src="" alt=""></a>
+            <div class="menu">
+                <h2 class="menu__nav__titulo">Ajustes</h2>
+                <nav class="menu__nav">
+                    <ul class="menu__nav__ul">
+                        <li class="menu__nav__li">
+                            <h3 class="menu__nav__subtitulo">Tableros</h3>
+                            <div class="menu__nav__tableros">
+                                <a href="#" class="menu__nav__tableros-opcion"></a>
                             </div>
                         </li>
-                        <li class="ajustes__nav__li">
-                            <h3 class="ajustes__nav__subtitulo">Fichas</h3>
-                            <div class="ajustes__nav__fichas-blancas">
-                                <a href="#" class="ajustes__nav__link"><img class="ajustes__nav__img" src="" alt=""></a>
+                        <li class="menu__nav__li">
+                            <h3 class="menu__nav__subtitulo">Fichas</h3>
+                            <div class="menu__nav__fichas">
+                                <a href="#" class="menu__nav__fichas-opcion"></a>
                             </div>
-                            <div class="ajustes__nav__fichas-negras">
-                                <a href="#" class="ajustes__nav__link"><img class="ajustes__nav__img" src="" alt=""></a>
+                            <div class="menu__nav__fichas">
+                                <a href="#" class="menu__nav__fichas-opcion"></a>
                             </div>
                         </li>
-                        <li class="ajustes__nav__li">
-                            <a href="#" class="ajustes__nav__link">aplicar</a>
-                            <a href="#" class="ajustes__nav__link">salir</a>
+                        <li class="menu__nav__li">
+                            <a href="#" class="menu__nav__link">aplicar</a>
+                            <a href="#" class="menu__nav__link">salir</a>
                         </li>
                     </ul>
                 </nav>
@@ -95,28 +103,28 @@
                 <nav class="menu__nav">
                     <ul class="menu__nav__ul">
                         <li class="menu__nav__li">
-                            <a href="#" class="menu__nav__link">ajustes</a>
+                            <a href="#" class="menu menu__nav__link">ajustes</a>
                         </li>
-                        <li class="ajustes__nav__li">
-                            <a href="#" class="ajustes__nav__link">volver</a>
-                            <a href="#" class="ajustes__nav__link">salir</a>
+                        <li class="menu__nav__li">
+                            <a href="#" class=" menu__nav__link">volver</a>
+                            <a href="#" class=" menu__nav__link">salir</a>
                         </li>
                     </ul>
                 </nav>
             </div>
-            <div class="victoria">
-                <h1 class="victoria__nav__titulo">ganan blancas</h1>
-                <h1 class="victoria__nav__titulo">ganan negras</h1>
-                <nav class="victoria__nav">
-                    <ul class="victoria__nav__ul">
-                        <li class="victoria__nav__li">
-                            <a href="#" class="victoria__nav__link">revancha</a>
+            <div class="menu">
+                <h1 class="menu__titulo menu__titulo--blancas">ganan blancas</h1>
+                <h1 class="menu__titulo menu__titulo--negras">ganan negras</h1>
+                <nav class="menu__nav">
+                    <ul class="menu__nav__ul">
+                        <li class="menu__nav__li">
+                            <a href="#" class="menu__nav__link">revancha</a>
                         </li>
-                        <li class="victoria__nav__li">
-                            <a href="#" class="victoria__nav__link">ajustes</a>
+                        <li class="menu__nav__li">
+                            <a href="#" class="menu__nav__link">ajustes</a>
                         </li>
-                        <li class="victoria__nav__li">
-                            <a href="#" class="victoria__nav__link">salir</a>
+                        <li class="menu__nav__li">
+                            <a href="#" class="menu__nav__link">salir</a>
                         </li>
                     </ul>
                 </nav>
@@ -125,15 +133,15 @@
         <!-- Área de juego -->
         <main class="main">
             <section class="main__adversario">
-
+                <p class="contador main__adversario__contador">2</p>
             </section>
-            <section class="main__tablero">
-                <div class="columna" v-for="(i, indiceI) in actualizarTablero">
-                    <div class="casilla" v-for="(j, indiceJ) in i" :class="{ 'ficha-blanca': j === fichaBlanca, 'ficha-negra': j === fichaNegra, 'ficha': j === fichaBlanca || j === fichaNegra}" @click="moverFicha(indiceI, indiceJ)">{{ j }}</div>
+            <section class="main__tablero classic__tablero">
+                <div class="main__tablero__columna" v-for="(i, indiceI) in tableroJuego">
+                    <div class="main__tablero__casilla classic__casilla" v-for="(j, indiceJ) in i" :class="{ 'ficha-blanca': j === fichaBlanca, 'ficha-negra': j === fichaNegra, 'ficha': j === fichaBlanca || j === fichaNegra}">{{ j }}</div>
                 </div>
             </section>
             <section class="main__jugador">
-
+                <p class="contador main__jugador__contador">2</p>
             </section>
         </main>
         <!-- Créditos y contacto -->

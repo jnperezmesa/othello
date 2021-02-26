@@ -1,1 +1,14 @@
 // Mixins
+
+// Solucion para bloquear el scroll
+@mixin pin
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+
+// Tamanyo de objetos
+@mixin cuadrado($medida)
+  width: $medida
+  height: $medida

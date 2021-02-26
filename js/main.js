@@ -34,7 +34,7 @@ new Vue({
         casillaVacia: casillaVacia,
     },
     mounted: function () {
-
+        this.nuevaPartida();
     },
     methods: {
         nuevaPartida: function () {
@@ -45,6 +45,8 @@ new Vue({
 
     },
     watch: {
-
+        tableroJuego: function () {
+            return this.tableroJuego;
+        }
     }
 })
