@@ -1,15 +1,45 @@
-const tableroInical = [];
+
+const fichaBlanca = 1;
+const fichaNegra = 2;
+const casillaVacia = 0;
+
+const tableroInicial = [
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 2, 0, 0, 0],
+    [0, 0, 0, 2, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0]
+];
 
 
-var app = new Vue({
+new Vue({
     el: '#app',
     data: {
+        tableroJuego: [
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0]
+        ],
+
+        fichaBlanca: fichaBlanca,
+        fichaNegra: fichaNegra,
+        casillaVacia: casillaVacia,
     },
     mounted: function () {
 
     },
     methods: {
-
+        nuevaPartida: function () {
+            this.tableroJuego = tableroInicial.reverse();
+        },
     },
     computed: {
 

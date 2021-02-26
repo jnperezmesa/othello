@@ -65,7 +65,7 @@
                 </nav>
             </div>
             <div class="ajustes">
-                <h2 class="ajustes__nav__titulo">othello</h2>
+                <h2 class="ajustes__nav__titulo">Ajustes</h2>
                 <nav class="ajustes__nav">
                     <ul class="ajustes__nav__ul">
                         <li class="ajustes__nav__li">
@@ -75,7 +75,7 @@
                             </div>
                         </li>
                         <li class="ajustes__nav__li">
-                            <h3 class="ajustes__nav__subtitulo">Tableros</h3>
+                            <h3 class="ajustes__nav__subtitulo">Fichas</h3>
                             <div class="ajustes__nav__fichas-blancas">
                                 <a href="#" class="ajustes__nav__link"><img class="ajustes__nav__img" src="" alt=""></a>
                             </div>
@@ -91,7 +91,7 @@
                 </nav>
             </div>
             <div class="menu">
-                <h1 class="menu__nav__titulo">othello</h1>
+                <h1 class="menu__nav__titulo">Menu</h1>
                 <nav class="menu__nav">
                     <ul class="menu__nav__ul">
                         <li class="menu__nav__li">
@@ -128,7 +128,9 @@
 
             </section>
             <section class="main__tablero">
-
+                <div class="columna" v-for="(i, indiceI) in actualizarTablero">
+                    <div class="casilla" v-for="(j, indiceJ) in i" :class="{ 'ficha-blanca': j === fichaBlanca, 'ficha-negra': j === fichaNegra, 'ficha': j === fichaBlanca || j === fichaNegra}" @click="moverFicha(indiceI, indiceJ)">{{ j }}</div>
+                </div>
             </section>
             <section class="main__jugador">
 
