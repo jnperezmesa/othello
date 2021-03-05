@@ -5,7 +5,7 @@
     display: flex
     justify-content: center
     align-items: center
-    z-index: 1000
+    z-index: 500
     @include pin
     background-color: transparentize($color-negro, .8)
     .menu
@@ -15,6 +15,7 @@
       background-color: $color-gris
       @include ajusteMenu(.5rem, 0)
       border-radius: .5rem
+      z-index: 1500
       &__titulo
         text-align: center
         text-transform: uppercase
@@ -38,7 +39,8 @@
           list-style: none
         &__link
           display: inline-block
+          font-size: 1.5rem
           font-weight: bold
           color: $color-negro
           text-transform: capitalize
-          margin-bottom: .5rem
+          margin: .5rem 0

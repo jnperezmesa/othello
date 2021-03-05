@@ -1,3 +1,22 @@
 
 .boton__menu
-  display: none
+  @include cuadrado(4rem)
+  position: fixed
+  top: 0
+  right: 0
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-direction: column
+  grid-gap: .8rem
+  z-index: 1000
+  margin: 3rem
+  cursor: pointer
+  &__linea
+    width: 80%
+    height: .4rem
+    margin: 0
+    padding: 0
+    background-color: darken($color-mesa, 20%)
+    border: none
+    border-radius: .5rem
