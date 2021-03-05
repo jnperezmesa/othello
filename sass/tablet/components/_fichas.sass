@@ -1,14 +1,15 @@
 
 // Ajuste general
 .ficha::before
-  @include cuadrado(1rem)
   @include pin
   content: ''
+  display: block
   position: absolute
   background:
     repeat: no-repeat
-    size: cover
-    color: black
+    size: 4.2rem
+    position: .2rem .3rem
+
 
 
 // Diseños
@@ -16,7 +17,7 @@
   &__ficha
     &--negra::before
       background:
-        image: image('../img/fichas/classic-negra.svg')
+        image: url("../img/fichas/classic-blanca.svg")
     &--blanca::before
       background:
-        image: image('../img/fichas/classic-blanca.svg')
+        image: url("../img/fichas/classic-negra.svg")

@@ -3,5 +3,12 @@
 .main
   @include pin
   display: flex
+  flex-direction: column
   justify-content: center
   align-items: center
+  background-color: $color-mesa
+  &__adversario
+    position: relative
+    transform: rotate(180deg)
+  &__jugador
+    position: relative

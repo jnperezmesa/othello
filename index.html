@@ -57,7 +57,7 @@
                 </div>
             </a>
             <div class="menu ver">
-                <h1 class="menu__nav__titulo">othello</h1>
+                <h1 class="menu__titulo menu__titulo--especial">othello</h1>
                 <nav class="menu__nav">
                     <ul class="menu__nav__ul">
                         <li class="menu__nav__li">
@@ -73,7 +73,7 @@
                 </nav>
             </div>
             <div class="menu">
-                <h2 class="menu__nav__titulo">Ajustes</h2>
+                <h2 class="menu__titulo">Ajustes</h2>
                 <nav class="menu__nav">
                     <ul class="menu__nav__ul">
                         <li class="menu__nav__li">
@@ -99,7 +99,7 @@
                 </nav>
             </div>
             <div class="menu">
-                <h1 class="menu__nav__titulo">Menu</h1>
+                <h1 class="menu__titulo">Menu</h1>
                 <nav class="menu__nav">
                     <ul class="menu__nav__ul">
                         <li class="menu__nav__li">
@@ -133,15 +133,15 @@
         <!-- Área de juego -->
         <main class="main">
             <section class="main__adversario">
-                <p class="contador main__adversario__contador">2</p>
+                <p class="contador contador__blanco main__adversario__contador"><span>2</span></p>
             </section>
             <section class="main__tablero classic__tablero">
-                <div class="main__tablero__columna" v-for="(i, indiceI) in tableroJuego">
-                    <div class="main__tablero__casilla classic__casilla" v-for="(j, indiceJ) in i" :class="{ 'ficha-blanca': j === fichaBlanca, 'ficha-negra': j === fichaNegra, 'ficha': j === fichaBlanca || j === fichaNegra}">{{ j }}</div>
+                <div class="main__tablero__columna" v-for="(x, indiceX) in tableroJuego">
+                    <div class="main__tablero__casilla classic__casilla" v-for="(y, indiceY) in x" :class="{ 'classic__ficha--blanca': y === fichaBlanca, 'classic__ficha--negra': y === fichaNegra, 'ficha': y === fichaBlanca || y === fichaNegra}">{{ y }}</div>
                 </div>
             </section>
             <section class="main__jugador">
-                <p class="contador main__jugador__contador">2</p>
+                <p class="contador contador__negro main__jugador__contador turno"><span>2</span></p>
             </section>
         </main>
         <!-- Créditos y contacto -->

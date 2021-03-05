@@ -18,27 +18,16 @@ const tableroInicial = [
 new Vue({
     el: '#app',
     data: {
-        tableroJuego: [
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0]
-        ],
-
+        tableroJuego: tableroInicial,
         fichaBlanca: fichaBlanca,
         fichaNegra: fichaNegra,
         casillaVacia: casillaVacia,
     },
     mounted: function () {
-        this.nuevaPartida();
     },
     methods: {
         nuevaPartida: function () {
-            this.tableroJuego = tableroInicial.reverse();
+            this.tableroJuego = tableroInicial;
         },
     },
     computed: {
