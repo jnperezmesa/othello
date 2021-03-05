@@ -134,7 +134,10 @@
         <!-- Área de juego -->
         <main class="main">
             <section class="main__adversario">
-                <p :class="{'contador__negro': jugador2 === fichaNegra , 'contador__blanco': jugador2 === fichaBlanca}" class="contador main__adversario__contador"><span>2</span></p>
+                <p :class="{'contador__negro': jugador2 === fichaNegra , 'contador__blanco': jugador2 === fichaBlanca}" class="contador main__adversario__contador">
+                    <span v-if="jugador2 === fichaNegra">2</span>
+                    <span v-if="jugador2 === fichaBlanca">2</span>
+                </p>
                 <div :class="{'turno': jugadorActivo === jugador2}"></div>
             </section>
             <section class="main__tablero classic__tablero">
@@ -146,7 +149,10 @@
                 </div>
             </section>
             <section class="main__jugador">
-                <p :class="{'contador__negro': jugador1 === fichaNegra , 'contador__blanco': jugador1 === fichaBlanca}" class="contador main__jugador__contador"><span>2</span></p>
+                <p :class="{'contador__negro': jugador1 === fichaNegra , 'contador__blanco': jugador1 === fichaBlanca}" class="contador main__jugador__contador">
+                    <span v-if="jugador1 === fichaNegra">{{ contarNegras.length }}</span>
+                    <span v-if="jugador1 === fichaBlanca">{{ contarBlancas.length }}</span>
+                </p>
                 <div :class="{'turno': jugadorActivo === jugador1}"></div>
             </section>
         </main>
