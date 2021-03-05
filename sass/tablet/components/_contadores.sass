@@ -9,29 +9,13 @@
   font-size: 2.5rem
   font-family: Roboto-j
   font-weight: bold
-  &:before
-    @include cuadrado(5rem)
-    content: ''
-    display: none
-    margin-left: 600%
-    position: absolute
-    background:
-      repeat: no-repeat
-      size: 4.2rem
-      position: center
   &__negro
     background-color: $color-negro
     color: $color-blanco
-    &:before
-      background:
-        image: url("../img/fichas/classic-negra.svg")
   &__blanco
     background-color: $color-blanco
     color: $color-negro
-    &:before
-      background:
-        image: url("../img/fichas/classic-blanca.svg")
 
 // Indicador de turno
-.turno:before
+.turno
   display: block

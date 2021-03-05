@@ -36,9 +36,9 @@ new Vue({
         menu: 1,
         victoria: 0,
 
-        jugador1: true,
-        jugador2: false,
-        jugadorActivo: true
+        jugador1: 2,
+        jugador2: 1,
+        jugadorActivo: ''
     },
     mounted: function () {
     },
@@ -46,12 +46,38 @@ new Vue({
         nuevaPartida: function () {
             this.tableroJuego = tableroInicial;
             this.desplegado = false;
+            this.jugador1 = this.fichaNegra;
+            this.jugador2 = this.fichaBlanca;
+            this.jugadorActivo = this.fichaNegra;
+            this.menu = 3;
+        },
+        revancha: function () {
+            this.tableroJuego = tableroInicial;
+            this.desplegado = false;
+            if (this.jugador1 === this.fichaBlanca) {
+                this.jugador1 = this.fichaNegra;
+                this.jugador2 = this.fichaBlanca;
+            }
+            if (this.jugador1 === this.fichaNegra) {
+                this.jugador2 = this.fichaNegra;
+                this.jugador1 = this.fichaBlanca;
+            }
+            this.jugadorActivo = this.fichaNegra;
             this.menu = 3;
         },
         turno: function () {
-            this.jugadorActivo = !this.jugadorActivo;
+            if (this.jugadorActivo === this.jugador1) {
+                this.jugadorActivo = this.jugador2;
+            }
+            if (this.jugadorActivo === this.jugador2) {
+                this.jugadorActivo = this.jugador1;
+            }
         },
-        colocarFicha: function () {
+        colocarFicha: function (x, y) {
+            this.tableroJuego[x][y] = this.jugadorActivo;
+            
+        },
+        convertirFichas: function () {
 
         }
     },

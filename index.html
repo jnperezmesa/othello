@@ -59,8 +59,8 @@
                     <h1 class="menu__titulo menu__titulo--especial">othello</h1>
                     <nav class="menu__nav">
                         <ul class="menu__nav__ul">
-                            <li class="menu__nav__li" @click="nuevaPartida()">
-                                <a href="#" class="menu__nav__link">nueva partida</a>
+                            <li class="menu__nav__li">
+                                <a href="#" class="menu__nav__link" @click="nuevaPartida()">nueva partida</a>
                             </li>
                             <li class="inicio__nav__li" @click="menu = 2">
                                 <a href="#" class="menu__nav__link">ajustes</a>
@@ -118,7 +118,7 @@
                     <nav class="menu__nav">
                         <ul class="menu__nav__ul">
                             <li class="menu__nav__li">
-                                <a href="#" class="menu__nav__link">revancha</a>
+                                <a href="#" class="menu__nav__link" @click="revancha()">revancha</a>
                             </li>
                             <li class="menu__nav__li">
                                 <a href="#" class="menu__nav__link" @click="menu = 2">ajustes</a>
@@ -134,15 +134,20 @@
         <!-- Área de juego -->
         <main class="main">
             <section class="main__adversario">
-                <p :class="{'turno': jugadorActivo === jugador2}" class="contador contador__blanco main__adversario__contador"><span>2</span></p>
+                <p :class="{'contador__negro': jugador2 === fichaNegra , 'contador__blanco': jugador2 === fichaBlanca}" class="contador main__adversario__contador"><span>2</span></p>
+                <div :class="{'turno': jugadorActivo === jugador2}"></div>
             </section>
             <section class="main__tablero classic__tablero">
                 <div class="main__tablero__columna" v-for="(x, indiceX) in tableroJuego">
-                    <div class="main__tablero__casilla classic__casilla" v-for="(y, indiceY) in x" :class="{ 'classic__ficha--blanca': y === fichaBlanca, 'classic__ficha--negra': y === fichaNegra, 'ficha': y === fichaBlanca || y === fichaNegra}">{{ y }}</div>
+                    <div class="main__tablero__casilla classic__casilla" v-for="(y, indiceY) in x" @click="colocarFicha(indiceX, indiceY)">
+                        <div v-if="y === fichaBlanca" class="ficha classic__ficha--blanca"></div>
+                        <div v-if="y === fichaNegra" class="ficha classic__ficha--negra"></div>
+                    </div>
                 </div>
             </section>
             <section class="main__jugador">
-                <p :class="{'turno': jugadorActivo === jugador1}" class="contador contador__negro main__jugador__contador"><span>2</span></p>
+                <p :class="{'contador__negro': jugador1 === fichaNegra , 'contador__blanco': jugador1 === fichaBlanca}" class="contador main__jugador__contador"><span>2</span></p>
+                <div :class="{'turno': jugadorActivo === jugador1}"></div>
             </section>
         </main>
         <!-- Créditos y contacto -->
