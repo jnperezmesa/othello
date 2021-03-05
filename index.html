@@ -49,85 +49,85 @@
     <div id="app">
         <!-- Menu del juego -->
         <header class="header">
-            <a href="#" class="boton__menu">
-                <div class="boton__menu__fondo">
-                    <hr class="boton__menu__linea">
-                    <hr class="boton__menu__linea">
-                    <hr class="boton__menu__linea">
+            <div v-if="desplegado === false" @click="desplegado = true" class="boton__menu">
+                <hr class="boton__menu__linea">
+                <hr class="boton__menu__linea">
+                <hr class="boton__menu__linea">
+            </div>
+            <div v-else class="menus">
+                <div class="menu">
+                    <h1 class="menu__titulo menu__titulo--especial">othello</h1>
+                    <nav class="menu__nav">
+                        <ul class="menu__nav__ul">
+                            <li class="menu__nav__li">
+                                <a href="#" class="menu__nav__link" @click="menu = ">nueva partida</a>
+                            </li>
+                            <li class="inicio__nav__li">
+                                <a href="#" class="menu__nav__link" @click="menu = ajustes">ajustes</a>
+                            </li>
+                            <li class="inicio__nav__li">
+                                <a href="#" class="menu__nav__link" @click="menu = ">salir</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-            </a>
-            <div class="menu ver">
-                <h1 class="menu__titulo menu__titulo--especial">othello</h1>
-                <nav class="menu__nav">
-                    <ul class="menu__nav__ul">
-                        <li class="menu__nav__li">
-                            <a href="#" class="menu__nav__link">nueva partida</a>
-                        </li>
-                        <li class="inicio__nav__li">
-                            <a href="#" class="menu__nav__link">ajustes</a>
-                        </li>
-                        <li class="inicio__nav__li">
-                            <a href="#" class="menu__nav__link">salir</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="menu">
-                <h2 class="menu__titulo">Ajustes</h2>
-                <nav class="menu__nav">
-                    <ul class="menu__nav__ul">
-                        <li class="menu__nav__li">
-                            <h3 class="menu__nav__subtitulo">Tableros</h3>
-                            <div class="menu__nav__tableros">
-                                <a href="#" class="menu__nav__tableros-opcion"></a>
-                            </div>
-                        </li>
-                        <li class="menu__nav__li">
-                            <h3 class="menu__nav__subtitulo">Fichas</h3>
-                            <div class="menu__nav__fichas">
-                                <a href="#" class="menu__nav__fichas-opcion"></a>
-                            </div>
-                            <div class="menu__nav__fichas">
-                                <a href="#" class="menu__nav__fichas-opcion"></a>
-                            </div>
-                        </li>
-                        <li class="menu__nav__li">
-                            <a href="#" class="menu__nav__link">aplicar</a>
-                            <a href="#" class="menu__nav__link">salir</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="menu">
-                <h1 class="menu__titulo">Menu</h1>
-                <nav class="menu__nav">
-                    <ul class="menu__nav__ul">
-                        <li class="menu__nav__li">
-                            <a href="#" class="menu menu__nav__link">ajustes</a>
-                        </li>
-                        <li class="menu__nav__li">
-                            <a href="#" class=" menu__nav__link">volver</a>
-                            <a href="#" class=" menu__nav__link">salir</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="menu">
-                <h1 class="menu__titulo menu__titulo--blancas">ganan blancas</h1>
-                <h1 class="menu__titulo menu__titulo--negras">ganan negras</h1>
-                <nav class="menu__nav">
-                    <ul class="menu__nav__ul">
-                        <li class="menu__nav__li">
-                            <a href="#" class="menu__nav__link">revancha</a>
-                        </li>
-                        <li class="menu__nav__li">
-                            <a href="#" class="menu__nav__link">ajustes</a>
-                        </li>
-                        <li class="menu__nav__li">
-                            <a href="#" class="menu__nav__link">salir</a>
-                        </li>
-                    </ul>
-                </nav>
+                <div class="menu">
+                    <h2 class="menu__titulo">Ajustes</h2>
+                    <nav class="menu__nav">
+                        <ul class="menu__nav__ul">
+                            <li class="menu__nav__li">
+                                <h3 class="menu__nav__subtitulo">Tableros</h3>
+                                <div class="menu__nav__tableros">
+                                    <a href="#" class="menu__nav__tableros-opcion"></a>
+                                </div>
+                            </li>
+                            <li class="menu__nav__li">
+                                <h3 class="menu__nav__subtitulo">Fichas</h3>
+                                <div class="menu__nav__fichas">
+                                    <a href="#" class="menu__nav__fichas-opcion"></a>
+                                </div>
+                                <div class="menu__nav__fichas">
+                                    <a href="#" class="menu__nav__fichas-opcion"></a>
+                                </div>
+                            </li>
+                            <li class="menu__nav__li">
+                                <a href="#" class="menu__nav__link">aplicar</a>
+                                <a href="#" class="menu__nav__link">salir</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="menu">
+                    <h1 class="menu__titulo">Menu</h1>
+                    <nav class="menu__nav">
+                        <ul class="menu__nav__ul">
+                            <li class="menu__nav__li">
+                                <a href="#" class="menu menu__nav__link">ajustes</a>
+                            </li>
+                            <li class="menu__nav__li">
+                                <a href="#" class=" menu__nav__link">volver</a>
+                                <a href="#" class=" menu__nav__link">salir</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="menu">
+                    <h1 class="menu__titulo menu__titulo--blancas">ganan blancas</h1>
+                    <h1 class="menu__titulo menu__titulo--negras">ganan negras</h1>
+                    <nav class="menu__nav">
+                        <ul class="menu__nav__ul">
+                            <li class="menu__nav__li">
+                                <a href="#" class="menu__nav__link">revancha</a>
+                            </li>
+                            <li class="menu__nav__li">
+                                <a href="#" class="menu__nav__link">ajustes</a>
+                            </li>
+                            <li class="menu__nav__li">
+                                <a href="#" class="menu__nav__link">salir</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </header>
         <!-- Área de juego -->

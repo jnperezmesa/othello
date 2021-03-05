@@ -22,6 +22,9 @@ new Vue({
         fichaBlanca: fichaBlanca,
         fichaNegra: fichaNegra,
         casillaVacia: casillaVacia,
+
+        desplegado: true
+        menu:
     },
     mounted: function () {
     },

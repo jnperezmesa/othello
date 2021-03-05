@@ -1,46 +1,44 @@
 // header
 
 .header
-  @include pin
-  background-color: transparentize($color-negro, .8)
-  display: flex
-  justify-content: center
-  align-items: center
-  z-index: 1000
-  .menu
-    min-width: 14rem
-    display: none
-    position: absolute
-    background-color: $color-gris
-    @include ajusteMenu(.5rem, 0)
-    border-radius: .5rem
-    &__titulo
-      text-align: center
-      text-transform: uppercase
-      color: $color-negro
-      font-family: Roboto-j
-      text-shadow: .17rem .17rem $color-blanco
-      &--especial
+  .menus
+    display: flex
+    justify-content: center
+    align-items: center
+    z-index: 1000
+    @include pin
+    background-color: transparentize($color-negro, .8)
+    .menu
+      min-width: 14rem
+      display: block
+      position: absolute
+      background-color: $color-gris
+      @include ajusteMenu(.5rem, 0)
+      border-radius: .5rem
+      &__titulo
         text-align: center
         text-transform: uppercase
-        color: $color-blanco
-        font-family: Roboto-j
-        text-shadow: .17rem .17rem $color-negro
-    &__nav
-      background-color: $color-mesa
-      padding: 1rem
-      border-radius: .5rem
-      &__ul
-        margin: 0
-        padding: 0
-        text-align: center
-        list-style: none
-      &__link
-        display: inline-block
-        font-weight: bold
         color: $color-negro
-        text-transform: capitalize
-        margin-bottom: .5rem
-
-  .ver
-    display: block
+        font-family: Roboto-j
+        text-shadow: .17rem .17rem $color-blanco
+        &--especial
+          text-align: center
+          text-transform: uppercase
+          color: $color-blanco
+          font-family: Roboto-j
+          text-shadow: .17rem .17rem $color-negro
+      &__nav
+        background-color: $color-mesa
+        padding: 1rem
+        border-radius: .5rem
+        &__ul
+          margin: 0
+          padding: 0
+          text-align: center
+          list-style: none
+        &__link
+          display: inline-block
+          font-weight: bold
+          color: $color-negro
+          text-transform: capitalize
+          margin-bottom: .5rem
