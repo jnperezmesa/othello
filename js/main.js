@@ -34,30 +34,34 @@ new Vue({
 
         desplegado: true,
         menu: 1,
-        victoria: 0,
+        victoria: null,
 
         jugador1: 2,
         jugador2: 1,
         jugadorActivo: '',
 
-        tablero: [],
-        contarNegras: [],
-        contarBlancas: []
+        contadorFichasNegras: 2,
+        contadorFichasBlancas: 2,
+        quedanHuecos: true
+    },
+    filter: {
     },
     mounted: function () {
     },
     methods: {
-        nuevaPartida: function () {
+        resetBasico: function () {
             this.tableroJuego = tableroInicial;
             this.desplegado = false;
-            this.jugador1 = this.fichaNegra;
-            this.jugador2 = this.fichaBlanca;
+            this.victoria = null;
             this.jugadorActivo = this.fichaNegra;
             this.menu = 3;
         },
+        nuevaPartida: function () {
+            this.jugador1 = this.fichaNegra;
+            this.jugador2 = this.fichaBlanca;
+            this.resetBasico();
+        },
         revancha: function () {
-            this.tableroJuego = tableroInicial;
-            this.desplegado = false;
             if (this.jugador1 === this.fichaBlanca) {
                 this.jugador1 = this.fichaNegra;
                 this.jugador2 = this.fichaBlanca;
@@ -66,8 +70,7 @@ new Vue({
                 this.jugador2 = this.fichaNegra;
                 this.jugador1 = this.fichaBlanca;
             }
-            this.jugadorActivo = this.fichaNegra;
-            this.menu = 3;
+            this.resetBasico();
         },
         turno: function () {
             if (this.jugadorActivo === this.fichaNegra) {
@@ -79,22 +82,53 @@ new Vue({
         colocarFicha: function (x, y) {
             this.tableroJuego[x][y] = this.jugadorActivo;
             this.convertirFichas();
-            // no va
-            this.revisarTablero();
             this.$forceUpdate();
         },
         convertirFichas: function () {
             this.turno();
         },
-        // No va
-        revisarTablero: function () {
-            this.tablero = _.flattenDeep(this.tableroJuego);
-            this.contarBlancas = this.tablero.filter(this.fichaBlanca);
-            this.contarNegras = this.tablero.filter(this.fichaNegra);
-        },
     },
     computed: {
+        tablero: function () {
+            if (this.jugadorActivo === 1) {
+                return _.flattenDeep(this.tableroJuego);
+            } else {
+                return _.flattenDeep(this.tableroJuego);
+            }
+        },
+        fichasNegras: function () {
+            let fichas = [];
+            fichas = this.tablero.filter(casilla => {
+                return casilla === this.fichaNegra;
+            });
+            return fichas.length;
+        },
+        fichasBlancas: function () {
+            let fichas = [];
+            fichas = this.tablero.filter(casilla => {
+                return casilla === this.fichaBlanca;
+            });
+            return fichas.length;
+        }
     },
     watch: {
+        jugadorActivo: function () {
+            if (!this.tablero.includes(casillaVacia)) {
+                if (this.fichasNegras < this.fichasBlancas) {
+                    this.victoria = this.fichaNegra;
+                }
+                if (this.fichasNegras < this.fichasBlancas) {
+                    this.victoria = this.fichaBlanca;
+                }
+                if (this.fichasNegras === this.fichasBlancas) {
+                    this.victoria = 0;
+                }
+                this.menu = 4;
+                this.desplegado = true;
+            }
+            console.log(this.jugadorActivo);
+            console.log('Negras '.concat(this.fichasNegras));
+            console.log('Blancas '.concat(this.fichasBlancas));
+        }
     }
 })

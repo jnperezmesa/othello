@@ -135,8 +135,8 @@
         <main class="main">
             <section class="main__adversario">
                 <p :class="{'contador__negro': jugador2 === fichaNegra , 'contador__blanco': jugador2 === fichaBlanca}" class="contador main__adversario__contador">
-                    <span v-if="jugador2 === fichaNegra">2</span>
-                    <span v-if="jugador2 === fichaBlanca">2</span>
+                    <span v-if="jugador2 === fichaNegra">{{ fichasNegras }}</span>
+                    <span v-if="jugador2 === fichaBlanca">{{ fichasBlancas }}</span>
                 </p>
                 <div :class="{'turno': jugadorActivo === jugador2}"></div>
             </section>
@@ -150,8 +150,8 @@
             </section>
             <section class="main__jugador">
                 <p :class="{'contador__negro': jugador1 === fichaNegra , 'contador__blanco': jugador1 === fichaBlanca}" class="contador main__jugador__contador">
-                    <span v-if="jugador1 === fichaNegra">{{ contarNegras.length }}</span>
-                    <span v-if="jugador1 === fichaBlanca">{{ contarBlancas.length }}</span>
+                    <span v-if="jugador1 === fichaNegra">{{ fichasNegras }}</span>
+                    <span v-if="jugador1 === fichaBlanca">{{ fichasBlancas }}</span>
                 </p>
                 <div :class="{'turno': jugadorActivo === jugador1}"></div>
             </section>
