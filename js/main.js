@@ -33,7 +33,7 @@ new Vue({
         casillaVacia: casillaVacia,
 
         desplegado: true,
-        menu: 2,
+        menu: 1,
         victoria: null,
 
         jugador1: 2,
@@ -50,8 +50,8 @@ new Vue({
     },
     methods: {
         resetBasico: function () {
-            this.tableroJuego = tableroInicial;
             this.desplegado = false;
+            this.tableroJuego = tableroInicial;
             this.victoria = null;
             this.jugadorActivo = this.fichaNegra;
             this.menu = 3;
