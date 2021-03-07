@@ -62,8 +62,8 @@
                             <li class="menu__nav__li">
                                 <a href="#" class="menu__nav__link" @click="nuevaPartida()">nueva partida</a>
                             </li>
-                            <li class="inicio__nav__li" @click="menu = 2">
-                                <a href="#" class="menu__nav__link">ajustes</a>
+                            <li class="inicio__nav__li">
+                                <a href="#" class="menu__nav__link" @click="menu = 2">ajustes</a>
                             </li>
                             <li class="inicio__nav__li">
                                 <a href="#" class="menu__nav__link">salir</a>
@@ -71,23 +71,29 @@
                         </ul>
                     </nav>
                 </div>
-                <div v-if="menu === 2" class="menu">
+                <div v-if="menu === 2" class="menu menu--especial">
                     <h2 class="menu__titulo">Ajustes</h2>
                     <nav class="menu__nav">
                         <ul class="menu__nav__ul">
                             <li class="menu__nav__li">
                                 <h3 class="menu__nav__subtitulo">Tableros</h3>
-                                <div class="menu__nav__tableros">
-                                    <a href="#" class="menu__nav__tableros-opcion"></a>
-                                </div>
+                                <ul class="menu__nav__tableros">
+                                    <li class="menu__nav__tableros-opcion"></li>
+                                </ul>
                             </li>
                             <li class="menu__nav__li">
                                 <h3 class="menu__nav__subtitulo">Fichas</h3>
-                                <div class="menu__nav__fichas">
-                                    <a href="#" class="menu__nav__fichas-opcion"></a>
+                                <div class="menu__nav__negras">
+                                    <p>Negras</p>
+                                    <ul class="menu__nav__fichas">
+                                        <li class="menu__nav__fichas-opcion ficha classic__ficha--negra"></li>
+                                    </ul>
                                 </div>
-                                <div class="menu__nav__fichas">
-                                    <a href="#" class="menu__nav__fichas-opcion"></a>
+                                <div class="menu__nav__blancas">
+                                    <p>Blancas</p>
+                                    <ul class="menu__nav__fichas">
+                                        <li class="menu__nav__fichas-opcion ficha classic__ficha--blanca"></li>
+                                    </ul>
                                 </div>
                             </li>
                             <li class="menu__nav__li">
@@ -102,7 +108,7 @@
                     <nav class="menu__nav">
                         <ul class="menu__nav__ul">
                             <li class="menu__nav__li">
-                                <a href="#" class="menu__nav__link">ajustes</a>
+                                <a href="#" class="menu__nav__link" @click="menu = 2">ajustes</a>
                             </li>
                             <li class="menu__nav__li">
                                 <a href="#" class=" menu__nav__link" @click="desplegado = false">volver</a>

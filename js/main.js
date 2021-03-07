@@ -33,7 +33,7 @@ new Vue({
         casillaVacia: casillaVacia,
 
         desplegado: true,
-        menu: 1,
+        menu: 2,
         victoria: null,
 
         jugador1: 2,
