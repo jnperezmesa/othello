@@ -32,8 +32,13 @@ new Vue({
         fichaNegra: fichaNegra,
         casillaVacia: casillaVacia,
 
+        disenyoTablero: 'classic',
+        disenyoFichaNegra: 'classic',
+        disenyoFichaBlanca: 'classic',
+
+
         desplegado: true,
-        menu: 1,
+        menu: 2,
         victoria: null,
 
         jugador1: 2,
