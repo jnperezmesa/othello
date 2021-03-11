@@ -151,8 +151,8 @@
             <section class="main__tablero classic__tablero">
                 <div class="main__tablero__columna" v-for="(x, indiceX) in tableroJuego">
                     <div class="main__tablero__casilla classic__casilla" v-for="(y, indiceY) in x" @click="colocarFicha(indiceX, indiceY)">
-                        <div v-if="y === fichaBlanca" class="ficha classic__ficha--blanca"></div>
-                        <div v-if="y === fichaNegra" class="ficha classic__ficha--negra"></div>
+                        <div v-if="y === fichaBlanca" class="ficha classic__ficha--blanca">{{ y }}</div>
+                        <div v-if="y === fichaNegra" class="ficha classic__ficha--negra">{{ y }}</div>
                     </div>
                 </div>
             </section>
