@@ -38,7 +38,7 @@ new Vue({
 
 
         desplegado: true,
-        menu: 1,
+        menu: 2,
         victoria: null,
 
         jugador1: 2,
@@ -89,7 +89,7 @@ new Vue({
             this.convertirFichas();
             this.$forceUpdate();
         },
-        convertirFichas: function (x, y) {
+        convertirFichas: function () {
             this.turno();
         },
     },
