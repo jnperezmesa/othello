@@ -1,4 +1,4 @@
-# ejemplo
+# othello-vuecli
 
 ## Project setup
 ```
