@@ -1,18 +1,17 @@
 <template>
-  <div class="main">
-    <Tablero :tableroActivo="tableroDeJuego"/>
+  <div class="juego">
+    <BotonHamburgesa/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Tablero from '@/components/Tablero.vue'
+import BotonHamburgesa from "../components/botones/BotonHamburguesa";
 
 export default {
   name: 'Juego',
   components: {
-    Tablero
-  },
-
+    BotonHamburgesa
+  }
 }
 </script>

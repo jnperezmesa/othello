@@ -88,10 +88,11 @@ new Vue({
         colocarFicha: function (x, y) {
             this.tableroJuego[x][y] = this.jugadorActivo;
             this.convertirFichas();
+            this.turno();
             this.$forceUpdate();
         },
         convertirFichas: function () {
-            this.turno();
+            console.log('Convertir fichas')
         },
     },
     computed: {
@@ -123,7 +124,7 @@ new Vue({
                 if (this.fichasNegras < this.fichasBlancas) {
                     this.victoria = this.fichaNegra;
                 }
-                if (this.fichasNegras < this.fichasBlancas) {
+                if (this.fichasNegras > this.fichasBlancas) {
                     this.victoria = this.fichaBlanca;
                 }
                 if (this.fichasNegras === this.fichasBlancas) {
