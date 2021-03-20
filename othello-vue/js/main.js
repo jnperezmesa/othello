@@ -38,7 +38,7 @@ new Vue({
 
 
         desplegado: true,
-        menu: 2,
+        menu: 1,
         victoria: null,
 
         jugador1: 2,
@@ -60,6 +60,7 @@ new Vue({
             this.victoria = null;
             this.jugadorActivo = this.fichaNegra;
             this.menu = 3;
+            this.$forceUpdate();
         },
         nuevaPartida: function () {
             this.jugador1 = this.fichaNegra;
