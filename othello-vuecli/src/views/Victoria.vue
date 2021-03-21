@@ -1,13 +1,16 @@
 <template>
   <div class="menus">
     <div class="menu">
+      <!--- Cabecera del menu --->
       <CabeceraMenus v-if="$store.state.victoria === $store.state.fichaBlanca" class="menu__titulo--especial" texto="ganan blancas"/>
       <CabeceraMenus v-if="$store.state.victoria === $store.state.fichaNegra" texto="ganan negras"/>
       <CabeceraMenus v-if="$store.state.victoria === $store.state.casillaVacia" texto="Empate"/>
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
-          <BotonJuego texto="revancha"/>
-          <BotonVolverAInicio texto="salir"/>
+          <!--- Botones del menu --->
+          <BotonJuego texto="revancha" @click="this.$store.commit('revancha')"/>
+          <BotonVolverAInicio texto="salir" @click="this.$store.commit('resetBasico')"/>
+          <!--- Fin otones del menu --->
         </ul>
       </nav>
     </div>

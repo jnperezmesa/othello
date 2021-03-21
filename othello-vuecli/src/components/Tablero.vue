@@ -22,8 +22,16 @@ export default {
   components: {
     Ficha
   },
-  props: {
-    estadoTablero: Array
+  computed: {
+    estadoTablero: function () {
+      // Utilizo el jugador activo para forzar la actualizacion
+      if (this.$store.state.jugadorActivo === 1) {
+        // Entrego el estado del tablero
+        return this.$store.state.tableroJuego
+      } else {
+        return this.$store.state.tableroJuego
+      }
+    }
   }
 }
 </script>

@@ -4,7 +4,7 @@
       <CabeceraMenus class="menu__titulo--especial" texto="othello"/>
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
-          <BotonJuego texto="nueva partida"/>
+          <BotonJuego texto="nueva partida" @click="this.$store.commit('nuevaPartida')"/>
           <BotonPersonalizar/>
         </ul>
       </nav>
@@ -24,7 +24,6 @@ export default {
     CabeceraMenus,
     BotonPersonalizar,
     BotonJuego
-
   }
 }
 </script>

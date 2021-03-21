@@ -15,9 +15,14 @@ export default {
   },
   methods: {
     colocarFicha: function (x, y) {
-      this.$store.state.tableroJuego[x][y] = this.$store.state.jugadorActivo;
+      // creo una copia del tablero
+      let tablero = this.$store.state.tableroJuego
+      // Inserto la ficha en la copia
+      tablero[x][y] = this.$store.state.jugadorActivo
+      // Reemplazo la copia
+      this.$store.state.tableroJuego = tablero
+      // Cambio el turno
       this.$store.commit('turno')
-      console.log(this.$store.state.jugadorActivo)
       console.log(this.$store.state.tableroJuego)
     }
   }
