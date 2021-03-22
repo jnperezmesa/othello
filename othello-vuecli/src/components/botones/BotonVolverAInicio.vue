@@ -8,7 +8,7 @@
 export default {
   name: 'BotonVolverAInicio',
   props: {
-    texto: String
+    texto: String,
   }
 }
 </script>

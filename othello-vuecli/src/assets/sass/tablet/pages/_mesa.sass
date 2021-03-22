@@ -1,0 +1,15 @@
+// Página de inicio...
+
+.main
+  @include pin
+  display: flex
+  position: fixed
+  flex-direction: column
+  justify-content: space-around
+  align-items: center
+  background-color: $color-mesa
+  &__adversario
+    position: relative
+    transform: rotate(180deg)
+  &__jugador
+    position: relative

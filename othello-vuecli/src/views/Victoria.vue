@@ -8,8 +8,8 @@
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
           <!--- Botones del menu --->
-          <BotonJuego texto="revancha" @click="this.$store.commit('revancha')"/>
-          <BotonVolverAInicio texto="salir" @click="this.$store.commit('resetBasico')"/>
+          <span @click="$store.commit('revancha')"><BotonJuego texto="revancha"/></span>
+          <span @click="$store.commit('resetBasico')"><BotonVolverAInicio texto="salir"/></span>
           <!--- Fin otones del menu --->
         </ul>
       </nav>

@@ -4,7 +4,7 @@
       <CabeceraMenus class="menu__titulo--especial" texto="othello"/>
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
-          <BotonJuego texto="nueva partida" @click="this.$store.commit('nuevaPartida')"/>
+          <span @click="$store.commit('nuevaPartida')"><BotonJuego texto="nueva partida"/></span>
           <BotonPersonalizar/>
         </ul>
       </nav>
@@ -18,12 +18,13 @@
 import BotonJuego from "../components/botones/BotonJuego";
 import BotonPersonalizar from "../components/botones/BotonPersonalizar";
 import CabeceraMenus from "../components/textos/CabeceraMenus";
+
 export default {
   name: 'Inicio',
   components: {
     CabeceraMenus,
     BotonPersonalizar,
     BotonJuego
-  }
+  },
 }
 </script>

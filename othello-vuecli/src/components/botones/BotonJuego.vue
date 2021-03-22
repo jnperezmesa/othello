@@ -8,7 +8,7 @@
 export default {
   name: 'BotonJuego',
   props: {
-    texto: String
+    texto: String,
   }
 }
 </script>
