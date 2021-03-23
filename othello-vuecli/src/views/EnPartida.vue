@@ -4,7 +4,7 @@
       <CabeceraMenus texto="menu"/>
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
-          <span @click="$store.commit('resetBasico')"><BotonVolverAInicio texto="rendirse"/></span>
+          <span @click="$store.commit('reset')"><BotonVolverAInicio texto="rendirse"/></span>
           <BotonJuego texto="continuar"/>
         </ul>
       </nav>

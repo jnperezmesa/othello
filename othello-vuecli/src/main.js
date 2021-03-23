@@ -6,7 +6,7 @@ import './registerServiceWorker'
 
 Vue.config.productionTip = false
 
-
+// Aquí lo que tenga que ejecutarse al inicio
 
 new Vue({
   router,

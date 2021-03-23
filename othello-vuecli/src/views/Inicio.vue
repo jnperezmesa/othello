@@ -4,7 +4,7 @@
       <CabeceraMenus class="menu__titulo--especial" texto="othello"/>
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
-          <span @click="$store.commit('nuevaPartida')"><BotonJuego texto="nueva partida"/></span>
+          <span @click="$store.dispatch('nuevaPartida')"><BotonJuego texto="nueva partida"/></span>
           <BotonPersonalizar/>
         </ul>
       </nav>

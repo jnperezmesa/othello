@@ -50,7 +50,7 @@ export default new Vuex.Store({
     quedanHuecos: true
   },
   mutations: {
-    resetBasico: state => {
+    reset: state => {
       // Reestablezco el tablero
       state.tableroJuego = _.cloneDeep(tableroInicial);
       // Establezco que nadie tiene la victoria
@@ -60,26 +60,14 @@ export default new Vuex.Store({
       console.log('reseteo')
       console.log(state.tableroJuego)
     },
-    nuevaPartida: state => {
-      // Reestablezco el tablero
-      state.tableroJuego = _.cloneDeep(tableroInicial);
-      // Establezco que nadie tiene la victoria
-      state.victoria = null;
-      // Doy el turno a las fichas negras
-      state.jugadorActivo = state.fichaNegra;
+    inicio: state => {
       // Establezco que fichas lleva cada jugador
       state.jugador1 = state.fichaNegra;
       state.jugador2 = state.fichaBlanca;
       console.log('Nueva partida')
       console.log(state.tableroJuego)
     },
-    revancha: state => {
-      // Reestablezco el tablero
-      state.tableroJuego = _.cloneDeep(tableroInicial)
-      // Establezco que nadie tiene la victoria
-      state.victoria = null;
-      // Doy el turno a las fichas negras
-      state.jugadorActivo = state.fichaNegra;
+    inicioConCambio: state => {
       // Compruebo que ficha lleva el jugador 1
       if (state.jugador1 === state.fichaBlanca) {
         // Jugador 1 pasa a llevar negras y jugador 2 blancas
@@ -117,6 +105,14 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    nuevaPartida: (context) => {
+      context.commit('reset');
+      context.commit('inicio');
+    },
+    revancha: (context) => {
+      context.commit('reset');
+      context.commit('inicioConCambio');
+    }
   },
   modules: {
   }
