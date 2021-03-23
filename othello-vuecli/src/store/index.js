@@ -2,20 +2,23 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import _ from 'lodash'
 
+
+const tableroInicial = [
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 1, 2, 0, 0, 0],
+  [0, 0, 0, 2, 1, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0]
+];
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    tableroInicial: [
-      [0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 1, 2, 0, 0, 0],
-      [0, 0, 0, 2, 1, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0]
-    ],
+
 
     tableroJuego: [
       [0, 0, 0, 0, 0, 0, 0, 0],
@@ -49,7 +52,7 @@ export default new Vuex.Store({
   mutations: {
     resetBasico: state => {
       // Reestablezco el tablero
-      state.tableroJuego = state.tableroInicial;
+      state.tableroJuego = _.cloneDeep(tableroInicial);
       // Establezco que nadie tiene la victoria
       state.victoria = null;
       // Doy el turno a las fichas negras
@@ -59,7 +62,7 @@ export default new Vuex.Store({
     },
     nuevaPartida: state => {
       // Reestablezco el tablero
-      state.tableroJuego = state.tableroInicial;
+      state.tableroJuego = _.cloneDeep(tableroInicial);
       // Establezco que nadie tiene la victoria
       state.victoria = null;
       // Doy el turno a las fichas negras
@@ -72,7 +75,7 @@ export default new Vuex.Store({
     },
     revancha: state => {
       // Reestablezco el tablero
-      state.tableroJuego = state.tableroInicial;
+      state.tableroJuego = _.cloneDeep(tableroInicial)
       // Establezco que nadie tiene la victoria
       state.victoria = null;
       // Doy el turno a las fichas negras
@@ -89,7 +92,7 @@ export default new Vuex.Store({
         state.jugador1 = state.fichaBlanca;
       }
       console.log('Revancha')
-      console.log(state.tableroJuego)
+      //console.log(state.tableroJuego)
     },
     turno: state => {
       // Compruebo quien tiene el turno
