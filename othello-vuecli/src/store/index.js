@@ -19,7 +19,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
 
-
     tableroJuego: [
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
@@ -58,14 +57,12 @@ export default new Vuex.Store({
       // Doy el turno a las fichas negras
       state.jugadorActivo = state.fichaNegra;
       console.log('reseteo')
-      console.log(state.tableroJuego)
     },
     inicio: state => {
       // Establezco que fichas lleva cada jugador
       state.jugador1 = state.fichaNegra;
       state.jugador2 = state.fichaBlanca;
       console.log('Nueva partida')
-      console.log(state.tableroJuego)
     },
     inicioConCambio: state => {
       // Compruebo que ficha lleva el jugador 1
