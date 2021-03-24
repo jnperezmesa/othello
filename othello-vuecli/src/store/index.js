@@ -38,7 +38,7 @@ export default new Vuex.Store({
     disenyoFichaNegra: 'classic',
     disenyoFichaBlanca: 'classic',
 
-    victoria: null,
+    victoria: 0,
 
     jugador1: 2,
     jugador2: 1,

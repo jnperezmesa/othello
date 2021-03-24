@@ -3,7 +3,7 @@
     <div class="menu">
       <!--- Cabecera del menu --->
       <CabeceraMenus v-if="$store.state.victoria === $store.state.fichaBlanca" class="menu__titulo--especial" texto="ganan blancas"/>
-      <CabeceraMenus v-if="$store.state.victoria === $store.state.fichaNegra" texto="ganan negras"/>
+      <CabeceraMenus v-if="$store.state.victoria=== $store.state.fichaNegra" texto="ganan negras"/>
       <CabeceraMenus v-if="$store.state.victoria === $store.state.casillaVacia" texto="Empate"/>
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
@@ -29,6 +29,9 @@ export default {
     CabeceraMenus,
     BotonVolverAInicio,
     BotonJuego,
+  },
+  mounted() {
+    console.log(this.$store.state.victoria)
   }
 }
 </script>
