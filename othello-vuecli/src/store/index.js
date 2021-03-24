@@ -30,6 +30,17 @@ export default new Vuex.Store({
       [0, 0, 0, 0, 0, 0, 0, 0]
     ],
 
+    estadoCasillas: [
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false]
+    ],
+
     fichaBlanca: 1,
     fichaNegra: 2,
     casillaVacia: 0,
