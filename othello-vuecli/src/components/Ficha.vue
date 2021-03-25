@@ -20,11 +20,17 @@ export default {
     colocarFicha: function (x, y) {
       if (this.actualizarEstado === true) {
         // Inserto la ficha en la copia
-        this.$store.state.tableroJuego[x][y] = this.$store.state.jugadorActivo
-        // Cambio el turno
-        this.$store.commit('turno')
+        let hayCambios = this.convertirFichas(x, y)
+        if (hayCambios === true) {
+          this.$store.state.tableroJuego[x][y] = this.$store.state.jugadorActivo
+          // Cambio el turno
+          this.$store.commit('turno')
+        }
       }
     },
+    mixins: [
+        convertirFichas
+    ]
   },
   computed: {
     // Revisa el estado de la ficha y lo actualiza en la base de datos
