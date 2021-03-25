@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import convertirFichas from "@/mixins/convertirFichas";
+
 export default {
   name: 'Ficha',
   props: {

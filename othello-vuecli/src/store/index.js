@@ -99,7 +99,7 @@ export default new Vuex.Store({
         // Cambio el turno de blanco a negro
         state.jugadorActivo = state.fichaNegra;
       }
-    }
+    },
   },
   getters: {
     tablero: state => {
