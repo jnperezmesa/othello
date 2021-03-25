@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import convertirFichas from "@/mixins/convertirFichas";
 
 export default {
   name: 'Ficha',
@@ -28,7 +27,7 @@ export default {
     },
     convertirFichas: function (x, y) {
       // Array de fichas para cambiar
-      let arrayFichas = [];
+      let arrayFichas = []
       // Minutos en un reloj
       // Cero
       let pasoCero = true
