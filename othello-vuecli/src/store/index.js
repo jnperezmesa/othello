@@ -111,6 +111,15 @@ export default new Vuex.Store({
         return _.flattenDeep(state.tableroJuego);
       }
     },
+    tableroEstado: state => {
+      // Utilizo el jugador para forzar la actualizacion del array sin profundidad
+      if (state.jugadorActivo === 1) {
+        // Elimino la profundidad de la matriz y la comvierto en un array simple
+        return _.flattenDeep(state.estadoCasillas);
+      } else {
+        return _.flattenDeep(state.estadoCasillas);
+      }
+    },
   },
   actions: {
     nuevaPartida: (context) => {
