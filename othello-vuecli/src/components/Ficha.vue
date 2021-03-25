@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     colocarFicha: function (x, y) {
-      if (this.sePuedePonerFicha === true) {
+      if (this.actualizarEstado === true) {
         // Inserto la ficha en la copia
         this.$store.state.tableroJuego[x][y] = this.$store.state.jugadorActivo
         // Cambio el turno
@@ -25,6 +25,16 @@ export default {
     },
   },
   computed: {
+    // Revisa el estado de la ficha y lo actualiza en la base de datos
+    actualizarEstado: function () {
+      if (this.sePuedePonerFicha === true) {
+        this.$store.state.estadoCasillas[this.posicionX][this.positionY] = true
+        return true
+      } else {
+        this.$store.state.estadoCasillas[this.posicionX][this.positionY] = false
+        return false
+      }
+    },
     sePuedePonerFicha: function () {
       // Interior
       if (this.posicionX !== 0 && this.positionY !== 0 && this.positionX !== 7 && this.positionY !== 7) {
