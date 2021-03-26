@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 
 export default {
   name: 'Ficha',
@@ -18,24 +19,26 @@ export default {
   methods: {
     colocarFicha: function (x, y) {
       if (this.actualizarEstado === true) {
-        this.explorarColumnas(x)
+        this.explorarColumnas(x, y)
         this.explorarFilas(y)
-        this.explorarDiagonalSuperior()
+        this.explorarDiagonalesA(x, y)
+        this.explorarDiagonalesB(x, y)
         // Inserto la ficha en la copia
         this.$store.state.tableroJuego[x][y] = this.$store.state.jugadorActivo
         // Cambio el turno
         this.$store.commit('turno')
       }
     },
-    explorarColumnas: function (x) {
+    // Explorar el tablero
+    explorarColumnas: function (x, y) {
       let columna = []
       this.$store.state.tableroJuego.forEach(function (contenidoX, indiceX) {
         contenidoX.forEach(function (contenidoY, indiceY) {
           if (indiceX === x) {
             columna.push({
-              posX: x,
-              posY: indiceY,
-              contenido: contenidoY
+              x: x,
+              y: indiceY,
+              valor: contenidoY
             })
             return columna
           }
@@ -43,6 +46,7 @@ export default {
       })
       console.log('columna')
       console.log(columna)
+      this.convertirFichas(columna, x, y)
     },
     explorarFilas: function (y) {
       let fila = []
@@ -50,9 +54,9 @@ export default {
         contenidoX.forEach(function (contenidoY, indiceY) {
           if (indiceY === y) {
             fila.push({
-              posX: indiceX,
-              posY: y,
-              contenido: contenidoY
+              x: indiceX,
+              y: y,
+              valor: contenidoY
             })
             return fila
           }
@@ -61,11 +65,12 @@ export default {
       console.log('fila')
       console.log(fila)
     },
-    explorarDiagonalSuperior: function () {
+    explorarDiagonalesA: function (x, y) {
+      let lineasDiagonalesA = []
       let diagonalSuperior = []
       for (var i=0;i<this.$store.state.tableroJuego.length;i++) {
         console.log(diagonalSuperior)
-        diagonalSuperior = []
+        lineasDiagonalesA.push(diagonalSuperior = [])
         for (var j=0;j<=i;j++) {
           diagonalSuperior.push({
             x: i-j,
@@ -74,14 +79,90 @@ export default {
           })
         }
       }
-      console.log('diagonal')
-      console.log(diagonalSuperior)
+      let lineasDiagonalesB = []
+      let diagonalInferior = []
+      for (var i=0;i<this.$store.state.tableroJuego.length;i++) {
+        console.log(diagonalInferior);
+        lineasDiagonalesB.push(diagonalInferior = [])
+        for (var j=0;j<this.$store.state.tableroJuego.length-i-1;j++) {
+          diagonalInferior.push({
+            x: this.$store.state.tableroJuego.length-j-1,
+            y: j+i+1,
+            valor: this.$store.state.tableroJuego[this.$store.state.tableroJuego.length-j-1][j+i+1]
+          })
+        }
+      }
+      const diagonales = lineasDiagonalesA.concat(lineasDiagonalesB.slice(0))
+      const miDiagonal = []
+      diagonales.forEach(function (contenidoX, indiceX) {
+        contenidoX.forEach(function (contenidoY, indiceY) {
+          if (contenidoY.x === x && contenidoY.y === y) {
+            miDiagonal.push(contenidoX)
+          }
+          return miDiagonal
+        })
+      })
+      console.log('DiagonalesA')
+      console.log(diagonales)
+      console.log('miDiagonalA')
+      console.log(miDiagonal)
     },
-    sumarContador: function (contador) {
-      return contador + 1
+    explorarDiagonalesB: function (x, y) {
+      let lineasDiagonalesA = []
+      let diagonalSuperior = []
+      for (var i=0;i<this.$store.state.tableroJuego.length;i++) {
+        lineasDiagonalesA.push(diagonalSuperior = [])
+        for (var j=0;j<i+1;j++) {
+          diagonalSuperior.push({
+            x: j,
+            y: this.$store.state.tableroJuego.length-1-i+j,
+            valor: this.$store.state.tableroJuego[j][this.$store.state.tableroJuego.length-1-i+j]
+          })
+        }
+      }
+      let lineasDiagonalesB = []
+      let diagonalInferior = []
+      for (var i=1;i<this.$store.state.tableroJuego.length;i++) {
+        lineasDiagonalesB.push(diagonalInferior = [])
+        for (var j=0;j<this.$store.state.tableroJuego.length-i;j++) {
+          diagonalInferior.push({
+            x: i+j,
+            y: j,
+            valor: this.$store.state.tableroJuego[i+j][j]
+          })
+        }
+      }
+      const diagonales = lineasDiagonalesA.concat(lineasDiagonalesB.slice(0))
+      const miDiagonal = []
+      diagonales.forEach(function (contenidoX, indiceX) {
+        contenidoX.forEach(function (contenidoY, indiceY) {
+          if (contenidoY.x === x && contenidoY.y === y) {
+            miDiagonal.push(contenidoX)
+          }
+          return miDiagonal
+        })
+      })
+      console.log('DiagonalesB')
+      console.log(diagonales)
+      console.log('miDiagonalB')
+      console.log(miDiagonal)
     },
-    restarContador: function (contador) {
-      return contador - 1
+    // Convertir
+    convertirFichas: function (array, x, y) {
+      let origen = 0
+      array.forEach(function (casilla, index){
+        if (casilla.x === x && casilla.y === y) {
+          origen = index
+        }
+        return origen
+      })
+      console.log(origen)
+      let subir = _.slice(array, origen, array.length)
+      let bajar = _.slice(array, 0, origen)
+      console.log('subir')
+      console.log(subir)
+      console.log('bajar')
+      console.log(bajar)
     }
   },
   computed: {
