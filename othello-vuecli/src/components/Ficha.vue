@@ -18,19 +18,19 @@ export default {
   },
   methods: {
     colocarFicha: function (x, y) {
-      if (this.actualizarEstado === true) {
-        this.explorarColumnas(x, y)
-        this.explorarFilas(y)
-        this.explorarDiagonalesA(x, y)
-        this.explorarDiagonalesB(x, y)
+      if (this.estado) {
+        // Exploro el tablero y cambio las fichas
+        this.convertirFichas(x, y)
         // Inserto la ficha en la copia
         this.$store.state.tableroJuego[x][y] = this.$store.state.jugadorActivo
         // Cambio el turno
         this.$store.commit('turno')
+      } else {
+        console.log('no')
       }
     },
     // Explorar el tablero
-    explorarColumnas: function (x, y) {
+    explorarColumnas: function (x) {
       let columna = []
       this.$store.state.tableroJuego.forEach(function (contenidoX, indiceX) {
         contenidoX.forEach(function (contenidoY, indiceY) {
@@ -46,7 +46,7 @@ export default {
       })
       console.log('columna')
       console.log(columna)
-      this.filtrarFichas(columna, x, y)
+      return columna
     },
     explorarFilas: function (y) {
       let fila = []
@@ -64,12 +64,12 @@ export default {
       })
       console.log('fila')
       console.log(fila)
+      return fila
     },
     explorarDiagonalesA: function (x, y) {
       let lineasDiagonalesA = []
       let diagonalSuperior = []
       for (let i=0;i<this.$store.state.tableroJuego.length;i++) {
-        console.log(diagonalSuperior)
         lineasDiagonalesA.push(diagonalSuperior = [])
         for (let j=0;j<=i;j++) {
           diagonalSuperior.push({
@@ -82,7 +82,6 @@ export default {
       let lineasDiagonalesB = []
       let diagonalInferior = []
       for (let i=0;i<this.$store.state.tableroJuego.length;i++) {
-        console.log(diagonalInferior);
         lineasDiagonalesB.push(diagonalInferior = [])
         for (let j=0;j<this.$store.state.tableroJuego.length-i-1;j++) {
           diagonalInferior.push({
@@ -102,10 +101,10 @@ export default {
           return miDiagonal
         })
       })
-      console.log('DiagonalesA')
-      console.log(diagonales)
-      console.log('miDiagonalA')
-      console.log(miDiagonal)
+      const diagonal = _.flattenDeep(miDiagonal)
+      console.log('Diagonal A')
+      console.log(diagonal)
+      return diagonal
     },
     explorarDiagonalesB: function (x, y) {
       let lineasDiagonalesA = []
@@ -142,13 +141,14 @@ export default {
           return miDiagonal
         })
       })
-      console.log('DiagonalesB')
-      console.log(diagonales)
-      console.log('miDiagonalB')
-      console.log(miDiagonal)
+      const diagonal = _.flattenDeep(miDiagonal)
+      console.log('Diagonal B')
+      console.log(diagonal)
+      return diagonal
     },
-    // Convertir
+    // Filtrar
     filtrarFichas: function (array, x, y) {
+      // Establezco donde tengo que hacer el corte del array
       let origen = 0
       array.forEach(function (casilla, index){
         if (casilla.x === x && casilla.y === y) {
@@ -156,23 +156,97 @@ export default {
         }
         return origen
       })
-      console.log(origen)
-      let subir = _.slice(array, origen, array.length)
-      let bajar = _.slice(array, 0, origen)
+
+      // Creo dos arrays uno subiendo desde la posicion de corte y otro bajando
+      let subir = _.slice(array, (origen + 1), array.length)
       console.log('subir')
       console.log(subir)
+      // El de bajada lo invierto para que en la iteración vaya desde la posición de corte en adelante
+      let bajar = _.reverse(_.slice(array, 0, origen))
       console.log('bajar')
       console.log(bajar)
+
+      // Creo un array donde almacenar las posiciones que se cambiarán
+      let cambiar = []
+
+      // Compruebo quien es el jugador activo
+      if (this.$store.state.jugadorActivo === this.$store.state.fichaNegra) {
+        // Control de paso
+        let pasoSubir = true
+        // Itero el array de subida buscando fichas del color contrario
+        subir.forEach(function (casilla) {
+          // Si no es de mi color pasa
+          if (casilla.valor === 1 && pasoSubir === true) {
+            cambiar.push(casilla)
+            return cambiar
+          } else {
+            // Si la que encuentro es de mi color o vacía, bloqueo el paso
+            return pasoSubir = false
+          }
+        })
+        // Control de paso
+        let pasoBajar = true
+        // Itero el array de bajada buscando fichas del color contrario
+        bajar.forEach(function (casilla) {
+          if (casilla.valor === 1 && pasoBajar === true) {
+            cambiar.push(casilla)
+            return cambiar
+          } else {
+            // Si la que encuentro es de mi color o vacía, bloqueo el paso
+            return pasoBajar = false
+          }
+        })
+      }
+
+      // La misma operación, pero si soy de otro color
+      if (this.$store.state.jugadorActivo === this.$store.state.fichaBlanca) {
+        let pasoSubir = true
+        subir.forEach(function (casilla) {
+          if (casilla.valor === 2 && pasoSubir === true) {
+            cambiar.push(casilla)
+            return cambiar
+          } else {
+            return pasoSubir = false
+          }
+        })
+        let pasoBajar = true
+        bajar.forEach(function (casilla) {
+          if (casilla.valor === 2 && pasoBajar === true) {
+            cambiar.push(casilla)
+            return cambiar
+          } else {
+            return pasoBajar = false
+          }
+        })
+      }
+      // Devuelvo las fichas que tengo que cambiar
+      return cambiar
+    },
+    // Convertir
+    convertirFichas: function (x, y) {
+      let lineas = []
+      // Inserto las fichas que se pueden cambiar de las columnas
+      lineas.push(this.filtrarFichas(this.explorarColumnas(x), x, y))
+      // Inserto las fichas que se pueden cambiar de las filas
+      lineas.push(this.filtrarFichas(this.explorarFilas(y), x, y))
+      // Inserto las fichas que se pueden cambiar de las diagonales A
+      lineas.push(this.filtrarFichas(this.explorarDiagonalesA(x, y), x, y))
+      // Inserto las fichas que se pueden cambiar de las diagonales B
+      lineas.push(this.filtrarFichas(this.explorarDiagonalesB(x, y), x, y))
+      // Elimini la matriz
+      const fichas = _.flattenDeep(lineas)
+      // Convierto todas
+      fichas.forEach((ficha) => {
+        this.$store.state.tableroJuego[ficha.x][ficha.y] = this.$store.state.jugadorActivo
+      })
     }
   },
   computed: {
     // Revisa el estado de la ficha y lo actualiza en la base de datos
-    actualizarEstado: function () {
+    estado: function () {
       if (this.sePuedePonerFicha === true) {
-        this.$store.state.estadoCasillas[this.posicionX][this.positionY] = true
         return true
       } else {
-        this.$store.state.estadoCasillas[this.posicionX][this.positionY] = false
         return false
       }
     },
@@ -471,6 +545,6 @@ export default {
         }
       }
     }
-  }
+  },
 }
 </script>
