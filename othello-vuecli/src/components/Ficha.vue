@@ -46,7 +46,7 @@ export default {
       })
       console.log('columna')
       console.log(columna)
-      this.convertirFichas(columna, x, y)
+      this.filtrarFichas(columna, x, y)
     },
     explorarFilas: function (y) {
       let fila = []
@@ -68,10 +68,10 @@ export default {
     explorarDiagonalesA: function (x, y) {
       let lineasDiagonalesA = []
       let diagonalSuperior = []
-      for (var i=0;i<this.$store.state.tableroJuego.length;i++) {
+      for (let i=0;i<this.$store.state.tableroJuego.length;i++) {
         console.log(diagonalSuperior)
         lineasDiagonalesA.push(diagonalSuperior = [])
-        for (var j=0;j<=i;j++) {
+        for (let j=0;j<=i;j++) {
           diagonalSuperior.push({
             x: i-j,
             y: j,
@@ -81,10 +81,10 @@ export default {
       }
       let lineasDiagonalesB = []
       let diagonalInferior = []
-      for (var i=0;i<this.$store.state.tableroJuego.length;i++) {
+      for (let i=0;i<this.$store.state.tableroJuego.length;i++) {
         console.log(diagonalInferior);
         lineasDiagonalesB.push(diagonalInferior = [])
-        for (var j=0;j<this.$store.state.tableroJuego.length-i-1;j++) {
+        for (let j=0;j<this.$store.state.tableroJuego.length-i-1;j++) {
           diagonalInferior.push({
             x: this.$store.state.tableroJuego.length-j-1,
             y: j+i+1,
@@ -94,8 +94,8 @@ export default {
       }
       const diagonales = lineasDiagonalesA.concat(lineasDiagonalesB.slice(0))
       const miDiagonal = []
-      diagonales.forEach(function (contenidoX, indiceX) {
-        contenidoX.forEach(function (contenidoY, indiceY) {
+      diagonales.forEach(function (contenidoX) {
+        contenidoX.forEach(function (contenidoY) {
           if (contenidoY.x === x && contenidoY.y === y) {
             miDiagonal.push(contenidoX)
           }
@@ -110,9 +110,9 @@ export default {
     explorarDiagonalesB: function (x, y) {
       let lineasDiagonalesA = []
       let diagonalSuperior = []
-      for (var i=0;i<this.$store.state.tableroJuego.length;i++) {
+      for (let i=0;i<this.$store.state.tableroJuego.length;i++) {
         lineasDiagonalesA.push(diagonalSuperior = [])
-        for (var j=0;j<i+1;j++) {
+        for (let j=0;j<i+1;j++) {
           diagonalSuperior.push({
             x: j,
             y: this.$store.state.tableroJuego.length-1-i+j,
@@ -122,9 +122,9 @@ export default {
       }
       let lineasDiagonalesB = []
       let diagonalInferior = []
-      for (var i=1;i<this.$store.state.tableroJuego.length;i++) {
+      for (let i=1;i<this.$store.state.tableroJuego.length;i++) {
         lineasDiagonalesB.push(diagonalInferior = [])
-        for (var j=0;j<this.$store.state.tableroJuego.length-i;j++) {
+        for (let j=0;j<this.$store.state.tableroJuego.length-i;j++) {
           diagonalInferior.push({
             x: i+j,
             y: j,
@@ -134,8 +134,8 @@ export default {
       }
       const diagonales = lineasDiagonalesA.concat(lineasDiagonalesB.slice(0))
       const miDiagonal = []
-      diagonales.forEach(function (contenidoX, indiceX) {
-        contenidoX.forEach(function (contenidoY, indiceY) {
+      diagonales.forEach(function (contenidoX) {
+        contenidoX.forEach(function (contenidoY) {
           if (contenidoY.x === x && contenidoY.y === y) {
             miDiagonal.push(contenidoX)
           }
@@ -148,7 +148,7 @@ export default {
       console.log(miDiagonal)
     },
     // Convertir
-    convertirFichas: function (array, x, y) {
+    filtrarFichas: function (array, x, y) {
       let origen = 0
       array.forEach(function (casilla, index){
         if (casilla.x === x && casilla.y === y) {
