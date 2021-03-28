@@ -2,7 +2,6 @@
   <div class="main__tablero__casilla classic__casilla" @click="colocarFicha(posicionX, positionY)">
     <div v-if="contenido === $store.state.fichaBlanca" class="ficha classic__ficha--blanca"></div>
     <div v-if="contenido === $store.state.fichaNegra" class="ficha classic__ficha--negra"></div>
-    {{ posicionX }} / {{ positionY }}
   </div>
 </template>
 
@@ -18,15 +17,13 @@ export default {
   },
   methods: {
     colocarFicha: function (x, y) {
-      if (this.estado) {
-        // Exploro el tablero y cambio las fichas
-        this.convertirFichas(x, y)
+      // Exploro el tablero y cambio las fichas
+      let paso = this.convertirFichas(x, y)
+      if (paso === true) {
         // Inserto la ficha en la copia
         this.$store.state.tableroJuego[x][y] = this.$store.state.jugadorActivo
         // Cambio el turno
         this.$store.commit('turno')
-      } else {
-        console.log('no')
       }
     },
     // Explorar el tablero
@@ -181,112 +178,154 @@ export default {
 
       // Compruebo quien es el jugador activo
       if (this.$store.state.jugadorActivo === this.$store.state.fichaNegra) {
-        // Control de paso
-        let pasoSubir = true
-        // Guardo temporalmente las casillas
-        let casillasSubir = []
-        console.log('subir')
-        console.log(casillasSubir)
-        // Itero el array de subida buscando fichas del color contrario
+
+        // Compruebo que en esa dirección haya una ficha mia
+        let copiarSubir = false
         subir.forEach(function (casilla) {
-          // Si no es de mi color pasa
-          if (casilla.valor === 1 && pasoSubir === true) {
-            casillasSubir.push(casilla)
-            console.log('agrego')
-            return casillasSubir
-          } else {
-            // Si la casilla es 0, borro el array
-            if (casilla.valor === 0 && pasoSubir === true) {
-              casillasSubir = []
-              pasoSubir = false
-              console.log('borrado')
+          if (casilla.valor === 2) {
+            copiarSubir = true
+            return copiarSubir
+          }
+        })
+
+        if (copiarSubir === true) {
+          // Control de paso
+          let pasoSubir = true
+          // Guardo temporalmente las casillas
+          let casillasSubir = []
+          // Itero el array de subida buscando fichas del color contrario
+          subir.forEach(function (casilla) {
+            // Si no es de mi color pasa
+            if (casilla.valor === 1 && pasoSubir === true) {
+              casillasSubir.push(casilla)
               return casillasSubir
+            } else {
+              // Si la casilla es 0, borro el array
+              if (casilla.valor === 0 && pasoSubir === true) {
+                casillasSubir = []
+                pasoSubir = false
+                return casillasSubir
+              }
+              // Si la que encuentro es de mi color o vacía, bloqueo el paso
+              return pasoSubir = false
             }
-            console.log('cierro')
-            // Si la que encuentro es de mi color o vacía, bloqueo el paso
-            return pasoSubir = false
-          }
-        })
-        // Agrego las casillasSubir a cambiar
-        cambiar.push(_.flattenDeep(casillasSubir))
+          })
+
+          // Agrego las casillasSubir a cambiar
+          cambiar.push(_.flattenDeep(casillasSubir))
+        }
 
 
-        // Control de paso
-        let pasoBajar = true
-        // Guardo temporalmente las casillas
-        let casillasBajar = []
-        // Itero el array de bajada buscando fichas del color contrario
+        // Compruebo que en esa dirección haya una ficha mia
+        let copiarBajar = false
         bajar.forEach(function (casilla) {
-          // Si no es de mi color pasa
-          if (casilla.valor === 1 && pasoBajar === true) {
-            casillasBajar.push(casilla)
-            return casillasBajar
-          } else {
-            // Si la casilla es 0, borro el array
-            if (casilla.valor === 0 && pasoBajar === true) {
-              casillasBajar = []
-              pasoBajar = false
-              return casillasBajar
-            }
-            // Si la que encuentro es de mi color o vacía, bloqueo el paso
-            return pasoBajar = false
+          if (casilla.valor === 2) {
+            copiarBajar = true
+            return copiarBajar
           }
         })
-        // Agrego las casillasSubir a cambiar
-        cambiar.push(_.flattenDeep(casillasBajar))
+
+        if (copiarBajar === true) {
+          // Control de paso
+          let pasoBajar = true
+          // Guardo temporalmente las casillas
+          let casillasBajar = []
+          // Itero el array de bajada buscando fichas del color contrario
+          bajar.forEach(function (casilla) {
+            // Si no es de mi color pasa
+            if (casilla.valor === 1 && pasoBajar === true) {
+              casillasBajar.push(casilla)
+              return casillasBajar
+            } else {
+              // Si la casilla es 0, borro el array
+              if (casilla.valor === 0 && pasoBajar === true) {
+                casillasBajar = []
+                pasoBajar = false
+                return casillasBajar
+              }
+              // Si la que encuentro es de mi color o vacía, bloqueo el paso
+              return pasoBajar = false
+            }
+          })
+          // Agrego las casillasSubir a cambiar
+          cambiar.push(_.flattenDeep(casillasBajar))
+        }
+
       }
 
       // La misma operación, pero si soy de otro color
       if (this.$store.state.jugadorActivo === this.$store.state.fichaBlanca) {
-        // Control de paso
-        let pasoSubir = true
-        // Guardo temporalmente las casillas
-        let casillasSubir = []
-        // Itero el array de subida buscando fichas del color contrario
-        subir.forEach(function (casilla) {
-          // Si no es de mi color pasa
-          if (casilla.valor === 2 && pasoSubir === true) {
-            casillasSubir.push(casilla)
-            return casillasSubir
-          } else {
-            // Si la casilla es 0, borro el array
-            if (casilla.valor === 0 && pasoSubir === true) {
-              casillasSubir = []
-              pasoSubir = false
-              return casillasSubir
-            }
-            // Si la que encuentro es de mi color o vacía, bloqueo el paso
-            return pasoSubir = false
-          }
-        })
-        // Agrego las casillasSubir a cambiar
-        cambiar.push(_.flattenDeep(casillasSubir))
 
-        // Control de paso
-        let pasoBajar = true
-        // Guardo temporalmente las casillas
-        let casillasBajar = []
-        // Itero el array de bajada buscando fichas del color contrario
-        bajar.forEach(function (casilla) {
-          // Si no es de mi color pasa
-          if (casilla.valor === 2 && pasoBajar === true) {
-            casillasBajar.push(casilla)
-            return casillasBajar
-          } else {
-            // Si la casilla es 0, borro el array
-            if (casilla.valor === 0 && pasoBajar === true) {
-              casillasBajar = []
-              pasoBajar = false
-              console.log('borrar')
-              return casillasBajar
-            }
-            // Si la que encuentro es de mi color o vacía, bloqueo el paso
-            console.log('cerrar')
-            return pasoBajar = false
+        // Compruebo que en esa dirección haya una ficha mia
+        let copiarSubir = false
+        subir.forEach(function (casilla) {
+          if (casilla.valor === 1) {
+            copiarSubir = true
+            return copiarSubir
           }
         })
-        // Agrego las casillasSubir a cambiar
-        cambiar.push(_.flattenDeep(casillasBajar))
+
+        if (copiarSubir === true) {
+          // Control de paso
+          let pasoSubir = true
+          // Guardo temporalmente las casillas
+          let casillasSubir = []
+          // Itero el array de subida buscando fichas del color contrario
+          subir.forEach(function (casilla) {
+            // Si no es de mi color pasa
+            if (casilla.valor === 2 && pasoSubir === true) {
+              casillasSubir.push(casilla)
+              return casillasSubir
+            } else {
+              // Si la casilla es 0, borro el array
+              if (casilla.valor === 0 && pasoSubir === true) {
+                casillasSubir = []
+                pasoSubir = false
+                return casillasSubir
+              }
+              // Si la que encuentro es de mi color o vacía, bloqueo el paso
+              return pasoSubir = false
+            }
+          })
+          // Agrego las casillasSubir a cambiar
+          cambiar.push(_.flattenDeep(casillasSubir))
+        }
+
+        // Compruebo que en esa dirección haya una ficha mia
+        let copiarBajar = false
+        bajar.forEach(function (casilla) {
+          if (casilla.valor === 1) {
+            copiarBajar = true
+            return copiarBajar
+          }
+        })
+
+        if (copiarBajar === true) {
+          // Control de paso
+          let pasoBajar = true
+          // Guardo temporalmente las casillas
+          let casillasBajar = []
+          // Itero el array de bajada buscando fichas del color contrario
+          bajar.forEach(function (casilla) {
+            // Si no es de mi color pasa
+            if (casilla.valor === 2 && pasoBajar === true) {
+              casillasBajar.push(casilla)
+              return casillasBajar
+            } else {
+              // Si la casilla es 0, borro el array
+              if (casilla.valor === 0 && pasoBajar === true) {
+                casillasBajar = []
+                pasoBajar = false
+                return casillasBajar
+              }
+              // Si la que encuentro es de mi color o vacía, bloqueo el paso
+              return pasoBajar = false
+            }
+          })
+          // Agrego las casillasSubir a cambiar
+          cambiar.push(_.flattenDeep(casillasBajar))
+        }
+
       }
       // Devuelvo las fichas que tengo que cambiar
       return _.flattenDeep(cambiar)
@@ -310,17 +349,18 @@ export default {
       fichas.forEach((ficha) => {
         this.$store.state.tableroJuego[ficha.x][ficha.y] = this.$store.state.jugadorActivo
       })
+      let hecho = false
+      if (fichas.length > 0) {
+        hecho = true
+        return hecho
+      } else {
+        hecho = false
+        return hecho
+      }
     }
   },
   computed: {
-    // Revisa el estado de la ficha y lo actualiza en la base de datos
-    estado: function () {
-      if (this.sePuedePonerFicha === true) {
-        return true
-      } else {
-        return false
-      }
-    },
+    /*
     sePuedePonerFicha: function () {
       // Interior
       if (this.posicionX !== 0 && this.positionY !== 0 && this.positionX !== 7 && this.positionY !== 7) {
@@ -615,7 +655,7 @@ export default {
           }
         }
       }
-    }
+    }*/
   },
 }
 </script>
