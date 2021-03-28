@@ -22,9 +22,6 @@ export default {
     Tablero,
     Contador
   },
-  mounted() {
-
-  },
   methods: {
   },
   computed: {

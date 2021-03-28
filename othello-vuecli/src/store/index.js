@@ -64,7 +64,7 @@ export default new Vuex.Store({
       // Reestablezco el tablero
       state.tableroJuego = _.cloneDeep(tableroInicial);
       // Establezco que nadie tiene la victoria
-      state.victoria = null;
+      state.victoria = 0;
       // Doy el turno a las fichas negras
       state.jugadorActivo = state.fichaNegra;
       console.log('reseteo')
@@ -99,7 +99,7 @@ export default new Vuex.Store({
         // Cambio el turno de blanco a negro
         state.jugadorActivo = state.fichaNegra;
       }
-    }
+    },
   },
   getters: {
     tablero: state => {
