@@ -15,6 +15,7 @@
 </template>
 
 <script>
+// Componentes
 import Ficha from "./Ficha";
 
 export default {

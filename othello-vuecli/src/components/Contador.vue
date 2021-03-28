@@ -9,7 +9,9 @@
 </template>
 
 <script>
+// Componentes
 import TestigoTurno from "./TestigoTurno";
+
 export default {
   name: 'Contador',
   components: {TestigoTurno},
