@@ -343,8 +343,6 @@ export default {
       lineas.push(this.filtrarFichas(this.explorarDiagonalesB(x, y), x, y))
       // Elimini la matriz
       const fichas = _.flattenDeep(lineas)
-      console.log('cambios')
-      console.log(fichas)
       // Convierto todas
       fichas.forEach((ficha) => {
         this.$store.state.tableroJuego[ficha.x][ficha.y] = this.$store.state.jugadorActivo
@@ -357,305 +355,29 @@ export default {
         hecho = false
         return hecho
       }
+    },
+    // Comprobar victoria
+    comprobarPosiciones: function (x, y) {
+      let lineas = []
+      // Inserto las fichas que se pueden cambiar de las columnas
+      lineas.push(this.filtrarFichas(this.explorarColumnas(x), x, y))
+      // Inserto las fichas que se pueden cambiar de las filas
+      lineas.push(this.filtrarFichas(this.explorarFilas(y), x, y))
+      // Inserto las fichas que se pueden cambiar de las diagonales A
+      lineas.push(this.filtrarFichas(this.explorarDiagonalesA(x, y), x, y))
+      // Inserto las fichas que se pueden cambiar de las diagonales B
+      lineas.push(this.filtrarFichas(this.explorarDiagonalesB(x, y), x, y))
+      // Elimini la matriz
+      const fichas = _.flattenDeep(lineas)
+      let hecho = false
+      if (fichas.length > 0) {
+        hecho = true
+        return hecho
+      } else {
+        hecho = false
+        return hecho
+      }
     }
-  },
-  computed: {
-    /*
-    sePuedePonerFicha: function () {
-      // Interior
-      if (this.posicionX !== 0 && this.positionY !== 0 && this.positionX !== 7 && this.positionY !== 7) {
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaNegra) {
-          if (
-              // Arriba
-              this.$store.state.tableroJuego[(this.posicionX - 1)][(this.positionY - 1)] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[(this.posicionX - 1)][this.positionY] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[(this.posicionX - 1)][(this.positionY + 1)] === this.$store.state.fichaBlanca ||
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY - 1)] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY + 1)] === this.$store.state.fichaBlanca ||
-              // Abajo
-              this.$store.state.tableroJuego[(this.posicionX + 1)][(this.positionY - 1)] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[(this.posicionX + 1)][this.positionY] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[(this.posicionX + 1)][(this.positionY + 1)] === this.$store.state.fichaBlanca
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaBlanca) {
-          if (
-              // Arriba
-              this.$store.state.tableroJuego[(this.posicionX - 1)][(this.positionY - 1)] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[(this.posicionX - 1)][this.positionY] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[(this.posicionX - 1)][(this.positionY + 1)] === this.$store.state.fichaNegra ||
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY - 1)] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY + 1)] === this.$store.state.fichaNegra ||
-              // Abajo
-              this.$store.state.tableroJuego[(this.posicionX + 1)][(this.positionY - 1)] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[(this.posicionX + 1)][this.positionY] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[(this.posicionX + 1)][(this.positionY + 1)] === this.$store.state.fichaNegra
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-      }
-      // Arriba (x = 0)
-      if (this.posicionX === 0 && this.positionY !== 0 && this.positionX !== 7 && this.positionY !== 7) {
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaNegra) {
-          if (
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY - 1)] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY + 1)] === this.$store.state.fichaBlanca ||
-              // Abajo
-              this.$store.state.tableroJuego[(this.posicionX + 1)][(this.positionY - 1)] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[(this.posicionX + 1)][this.positionY] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[(this.posicionX + 1)][(this.positionY + 1)] === this.$store.state.fichaBlanca
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaBlanca) {
-          if (
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY - 1)] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY + 1)] === this.$store.state.fichaNegra ||
-              // Abajo
-              this.$store.state.tableroJuego[(this.posicionX + 1)][(this.positionY - 1)] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[(this.posicionX + 1)][this.positionY] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[(this.posicionX + 1)][(this.positionY + 1)] === this.$store.state.fichaNegra
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-      }
-      // Derecha (y = 7)
-      if (this.posicionX !== 0 && this.positionY !== 0 && this.positionX !== 7 && this.positionY === 7) {
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaNegra) {
-          if (
-              // Arriba
-              this.$store.state.tableroJuego[(this.posicionX - 1)][(this.positionY - 1)] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[(this.posicionX - 1)][this.positionY] === this.$store.state.fichaBlanca ||
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY - 1)] === this.$store.state.fichaBlanca ||
-              // Abajo
-              this.$store.state.tableroJuego[(this.posicionX + 1)][(this.positionY - 1)] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[(this.posicionX + 1)][this.positionY] === this.$store.state.fichaBlanca
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaBlanca) {
-          if (
-              // Arriba
-              this.$store.state.tableroJuego[(this.posicionX - 1)][(this.positionY - 1)] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[(this.posicionX - 1)][this.positionY] === this.$store.state.fichaNegra ||
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY - 1)] === this.$store.state.fichaNegra ||
-              // Abajo
-              this.$store.state.tableroJuego[(this.posicionX + 1)][(this.positionY - 1)] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[(this.posicionX + 1)][this.positionY] === this.$store.state.fichaNegra
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-      }
-      // Abajo (x = 7)
-      if (this.posicionX !== 0 && this.positionY !== 0 && this.positionX === 7 && this.positionY !== 7) {
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaNegra) {
-          if (
-              // Arriba
-              this.$store.state.tableroJuego[(this.posicionX - 1)][(this.positionY - 1)] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[(this.posicionX - 1)][this.positionY] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[(this.posicionX - 1)][(this.positionY + 1)] === this.$store.state.fichaBlanca ||
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY - 1)] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY + 1)] === this.$store.state.fichaBlanca
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaBlanca) {
-          if (
-              // Arriba
-              this.$store.state.tableroJuego[(this.posicionX - 1)][(this.positionY - 1)] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[(this.posicionX - 1)][this.positionY] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[(this.posicionX - 1)][(this.positionY + 1)] === this.$store.state.fichaNegra ||
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY - 1)] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY + 1)] === this.$store.state.fichaNegra
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-      }
-      // Izquierda (y = 0)
-      if (this.posicionX !== 0 && this.positionY === 0 && this.positionX !== 7 && this.positionY !== 7) {
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaNegra) {
-          if (
-              // Arriba
-              this.$store.state.tableroJuego[(this.posicionX - 1)][this.positionY] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[(this.posicionX - 1)][(this.positionY + 1)] === this.$store.state.fichaBlanca ||
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY + 1)] === this.$store.state.fichaBlanca ||
-              // Abajo
-              this.$store.state.tableroJuego[(this.posicionX + 1)][this.positionY] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[(this.posicionX + 1)][(this.positionY + 1)] === this.$store.state.fichaBlanca
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaBlanca) {
-          if (
-              // Arriba
-              this.$store.state.tableroJuego[(this.posicionX - 1)][this.positionY] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[(this.posicionX - 1)][(this.positionY + 1)] === this.$store.state.fichaNegra ||
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY + 1)] === this.$store.state.fichaNegra ||
-              // Abajo
-              this.$store.state.tableroJuego[(this.posicionX + 1)][this.positionY] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[(this.posicionX + 1)][(this.positionY + 1)] === this.$store.state.fichaNegra
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-      }
-      // Esquina Superior-Izquierda (x = 0 / y = 0)
-      if (this.posicionX === 0 && this.positionY === 0 && this.positionX !== 7 && this.positionY !== 7) {
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaNegra) {
-          if (
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY + 1)] === this.$store.state.fichaBlanca ||
-              // Abajo
-              this.$store.state.tableroJuego[(this.posicionX + 1)][this.positionY] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[(this.posicionX + 1)][(this.positionY + 1)] === this.$store.state.fichaBlanca
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaBlanca) {
-          if (
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY + 1)] === this.$store.state.fichaNegra ||
-              // Abajo
-              this.$store.state.tableroJuego[(this.posicionX + 1)][this.positionY] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[(this.posicionX + 1)][(this.positionY + 1)] === this.$store.state.fichaNegra
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-      }
-      // Esquina Superior-Derecha (x = 0 / y = 7)
-      if (this.posicionX === 0 && this.positionY !== 0 && this.positionX !== 7 && this.positionY === 7) {
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaNegra) {
-          if (
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY - 1)] === this.$store.state.fichaBlanca ||
-              // Abajo
-              this.$store.state.tableroJuego[(this.posicionX + 1)][(this.positionY - 1)] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[(this.posicionX + 1)][this.positionY] === this.$store.state.fichaBlanca
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaBlanca) {
-          if (
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY - 1)] === this.$store.state.fichaNegra ||
-              // Abajo
-              this.$store.state.tableroJuego[(this.posicionX + 1)][(this.positionY - 1)] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[(this.posicionX + 1)][this.positionY] === this.$store.state.fichaNegra
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-      }
-      // Esquina Inferior-Derecha (x = 7 / y = 7)
-      if (this.posicionX !== 0 && this.positionY !== 0 && this.positionX === 7 && this.positionY === 7) {
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaNegra) {
-          if (
-              // Arriba
-              this.$store.state.tableroJuego[(this.posicionX - 1)][(this.positionY - 1)] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[(this.posicionX - 1)][this.positionY] === this.$store.state.fichaBlanca ||
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY - 1)] === this.$store.state.fichaBlanca
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaBlanca) {
-          if (
-              // Arriba
-              this.$store.state.tableroJuego[(this.posicionX - 1)][(this.positionY - 1)] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[(this.posicionX - 1)][this.positionY] === this.$store.state.fichaNegra ||
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY - 1)] === this.$store.state.fichaNegra
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-      }
-      // Esquina Inferior-Izquierda (x = 7 / y = 0)
-      if (this.posicionX !== 0 && this.positionY === 0 && this.positionX === 7 && this.positionY !== 7) {
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaNegra) {
-          if (
-              // Arriba
-              this.$store.state.tableroJuego[(this.posicionX - 1)][this.positionY] === this.$store.state.fichaBlanca ||
-              this.$store.state.tableroJuego[(this.posicionX - 1)][(this.positionY + 1)] === this.$store.state.fichaBlanca ||
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY + 1)] === this.$store.state.fichaBlanca
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-        if (this.$store.state.jugadorActivo === this.$store.state.fichaBlanca) {
-          if (
-              // Arriba
-              this.$store.state.tableroJuego[(this.posicionX - 1)][this.positionY] === this.$store.state.fichaNegra ||
-              this.$store.state.tableroJuego[(this.posicionX - 1)][(this.positionY + 1)] === this.$store.state.fichaNegra ||
-              // Centro
-              this.$store.state.tableroJuego[this.posicionX][(this.positionY + 1)] === this.$store.state.fichaNegra
-          ) {
-            return true
-          } else {
-            return false
-          }
-        }
-      }
-    }*/
   },
 }
 </script>

@@ -30,17 +30,6 @@ export default new Vuex.Store({
       [0, 0, 0, 0, 0, 0, 0, 0]
     ],
 
-    estadoCasillas: [
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false]
-    ],
-
     fichaBlanca: 1,
     fichaNegra: 2,
     casillaVacia: 0,
@@ -49,7 +38,7 @@ export default new Vuex.Store({
     disenyoFichaNegra: 'classic',
     disenyoFichaBlanca: 'classic',
 
-    victoria: 0,
+    victoria: false,
 
     jugador1: 2,
     jugador2: 1,
@@ -57,14 +46,14 @@ export default new Vuex.Store({
 
     contadorFichasNegras: 2,
     contadorFichasBlancas: 2,
-    quedanHuecos: true
+
   },
   mutations: {
     reset: state => {
       // Reestablezco el tablero
       state.tableroJuego = _.cloneDeep(tableroInicial);
       // Establezco que nadie tiene la victoria
-      state.victoria = 0;
+      state.victoria = false;
       // Doy el turno a las fichas negras
       state.jugadorActivo = state.fichaNegra;
       console.log('reseteo')
@@ -110,16 +99,7 @@ export default new Vuex.Store({
       } else {
         return _.flattenDeep(state.tableroJuego);
       }
-    },
-    tableroEstado: state => {
-      // Utilizo el jugador para forzar la actualizacion del array sin profundidad
-      if (state.jugadorActivo === 1) {
-        // Elimino la profundidad de la matriz y la comvierto en un array simple
-        return _.flattenDeep(state.estadoCasillas);
-      } else {
-        return _.flattenDeep(state.estadoCasillas);
-      }
-    },
+    }
   },
   actions: {
     nuevaPartida: (context) => {

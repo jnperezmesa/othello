@@ -2,9 +2,9 @@
   <div class="menus">
     <div class="menu">
       <!--- Cabecera del menu --->
-      <CabeceraMenus v-if="$store.state.victoria === $store.state.fichaBlanca" class="menu__titulo--especial" texto="ganan blancas"/>
-      <CabeceraMenus v-if="$store.state.victoria === $store.state.fichaNegra" texto="ganan negras"/>
-      <CabeceraMenus v-if="$store.state.victoria === $store.state.casillaVacia" texto="Empate"/>
+      <CabeceraMenus v-if="fichasNegrasLocal < fichasBlancasLocal" class="menu__titulo--especial" texto="ganan blancas"/>
+      <CabeceraMenus v-if="fichasNegrasLocal > fichasBlancasLocal" texto="ganan negras"/>
+      <CabeceraMenus v-if="fichasNegrasLocal === fichasBlancasLocal" texto="Empate"/>
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
           <!--- Botones del menu --->
@@ -30,8 +30,27 @@ export default {
     BotonVolverAInicio,
     BotonJuego,
   },
-  mounted() {
-    console.log(this.$store.state.victoria)
+  computed: {
+    fichasNegrasLocal: function () {
+      // Creo un array para almacenar las fichas negras
+      let fichas = [];
+      // Filtro el array para quedarme las fichas negras
+      fichas = this.$store.getters.tablero.filter(casilla => {
+        return casilla === this.$store.state.fichaNegra;
+      });
+      // Devuelvo el total de posiciones
+      return fichas.length;
+    },
+    fichasBlancasLocal: function () {
+      // Creo un array para almacenar las fichas negras
+      let fichas = [];
+      // Filtro el array para quedarme las fichas negras
+      fichas = this.$store.getters.tablero.filter(casilla => {
+        return casilla === this.$store.state.fichaBlanca;
+      });
+      // Devuelvo el total de posiciones
+      return fichas.length;
+    }
   }
 }
 </script>

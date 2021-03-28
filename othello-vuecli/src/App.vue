@@ -48,27 +48,12 @@ export default {
       });
       // Devuelvo el total de posiciones
       return fichas.length;
-    }
+    },
   },
   watch: {
     jugadorActivoLocal: function () {
       // Observo el jugador activo para analizar el estado del tablero, si no hay casillas vacias entro
-      if (!this.$store.getters.tablero.includes(this.$store.state.casillaVacia)) {
-        // Si hay más negras que blancas
-        if (this.fichasNegras > this.fichasBlancas) {
-          // Establezco victoria de negras
-          this.$store.state.victoria = this.$store.state.fichaNegra;
-        }
-        // Si hay más blancas que negras
-        if (this.fichasNegras > this.fichasBlancas) {
-          // Establezco victoria de blancas
-          this.$store.state.victoria = this.$store.state.fichaBlanca;
-        }
-        // si hay el mismo numero
-        if (this.fichasNegras === this.fichasBlancas) {
-          // Establezco empate
-          this.$store.state.victoria = this.$store.state.casillaVacia;
-        }
+      if (this.$store.state.victoria === true) {
         // Voy a la vista de victoria
         this.$router.push('Victoria')
       }
