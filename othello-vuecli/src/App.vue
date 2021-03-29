@@ -19,7 +19,6 @@ import Contador from "./components/Contador";
 import explorarTablero from "./mixins/explorarTablero";
 import contarFichas from "./mixins/contarFichas";
 
-
 export default {
   name: 'App',
   components: {
@@ -36,7 +35,9 @@ export default {
   watch: {
     jugadorActivoLocal: function () {
       // Observo el jugador activo para analizar el estado del tablero, si no hay casillas vacias entro
-      if (this.$store.getters.tablero.includes(!this.$store.state.casillaVacia)) {
+      console.log('¿victoria?')
+      if (this.$store.getters.tablero.includes(0) === false) {
+        console.log('si')
         // Voy a la vista de victoria
         this.$router.push('Victoria')
       }
