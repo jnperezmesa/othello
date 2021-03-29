@@ -16,7 +16,6 @@
 import Tablero from "./components/Tablero";
 import Contador from "./components/Contador";
 // Mixins
-import explorarTablero from "./mixins/explorarTablero";
 import contarFichas from "./mixins/contarFichas";
 // Dependencias
 import _ from 'lodash'
@@ -48,8 +47,6 @@ export default {
     },
   },
   mixins: [
-    // Methods
-    explorarTablero,
     // Computed
     contarFichas
   ],
