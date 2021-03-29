@@ -2,9 +2,9 @@
   <div class="menus">
     <div class="menu">
       <!--- Cabecera del menu --->
-      <CabeceraMenus v-if="$store.state.victoria === $store.state.fichaBlanca" class="menu__titulo--especial" texto="ganan blancas"/>
-      <CabeceraMenus v-if="$store.state.victoria === $store.state.fichaNegra" texto="ganan negras"/>
-      <CabeceraMenus v-if="$store.state.victoria === $store.state.casillaVacia" texto="Empate"/>
+      <CabeceraMenus v-if="fichasNegras < fichasBlancas" class="menu__titulo--especial" texto="ganan blancas"/>
+      <CabeceraMenus v-if="fichasNegras > fichasBlancas" texto="ganan negras"/>
+      <CabeceraMenus v-if="fichasNegras === fichasBlancas" texto="Empate"/>
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
           <!--- Botones del menu --->
@@ -18,10 +18,12 @@
 </template>
 
 <script>
-// @ is an alias to /src
+// Componentes
 import BotonJuego from "../components/botones/BotonJuego";
 import BotonVolverAInicio from "../components/botones/BotonVolverAInicio";
 import CabeceraMenus from "../components/textos/CabeceraMenus";
+// Mixins
+import contarFichas from "../mixins/contarFichas";
 
 export default {
   name: 'Victoria',
@@ -30,8 +32,9 @@ export default {
     BotonVolverAInicio,
     BotonJuego,
   },
-  mounted() {
-    console.log(this.$store.state.victoria)
-  }
+  mixins: [
+    // Computed
+    contarFichas
+  ]
 }
 </script>
