@@ -43,7 +43,6 @@ export default new Vuex.Store({
     jugador1: 2,
     jugador2: 1,
     jugadorActivo: 2,
-    posicionesPosibles: 0,
 
     contadorFichasNegras: 2,
     contadorFichasBlancas: 2,
@@ -110,8 +109,8 @@ export default new Vuex.Store({
     revancha: (context) => {
       context.commit('reset');
       context.commit('inicioConCambio');
-    },
+    }
   },
   modules: {
-  },
+  }
 })
