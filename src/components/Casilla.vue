@@ -1,7 +1,7 @@
 <template>
   <div class="main__tablero__casilla classic__casilla" @click="colocarFicha(posicionX, positionY)">
-    <div v-if="contenido === $store.state.fichaBlanca" class="ficha classic__ficha--blanca"></div>
-    <div v-if="contenido === $store.state.fichaNegra" class="ficha classic__ficha--negra"></div>
+    <div v-if="contenido === $store.state.fichaBlanca" class="ficha" :class="{ 'classic__ficha--blanca' : this.$store.state.disenyoFichaBlanca === 'classic'}"></div>
+    <div v-if="contenido === $store.state.fichaNegra" class="ficha" :class="{ 'classic__ficha--negra' : this.$store.state.disenyoFichaNegra === 'classic'}"></div>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ import explorarTablero from "../mixins/explorarTablero";
 import _ from 'lodash'
 
 export default {
-  name: 'Ficha',
+  name: 'Casilla',
   props: {
     contenido: Number,
     posicionX: Number,
