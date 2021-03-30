@@ -37,7 +37,7 @@ export default {
           console.log('datos que salen')
           console.log(quedan)
           // Si no quedan huecos vacios declaro la victoria
-          if (!_.includes(this.$store.getters.tablero, this.$store.state.casillaVacia)) {
+          if (!_.includes(this.$store.getters.tablero, this.$store.state.casillaVacia) || !_.includes(this.$store.getters.tablero, this.$store.state.fichaBlanca) || !_.includes(this.$store.getters.tablero, this.$store.state.fichaNegra)) {
             this.$router.push('Victoria')
           }
           // Si el jugador contrario no puede jugar paso turno automaticamente
