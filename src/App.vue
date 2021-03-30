@@ -36,7 +36,7 @@ export default {
   watch: {
     jugadorActivoLocal: function () {
       // Observo el jugador activo para analizar el estado del tablero, si no hay casillas vacias entro
-      if (_.includes(this.$store.getters.tablero, this.$store.state.casillaVacia) === false) {
+      if (_.includes(this.$store.getters.tablero, this.$store.state.casillaVacia) === false || _.includes(this.$store.getters.tablero, this.$store.state.fichaBlanca) === false || _.includes(this.$store.getters.tablero, this.$store.state.fichaNegra) === false) {
         // Voy a la vista de victoria
         this.$router.push('Victoria')
       }
