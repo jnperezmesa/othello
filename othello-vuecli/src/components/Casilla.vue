@@ -12,7 +12,7 @@ import explorarTablero from "../mixins/explorarTablero";
 import _ from 'lodash'
 
 export default {
-  name: 'Ficha',
+  name: 'Casilla',
   props: {
     contenido: Number,
     posicionX: Number,
