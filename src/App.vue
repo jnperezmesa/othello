@@ -17,8 +17,7 @@ import Tablero from "./components/Tablero";
 import Contador from "./components/Contador";
 // Mixins
 import contarFichas from "./mixins/contarFichas";
-// Dependencias
-import _ from 'lodash'
+
 
 export default {
   name: 'App',
@@ -32,19 +31,6 @@ export default {
       // Traigo localmente el estado del jugador activo
       return this.$store.state.jugadorActivo
     }
-  },
-  watch: {
-    jugadorActivoLocal: function () {
-      // Observo el jugador activo para analizar el estado del tablero, si no hay casillas vacias entro
-      if (_.includes(this.$store.getters.tablero, this.$store.state.casillaVacia) === false || _.includes(this.$store.getters.tablero, this.$store.state.fichaBlanca) === false || _.includes(this.$store.getters.tablero, this.$store.state.fichaNegra) === false) {
-        // Voy a la vista de victoria
-        this.$router.push('Victoria')
-      }
-      // Sigo con la partida
-      console.log(this.jugadorActivoLocal);
-      console.log('Negras '.concat(this.fichasNegras));
-      console.log('Blancas '.concat(this.fichasBlancas));
-    },
   },
   mixins: [
     // Computed

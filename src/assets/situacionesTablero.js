@@ -1,4 +1,6 @@
-const tablero1 = [
+// Situaciones de tablero de prueba
+
+const casillaBloqueada = [
     [2, 2, 2, 2, 2, 2, 2, 0],
     [2, 2, 1, 1, 1, 1, 1, 1],
     [2, 1, 1, 1, 1, 1, 1, 1],
