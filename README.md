@@ -1,4 +1,4 @@
-# othello-vuecli
+# Othello
 
 ## Project setup
 ```

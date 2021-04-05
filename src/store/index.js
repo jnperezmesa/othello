@@ -47,6 +47,8 @@ export default new Vuex.Store({
     contadorFichasNegras: 2,
     contadorFichasBlancas: 2,
 
+    posiciones: 0
+
   },
   mutations: {
     reset: state => {
