@@ -58,13 +58,11 @@ export default new Vuex.Store({
       state.victoria = false;
       // Doy el turno a las fichas negras
       state.jugadorActivo = state.fichaNegra;
-      console.log('reseteo')
     },
     inicio: state => {
       // Establezco que fichas lleva cada jugador
       state.jugador1 = state.fichaNegra;
       state.jugador2 = state.fichaBlanca;
-      console.log('Nueva partida')
     },
     inicioConCambio: state => {
       // Compruebo que ficha lleva el jugador 1
@@ -78,8 +76,6 @@ export default new Vuex.Store({
         state.jugador2 = state.fichaNegra;
         state.jugador1 = state.fichaBlanca;
       }
-      console.log('Revancha')
-      //console.log(state.tableroJuego)
     },
     turno: state => {
       // Compruebo quien tiene el turno

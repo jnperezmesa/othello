@@ -9,6 +9,8 @@
 // Mixins
 import posicionesPosibles from "../mixins/posicionesPosibles";
 import convertirFichas from "../mixins/convertirFichas";
+// Dependencias
+import _ from 'lodash'
 
 
 export default {
@@ -37,6 +39,9 @@ export default {
           // Cambio el turno
           this.$store.commit('turno')
 
+          // Compruebo victoria otra vez
+          this.victoria()
+
           // Reviso si el siguiente jugador tiene opcion de colocar ficha
           let quedan = this.filtrarPosiciones(this.estadoTablero(this.$store.state.jugadorActivo))
 
@@ -55,6 +60,13 @@ export default {
 
       // Si no quedan huecos vacios declaro la victoria
       if (quedanBlancas === false && quedanNegras === false) {
+        this.$router.push('Victoria')
+      }
+      if (
+          _.includes(this.$store.getters.tablero, this.$store.state.casillaVacia) === false ||
+          _.includes(this.$store.getters.tablero, this.$store.state.fichaBlanca) === false ||
+          _.includes(this.$store.getters.tablero, this.$store.state.fichaNegra) === false
+      ) {
         this.$router.push('Victoria')
       }
     }
