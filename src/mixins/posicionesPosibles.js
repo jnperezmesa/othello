@@ -320,17 +320,7 @@ export default {
                 }
             })
 
-            this.$store.state.posiciones = fichas.length
-
-            // Respondo si se puede jugar desde alguna casilla
-            let hecho = false
-            if (fichas.length > 0) {
-                hecho = true
-                return hecho
-            } else {
-                hecho = false
-                return hecho
-            }
+            return fichas
         }
     },
     mixins: [

@@ -46,7 +46,7 @@ export default {
           let quedan = this.filtrarPosiciones(this.estadoTablero(this.$store.state.jugadorActivo))
 
           // Si el jugador contrario no puede jugar paso turno automaticamente
-          if (quedan === false) {
+          if (quedan.length === 0) {
             this.$store.commit('turno')
           }
         }
@@ -59,15 +59,12 @@ export default {
       let quedanBlancas = this.filtrarPosiciones(this.estadoTablero(this.$store.state.fichaBlanca))
 
       // Si no quedan huecos vacios declaro la victoria
-      if (quedanBlancas === false && quedanNegras === false) {
-        this.$router.push('Victoria')
-      }
       if (
+          quedanBlancas === false && quedanNegras === false ||
           _.includes(this.$store.getters.tablero, this.$store.state.casillaVacia) === false ||
           _.includes(this.$store.getters.tablero, this.$store.state.fichaBlanca) === false ||
-          _.includes(this.$store.getters.tablero, this.$store.state.fichaNegra) === false
-      ) {
-        this.$router.push('Victoria')
+          _.includes(this.$store.getters.tablero, this.$store.state.fichaNegra) === false) {
+        this.$store.state.victoria = true
       }
     }
   },

@@ -30,6 +30,16 @@ export default {
     jugadorActivoLocal: function () {
       // Traigo localmente el estado del jugador activo
       return this.$store.state.jugadorActivo
+    },
+  },
+  watch: {
+    // Vigilo si se ha producido la victoria
+    jugadorActivoLocal: function () {
+      // Observo el jugador activo para analizar el estado del tablero, si no hay casillas vacias entro
+      if (this.$store.state.victoria === true) {
+        // Voy a la vista de victoria
+        this.$router.push('Victoria')
+      }
     }
   },
   mixins: [
