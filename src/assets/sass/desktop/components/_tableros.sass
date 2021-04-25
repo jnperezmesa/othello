@@ -1,0 +1,29 @@
+
+// Ajuste general
+.main
+  &__tablero
+    position: relative
+    display: grid
+    grid-template-rows: repeat(8, $tamanyo-casilla-desktop)
+    padding: .5rem
+    &__columna
+      display: grid
+      grid-template-columns: repeat(8, $tamanyo-casilla-desktop)
+    &__casilla
+      position: relative
+      margin: auto
+
+
+// Diseños
+
+.classic
+  &__tablero
+    background-color: $color-classic
+  &__casilla
+    background-color: $color-classic-casilla
+    box-shadow: inset 3px 3px 1px transparentize($color-negro, 0.6)
+    @include cuadrado(90%)
+  &__miniatura
+    background-image: url("../img/tablero/classic-tablero.png")
+
+

@@ -1,0 +1,26 @@
+// Contadores de puntos
+
+.contador
+  @include cuadrado(8vh)
+  border-radius: .5rem
+  display: flex
+  justify-content: center
+  align-items: center
+  font-size: 2.5rem
+  font-family: Roboto-j
+  font-weight: bold
+  &__negro
+    background-color: $color-negro
+    color: $color-blanco
+  &__blanco
+    background-color: $color-blanco
+    color: $color-negro
+
+// Indicador de turno
+.turno
+  display: none
+  position: absolute
+  top: 0
+  left: 300%
+  &--activo
+    display: block
