@@ -57,6 +57,11 @@ export default {
         }
       }
     },
+    comprobarCambios: function () {
+      setInterval(() => {
+        console.log('Hola');
+      }, 3000);
+    },
     // Situación del tablero
     esVictoria: function () {
       // Compruebo el estado del tablero

@@ -10,7 +10,7 @@ export default {
   props: {
     texto: String,
     ir: String,
-    ir_menu: String,
+    ir_menu: Number,
   },
   methods: {
     ruta: function (ir) {

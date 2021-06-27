@@ -24,11 +24,33 @@ export default {
   },
   data: function () {
     return {
+      local: window.localStorage,
     }
   },
   mounted: function () {
+    // Regenero el id del jugador
+    this.comprobarIdJugador();
   },
   methods: {
+    comprobarIdJugador: function () {
+      if (this.$store.state.idJugador === '') {
+        this.recuperarLocal();
+        if (this.$store.state.idJugador === '') {
+          this.$store.commit('crearIdJugador');
+          setTimeout(() => {
+            this.guardarEnLocal();
+          }, 1000);
+        }
+      }
+    },
+    guardarEnLocal: function () {
+      return this.local.setItem('othello_id', this.$store.state.idJugador)
+    },
+    recuperarLocal: function () {
+      if (this.local.getItem('othello_id') !== null) {
+        return this.$store.state.idJugador = this.local.getItem('othello_id');
+      }
+    },
   }
 }
 </script>
