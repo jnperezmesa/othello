@@ -313,7 +313,7 @@ export default {
                 lineas.push(this.filtrarFichas(this.explorarDiagonalesB(casilla.x, casilla.y), casilla.x, casilla.y))
             })
 
-            // Elimini la matriz y
+            // Eliminia la matriz y devuelve el el numero de posiciones en fomrma de array que contiene cantas fichas caerian
             const fichas = lineas.filter(function (posicion) {
                 if (posicion.length !== 0) {
                     return posicion

@@ -1,39 +1,27 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Inicio from '../views/Inicio.vue'
-import Juego from '../views/Juego.vue'
-import EnPartida from "../views/EnPartida";
-import Victoria from "../views/Victoria";
-import Personalizar from "../views/Personalizar";
+import Home from '../views/Home.vue'
+import Local from '../views/Local.vue'
+import Online from '../views/Online.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Inicio',
-    component: Inicio
+    name: 'Home',
+    component: Home
   },
   {
-    path: '/juego',
-    name: 'Juego',
-    component: Juego
+    path: '/local',
+    name: 'Local',
+    component: Local
   },
   {
-    path: '/enpartida',
-    name: 'EnPartida',
-    component: EnPartida
+    path: '/online',
+    name: 'Online',
+    component: Online
   },
-  {
-    path: '/victoria',
-    name: 'Victoria',
-    component: Victoria
-  },
-  {
-    path: '/personalizar',
-    name: 'Personalizar',
-    component: Personalizar
-  }
 ]
 
 const router = new VueRouter({

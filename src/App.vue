@@ -1,51 +1,35 @@
 <template>
   <div id="app">
     <header class="header">
-      <router-view/>
+      <div  v-if="this.$store.state.menuEstado" @click="$store.commit('desplegarMenu')">
+        <BotonHamburgesa/>
+      </div>
+      <div v-else>
+        <Menu :menu="this.$store.state.menu" style="background-color: red"/>
+      </div>
     </header>
-    <main class="main">
-      <Contador :tipo="2" :jugador="this.$store.state.jugador2" :puntuacionNegras="fichasNegras" :puntuacionBlancas="fichasBlancas"/>
-      <Tablero/>
-      <Contador :tipo="1" :jugador="this.$store.state.jugador1" :puntuacionNegras="fichasNegras" :puntuacionBlancas="fichasBlancas"/>
-    </main>
+    <router-view/>
   </div>
 </template>
 
 <script>
-// Componentes
-import Tablero from "./components/Tablero";
-import Contador from "./components/Contador";
-// Mixins
-import contarFichas from "./mixins/contarFichas";
-
+import BotonHamburgesa from "./components/botones/BotonHamburguesa";
+import Menu from "./components/Menu";
 
 export default {
   name: 'App',
   components: {
-    Tablero,
-    Contador
+    BotonHamburgesa,
+    Menu,
   },
-  computed: {
-    // Jugador Activo
-    jugadorActivoLocal: function () {
-      // Traigo localmente el estado del jugador activo
-      return this.$store.state.jugadorActivo
-    },
-  },
-  watch: {
-    // Vigilo si se ha producido la victoria
-    jugadorActivoLocal: function () {
-      // Observo el jugador activo para analizar el estado del tablero, si no hay casillas vacias entro
-      if (this.$store.state.victoria === true) {
-        // Voy a la vista de victoria
-        this.$router.push('Victoria')
-      }
+  data: function () {
+    return {
     }
   },
-  mixins: [
-    // Computed
-    contarFichas
-  ],
+  mounted: function () {
+  },
+  methods: {
+  }
 }
 </script>
 

@@ -27,7 +27,7 @@
               </div>
             </div>
           </li>
-          <BotonVolverAInicio texto="aplicar"/>
+          <BotonSetMenu :ir="this.$store.state.menuInicio" texto="aplicar"/>
         </ul>
       </nav>
     </div>
@@ -36,13 +36,13 @@
 
 <script>
 // @ is an alias to /src
-import CabeceraMenus from "../components/textos/CabeceraMenus";
-import BotonVolverAInicio from "../components/botones/BotonVolverAInicio";
+import CabeceraMenus from "../textos/CabeceraMenus";
+import BotonSetMenu from "../botones/BotonSetMenu";
 
 export default {
   name: 'Personalizar',
   components: {
-    BotonVolverAInicio,
+    BotonSetMenu,
     CabeceraMenus,
   }
 }
