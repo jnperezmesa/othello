@@ -24,30 +24,35 @@ export default {
     // Colocar
     colocarFicha: function (x, y) {
       if (this.contenido === this.$store.state.casillaVacia) {
+        // Copruebo que ficha lleva el jugador
+        if (
+            this.$store.state.juegasCon === this.$store.state.jugadorActivo ||
+            this.$store.state.juegasCon === this.$store.state.juegasConDefault
+        ) {
+          // Comprbar victoria
+          this.esVictoria();
 
-        // Comprbar victoria
-        this.esVictoria();
+          // Exploro el tablero y cambio las fichas
+          let paso = this.convertirFichas(x, y)
 
-        // Exploro el tablero y cambio las fichas
-        let paso = this.convertirFichas(x, y)
+          if (paso === true) {
 
-        if (paso === true) {
+            // Inserto la ficha en la copia
+            this.$store.state.tableroJuego[x][y] = this.$store.state.jugadorActivo
 
-          // Inserto la ficha en la copia
-          this.$store.state.tableroJuego[x][y] = this.$store.state.jugadorActivo
-
-          // Cambio el turno
-          this.$store.commit('turno')
-
-          // Compruebo victoria otra vez
-          this.esVictoria()
-
-          // Reviso si el siguiente jugador tiene opcion de colocar ficha
-          let quedan = this.filtrarPosiciones(this.estadoTablero(this.$store.state.jugadorActivo))
-
-          // Si el jugador contrario no puede jugar paso turno automaticamente
-          if (quedan.length === 0) {
+            // Cambio el turno
             this.$store.commit('turno')
+
+            // Compruebo victoria otra vez
+            this.esVictoria()
+
+            // Reviso si el siguiente jugador tiene opcion de colocar ficha
+            let quedan = this.filtrarPosiciones(this.estadoTablero(this.$store.state.jugadorActivo))
+
+            // Si el jugador contrario no puede jugar paso turno automaticamente
+            if (quedan.length === 0) {
+              this.$store.commit('turno')
+            }
           }
         }
       }

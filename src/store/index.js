@@ -73,8 +73,10 @@ export default new Vuex.Store({
     menuPersonalizar: 6,
     menuVictoria: 7,
 
-    idJugador: '',
     idPatida: 'Test',
+    idJugador: '',
+    juegasCon: 0,
+    juegasConDefault: 0,
 
   },
   mutations: {
@@ -87,6 +89,8 @@ export default new Vuex.Store({
       state.estado = state.estadoPorDefecto;
       // Limpio el tipo de partida
       state.tipoDePartida = state.tipoDePartidaPorDefecto;
+      // Limpio la ficha que llevo
+      state.juegasCon = state.juegasConDefault;
       // Doy el turno a las fichas negras
       state.jugadorActivo = state.fichaNegra;
     },
@@ -96,6 +100,25 @@ export default new Vuex.Store({
       // Establezco que fichas lleva cada jugador
       state.jugador1 = state.fichaNegra;
       state.jugador2 = state.fichaBlanca;
+    },
+    inicioConCambio: state => {
+      // Compruebo que ficha lleva el jugador 1
+      if (state.jugador1 === state.fichaBlanca) {
+        // Jugador 1 pasa a llevar negras y jugador 2 blancas
+        state.jugador1 = state.fichaNegra;
+        state.jugador2 = state.fichaBlanca;
+      }
+      if (state.jugador1 === state.fichaNegra) {
+        // Jugador 1 pasa a llevar blancas y jugador 2 negras
+        state.jugador2 = state.fichaNegra;
+        state.jugador1 = state.fichaBlanca;
+      }
+    },
+    soyJugador1: state => {
+      state.juegasCon = state.jugador1;
+    },
+    soyJugador2: state => {
+      state.juegasCon = state.jugador2;
     },
     tipoOnline: state => {
       // Abro la partida
@@ -130,19 +153,6 @@ export default new Vuex.Store({
       state.menu = state.menuVictoria;
       // Despliego el menu
       state.menuEstado = false;
-    },
-    inicioConCambio: state => {
-      // Compruebo que ficha lleva el jugador 1
-      if (state.jugador1 === state.fichaBlanca) {
-        // Jugador 1 pasa a llevar negras y jugador 2 blancas
-        state.jugador1 = state.fichaNegra;
-        state.jugador2 = state.fichaBlanca;
-      }
-      if (state.jugador1 === state.fichaNegra) {
-        // Jugador 1 pasa a llevar blancas y jugador 2 negras
-        state.jugador2 = state.fichaNegra;
-        state.jugador1 = state.fichaBlanca;
-      }
     },
     turno: state => {
       // Compruebo quien tiene el turno
@@ -180,10 +190,12 @@ export default new Vuex.Store({
       context.commit('reset');
       context.commit('tipoOnline');
       context.commit('inicio');
+      context.commit('soyJugador1');
     },
     unirseAPartidaOnline: (context) => {
       context.commit('reset');
       context.commit('inicio');
+      context.commit('soyJugador2');
       context.commit('modoJuego');
     },
     revancha: (context) => {

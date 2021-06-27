@@ -4,9 +4,9 @@
       <CabeceraMenus class="menu__titulo" texto="Online"/>
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
-          <span @click="$store.dispatch('nuevaPartidaOnline')"><BotonSetMenu :ir="this.$store.state.menuOnlineCrear" texto="Crear"/></span>
+          <span @click="$store.dispatch('nuevaPartidaOnline')"><BotonJuegoOnline ir="Online" :ir_menu="this.$store.state.menuOnlineCrear" texto="Crear"/></span>
           <BotonSetMenu :ir="this.$store.state.menuOnlineUnirse" texto="Unirse"/>
-          <BotonSetMenu :ir="this.$store.state.menuNuevaPartida" texto="Volver"/>
+          <BotonSetMenu :ir="this.$store.state.menuInicio" texto="Volver"/>
         </ul>
       </nav>
     </div>
@@ -16,12 +16,14 @@
 <script>
 // @ is an alias to /src
 import BotonSetMenu from "../botones/BotonSetMenu";
+import BotonJuegoOnline from "../botones/BotonJuegoOnline";
 import CabeceraMenus from "../textos/CabeceraMenus";
 
 export default {
   name: 'NuevaPartida',
   components: {
     CabeceraMenus,
+    BotonJuegoOnline,
     BotonSetMenu,
   },
 }

@@ -5,10 +5,10 @@
       <nav class="menu__nav">
         <div>
           <p>{{ this.$store.state.idPatida }}</p>
-          <button>Copiar</button>
+          <button @click="$store.commit('desplegarMenu')">Copiar</button>
         </div>
         <ul class="menu__nav__ul">
-          <BotonSetMenu :ir="this.$store.state.menuOnlineOpciones" texto="Volver"/>
+          <BotonJuegoOnline ir="Home" :ir_menu="this.$store.state.menuOnlineOpciones" texto="Volver"/>
         </ul>
       </nav>
     </div>
@@ -17,14 +17,14 @@
 
 <script>
 // @ is an alias to /src
-import BotonSetMenu from "../botones/BotonSetMenu";
+import BotonJuegoOnline from "../botones/BotonJuegoOnline";
 import CabeceraMenus from "../textos/CabeceraMenus";
 
 export default {
   name: 'NuevaPartida',
   components: {
     CabeceraMenus,
-    BotonSetMenu,
+    BotonJuegoOnline,
   },
 }
 </script>

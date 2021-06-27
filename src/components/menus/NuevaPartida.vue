@@ -5,7 +5,7 @@
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
           <span @click="$store.dispatch('nuevaPartida')"><BotonJuego ir="Local" texto="Local"/></span>
-          <BotonSetMenu style="display: none" :ir="this.$store.state.menuOnlineOpciones" texto="Online"/>
+          <BotonSetMenu :ir="this.$store.state.menuOnlineOpciones" texto="Online"/>
           <BotonSetMenu :ir="this.$store.state.menuInicio" texto="Volver"/>
         </ul>
       </nav>
