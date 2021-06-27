@@ -8,8 +8,8 @@
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
           <!--- Botones del menu --->
-          <span @click="$store.dispatch('revancha')"><BotonJuego texto="revancha"/></span>
-          <span @click="$store.commit('reset')"><BotonVolverAInicio texto="salir"/></span>
+          <span v-if="this.$store.state.tipoDePartida = this.$store.state.partidaLocal" @click="$store.dispatch('revancha')"><BotonJuego ir="Local" texto="revancha"/></span>
+          <span @click="$store.commit('reset')"><BotonSetMenu :ir="this.$store.state.menuInicio" texto="salir"/></span>
           <!--- Fin otones del menu --->
         </ul>
       </nav>
@@ -19,17 +19,17 @@
 
 <script>
 // Componentes
-import BotonJuego from "../components/botones/BotonJuego";
-import BotonVolverAInicio from "../components/botones/BotonVolverAInicio";
-import CabeceraMenus from "../components/textos/CabeceraMenus";
+import BotonJuego from "../botones/BotonJuego";
+import BotonSetMenu from "../botones/BotonSetMenu";
+import CabeceraMenus from "../textos/CabeceraMenus";
 // Mixins
-import contarFichas from "../mixins/contarFichas";
+import contarFichas from "../../mixins/contarFichas";
 
 export default {
   name: 'Victoria',
   components: {
     CabeceraMenus,
-    BotonVolverAInicio,
+    BotonSetMenu,
     BotonJuego,
   },
   mixins: [

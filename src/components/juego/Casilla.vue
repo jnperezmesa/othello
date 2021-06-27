@@ -7,8 +7,8 @@
 
 <script>
 // Mixins
-import posicionesPosibles from "../mixins/posicionesPosibles";
-import convertirFichas from "../mixins/convertirFichas";
+import posicionesPosibles from "../../mixins/posicionesPosibles";
+import convertirFichas from "../../mixins/convertirFichas";
 // Dependencias
 import _ from 'lodash'
 
@@ -26,7 +26,7 @@ export default {
       if (this.contenido === this.$store.state.casillaVacia) {
 
         // Comprbar victoria
-        this.victoria();
+        this.esVictoria();
 
         // Exploro el tablero y cambio las fichas
         let paso = this.convertirFichas(x, y)
@@ -40,7 +40,7 @@ export default {
           this.$store.commit('turno')
 
           // Compruebo victoria otra vez
-          this.victoria()
+          this.esVictoria()
 
           // Reviso si el siguiente jugador tiene opcion de colocar ficha
           let quedan = this.filtrarPosiciones(this.estadoTablero(this.$store.state.jugadorActivo))
@@ -53,10 +53,10 @@ export default {
       }
     },
     // Situación del tablero
-    victoria: function () {
+    esVictoria: function () {
       // Compruebo el estado del tablero
-      let quedanNegras = this.filtrarPosiciones(this.estadoTablero(this.$store.state.fichaNegra))
-      let quedanBlancas = this.filtrarPosiciones(this.estadoTablero(this.$store.state.fichaBlanca))
+      const quedanNegras = this.filtrarPosiciones(this.estadoTablero(this.$store.state.fichaNegra))
+      const quedanBlancas = this.filtrarPosiciones(this.estadoTablero(this.$store.state.fichaBlanca))
 
       // Si no quedan huecos vacios declaro la victoria
       if (
@@ -64,8 +64,9 @@ export default {
           _.includes(this.$store.getters.tablero, this.$store.state.casillaVacia) === false ||
           _.includes(this.$store.getters.tablero, this.$store.state.fichaBlanca) === false ||
           _.includes(this.$store.getters.tablero, this.$store.state.fichaNegra) === false) {
-        this.$store.state.victoria = true
+        return this.$store.dispatch('victoria');
       }
+      return false;
     }
   },
   mixins: [

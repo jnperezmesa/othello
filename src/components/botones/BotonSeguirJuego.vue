@@ -1,14 +1,16 @@
 <template>
   <li class="inicio__nav__li">
-    <router-link to="/" class="menu__nav__link">{{ texto }}</router-link>
+    <a @click="$store.commit('desplegarMenu')" class="menu__nav__link">{{ texto }}</a>
   </li>
 </template>
 
 <script>
 export default {
-  name: 'BotonVolverAInicio',
+  name: 'BotonSeguirJuego',
   props: {
     texto: String,
+  },
+  methods: {
   }
 }
 </script>

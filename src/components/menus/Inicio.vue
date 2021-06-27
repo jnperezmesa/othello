@@ -4,8 +4,8 @@
       <CabeceraMenus class="menu__titulo--especial" texto="othello"/>
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
-          <span @click="$store.dispatch('nuevaPartida')"><BotonJuego texto="nueva partida"/></span>
-          <BotonPersonalizar/>
+          <BotonSetMenu :ir="this.$store.state.menuNuevaPartida" texto="nueva partida"/>
+          <BotonSetMenu style="display: none" :ir="this.$store.state.menuPersonalizar" texto="Personalizar"/>
         </ul>
       </nav>
     </div>
@@ -14,17 +14,14 @@
 
 <script>
 // @ is an alias to /src
-
-import BotonJuego from "../components/botones/BotonJuego";
-import BotonPersonalizar from "../components/botones/BotonPersonalizar";
-import CabeceraMenus from "../components/textos/CabeceraMenus";
+import BotonSetMenu from "../botones/BotonSetMenu";
+import CabeceraMenus from "../textos/CabeceraMenus";
 
 export default {
   name: 'Inicio',
   components: {
     CabeceraMenus,
-    BotonPersonalizar,
-    BotonJuego
+    BotonSetMenu,
   },
 }
 </script>

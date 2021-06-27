@@ -1,9 +1,9 @@
 <template>
-  <router-link to="/enpartida" class="boton__menu">
+  <div class="boton__menu">
     <hr class="boton__menu__linea">
     <hr class="boton__menu__linea">
     <hr class="boton__menu__linea">
-  </router-link>
+  </div>
 </template>
 
 <script>
