@@ -54,8 +54,8 @@ export default new Vuex.Store({
 
     estado: 0,
     estadoPorDefecto: 0,
-    estadoEspera: 1,
-    estadoActiva: 2,
+    estadoActiva: 1,
+    estadoEspera: 2,
     estadoCerrada: 3,
 
     victoria: false,
@@ -66,6 +66,7 @@ export default new Vuex.Store({
     jugadorActivo: 2,
 
     turno: 0,
+    ultimoCambio: '',
 
     contadorFichasNegras: 2,
     contadorFichasBlancas: 2,
@@ -86,6 +87,7 @@ export default new Vuex.Store({
 
     idPatida: 'Test',
     idJugador: '',
+
     juegasCon: 0,
     juegasConDefault: 0,
 
@@ -193,7 +195,6 @@ export default new Vuex.Store({
           })
           .then((json) => {
             // Usamos la información recibida como necesitemos
-            console.log(json)
             return state.idJugador = json['id_jugador'];
           });
     },
@@ -212,8 +213,8 @@ export default new Vuex.Store({
           })
           .then((json) => {
             // Usamos la información recibida como necesitemos
-            console.log(json)
-            return state.idPatida = json['id_partida'];
+            state.idPatida = json['id_partida'];
+            state.ultimoCambio = json['fecha_ultima_actualizacion'];
           });
     },
     actualizarPartida: state => {
@@ -222,19 +223,15 @@ export default new Vuex.Store({
           'Content-type': 'application/json',
           "Access-Control-Allow-Origin": "*",
         },
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify(
       {
               "estado": state.estado,
               "turno": state.turno,
               "juega": state.jugadorActivo,
               "victoria": state.ganador,
-              "ficha_jugador_1": 0,
-              "capturas_jugador_1": 0,
-              "ficha_jugador_2": 0,
-              "capturas_jugador_2": 0,
-              "tablero": "string",
-              "state.ultimoCambio": "string"
+              "tablero": JSON.stringify(state.tableroJuego),
+              "state.ultimoCambio": state.ultimoCambio,
             }
         )
       })
@@ -247,7 +244,9 @@ export default new Vuex.Store({
             if (state.ultimoCambio !== json['fecha_ultima_actualizacion']) {
               state.estado = json['estado'];
               state.turno = json['turno'];
-
+              state.jugadorActivo = json['juega'];
+              state.ganador = json['victoria'];
+              state.tableroJuego = _.cloneDeep(JSON.parse(json['tablero']))
               state.ultimoCambio = json['fecha_ultima_actualizacion'];
             }
           });
@@ -264,6 +263,7 @@ export default new Vuex.Store({
         state.jugadorActivo = state.fichaNegra;
       }
     },
+
     desplegarMenu: state => {
       return state.menuEstado = !state.menuEstado
     },

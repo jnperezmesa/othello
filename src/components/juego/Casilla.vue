@@ -26,7 +26,7 @@ export default {
       if (this.contenido === this.$store.state.casillaVacia) {
         // Copruebo que ficha lleva el jugador
         if (
-            this.$store.state.juegasCon === this.$store.state.jugadorActivo ||
+            this.$store.state.juegasCon !== this.$store.state.jugadorActivo ||
             this.$store.state.juegasCon === this.$store.state.juegasConDefault
         ) {
           // Comprbar victoria
@@ -54,6 +54,8 @@ export default {
               this.$store.commit('turno')
             }
           }
+          // Actualizo el servidor
+          this.$store.commit('actualizarPartida');
         }
       }
     },
