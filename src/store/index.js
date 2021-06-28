@@ -7,8 +7,9 @@ const API_VERSION = 'v2'
 const API = 'http://127.0.0.1:8000/api/'.concat(API_VERSION);
 const API_NUEVO_JUGADOR = API.concat('/jugador/crear/');
 const API_NUEVA_PARTIDA = API.concat('/partida/crear/');
-//const API_UNIRSE_A_PARTIDA = API.concat('/partida/unirse/');
+const API_UNIRSE_A_PARTIDA = API.concat('/partida/unirse/');
 const API_JUGAR_A_PARTIDA = API.concat('/partida/jugar/');
+const API_VER_PARTIDA = API.concat('/partida/');
 
 
 const tableroInicial = [
@@ -217,6 +218,30 @@ export default new Vuex.Store({
             state.ultimoCambio = json['fecha_ultima_actualizacion'];
           });
     },
+    unirseAPartida: state => {
+      fetch(API_UNIRSE_A_PARTIDA.concat(state.idPatida, '/', state.idJugador, '/'), {
+        headers: {
+          'Content-type': 'application/json',
+          "Access-Control-Allow-Origin": "*",
+        },
+        method: 'PUT',
+      })
+          .then((response) => {
+            // Transforma la respuesta. En este caso lo convierte a JSON
+            return response.json();
+          })
+          .then((json) => {
+            // Usamos la información recibida como necesitemos
+            if (state.ultimoCambio !== json['fecha_ultima_actualizacion']) {
+              state.estado = json['estado'];
+              state.turno = json['turno'];
+              state.jugadorActivo = json['juega'];
+              state.ganador = json['victoria'];
+              state.tableroJuego = _.cloneDeep(JSON.parse(json['tablero']))
+              state.ultimoCambio = json['fecha_ultima_actualizacion'];
+            }
+          });
+    },
     actualizarPartida: state => {
       fetch(API_JUGAR_A_PARTIDA.concat(state.idPatida, '/', state.idJugador, '/'), {
         headers: {
@@ -235,6 +260,24 @@ export default new Vuex.Store({
             }
         )
       })
+          .then((response) => {
+            // Transforma la respuesta. En este caso lo convierte a JSON
+            return response.json();
+          })
+          .then((json) => {
+            // Usamos la información recibida como necesitemos
+            if (state.ultimoCambio !== json['fecha_ultima_actualizacion']) {
+              state.estado = json['estado'];
+              state.turno = json['turno'];
+              state.jugadorActivo = json['juega'];
+              state.ganador = json['victoria'];
+              state.tableroJuego = _.cloneDeep(JSON.parse(json['tablero']))
+              state.ultimoCambio = json['fecha_ultima_actualizacion'];
+            }
+          });
+    },
+    pedirCambios: state => {
+      fetch(API_VER_PARTIDA.concat(state.idPatida))
           .then((response) => {
             // Transforma la respuesta. En este caso lo convierte a JSON
             return response.json();
@@ -285,6 +328,7 @@ export default new Vuex.Store({
       context.commit('tipoLocal');
       context.commit('inicio');
       context.commit('modoJuego');
+      context.commit('crearPartida');
     },
     nuevaPartidaOnline: (context) => {
       context.commit('reset');
