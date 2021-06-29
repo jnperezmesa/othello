@@ -20,9 +20,11 @@ export default {
   },
   mounted: function () {
     // Regenero el id del jugador
-    setInterval(() => {
-      this.$store.commit('pedirCambios');
-    }, 3000);
+    if (this.$store.state.tipoDePartida === this.$store.state.partidaOnline) {
+      setInterval(() => {
+        this.$store.commit('pedirCambios');
+      }, 2000);
+    }
   },
   methods: {
   },

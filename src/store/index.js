@@ -339,6 +339,7 @@ export default new Vuex.Store({
     },
     unirseAPartidaOnline: (context) => {
       context.commit('reset');
+      context.commit('tipoOnline');
       context.commit('inicio');
       context.commit('soyJugador2');
       context.commit('modoJuego');

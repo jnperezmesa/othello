@@ -27,8 +27,7 @@ export default {
         // Copruebo que ficha lleva el jugador
         if (
             this.$store.state.juegasCon === this.$store.state.jugadorActivo ||
-            this.$store.state.juegasCon === this.$store.state.juegasConDefault ||
-            this.$store.state.juegasCon !== this.$store.state.jugadorActivo
+            this.$store.state.juegasCon === this.$store.state.juegasConDefault
         ) {
           // Comprbar victoria
           this.esVictoria();
