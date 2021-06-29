@@ -86,7 +86,7 @@ export default new Vuex.Store({
     menuPersonalizar: 6,
     menuVictoria: 7,
 
-    idPatida: 'Test',
+    idPatida: '',
     idJugador: '',
 
     juegasCon: 0,
@@ -342,6 +342,7 @@ export default new Vuex.Store({
       context.commit('inicio');
       context.commit('soyJugador2');
       context.commit('modoJuego');
+      context.commit('unirseAPartida');
     },
     revancha: (context) => {
       context.commit('reset');

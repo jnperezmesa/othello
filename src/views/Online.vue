@@ -18,6 +18,14 @@ export default {
     Tablero,
     Contador
   },
+  mounted: function () {
+    // Regenero el id del jugador
+    setInterval(() => {
+      this.$store.commit('pedirCambios');
+    }, 3000);
+  },
+  methods: {
+  },
   computed: {
   },
   watch: {
