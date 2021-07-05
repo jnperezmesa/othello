@@ -56,12 +56,6 @@ export default {
           }
           // Actualizo el servidor
           this.$store.commit('actualizarPartida');
-          // Dejo la rutina que busca si hay cambios
-          if (this.$store.state.tipoDePartida === this.$store.state.partidaOnline) {
-            setInterval(() => {
-              this.$store.commit('pedirCambios');
-            }, 3000);
-          }
         }
       }
     },

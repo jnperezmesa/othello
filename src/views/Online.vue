@@ -1,5 +1,5 @@
 <template>
-  <main class="main main_local">
+  <main class="main main_online">
     <Contador :tipo="2" :jugador="this.$store.state.jugador2" :puntuacionNegras="fichasNegras" :puntuacionBlancas="fichasBlancas"/>
     <Tablero/>
     <Contador :tipo="1" :jugador="this.$store.state.jugador1" :puntuacionNegras="fichasNegras" :puntuacionBlancas="fichasBlancas"/>
@@ -13,20 +13,20 @@ import Contador from "../components/juego/Contador";
 import contarFichas from "../mixins/contarFichas";
 
 export default {
-  name: 'Local',
+  name: 'Online',
   components: {
     Tablero,
     Contador
   },
   mounted: function () {
-    // Regenero el id del jugador
-    if (this.$store.state.tipoDePartida === this.$store.state.partidaOnline) {
-      setInterval(() => {
-        this.$store.commit('pedirCambios');
-      }, 2000);
-    }
+    this.activarIntervalo()
   },
   methods: {
+    activarIntervalo: function () {
+      return setInterval(() => {
+        this.$store.dispatch('comprobarCambios');
+      }, 2000);
+    }
   },
   computed: {
   },

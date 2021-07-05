@@ -41,6 +41,7 @@ export default new Vuex.Store({
 
     fichaBlanca: 1,
     fichaNegra: 2,
+    empate: 3,
     casillaVacia: 0,
 
     disenyoTablero: 'classic',
@@ -59,8 +60,8 @@ export default new Vuex.Store({
     estadoEspera: 2,
     estadoCerrada: 3,
 
-    victoria: false,
-    ganador: null,
+    victoria: 0,
+
 
     jugador1: 2,
     jugador2: 1,
@@ -99,7 +100,7 @@ export default new Vuex.Store({
       // Reestablezco el tablero
       state.tableroJuego = _.cloneDeep(tableroInicial);
       // Establezco que nadie tiene la victoria
-      state.victoria = false;
+      state.victoria = 0;
       // Limpio el estado de la partida
       state.estado = state.estadoPorDefecto;
       // Limpio el tipo de partida
@@ -114,8 +115,6 @@ export default new Vuex.Store({
 
     // Inicios
     inicio: state => {
-      // Abro la partida
-      state.estado = state.estadoActiva;
       // Establezco que fichas lleva cada jugador
       state.jugador1 = state.fichaNegra;
       state.jugador2 = state.fichaBlanca;
@@ -144,14 +143,20 @@ export default new Vuex.Store({
 
     //  Tipos de partida
     tipoOnline: state => {
+      // Establezco el estado
+      state.estado = state.estadoEspera;
       // Abro la partida
       state.tipoDePartida = state.partidaOnline;
     },
     tipoLocal: state => {
+      // Establezco el estado
+      state.estado = state.estadoActiva;
       // Abro la partida
       state.tipoDePartida = state.partidaLocal;
     },
     tipoBoot: state => {
+      // Establezco el estado
+      state.estado = state.estadoActiva;
       // Abro la partida
       state.tipoDePartida = state.partidaBoot;
     },
@@ -170,10 +175,6 @@ export default new Vuex.Store({
       state.menuEstado = false;
     },
     modoVictoria: state => {
-      // Declaro la victoria
-      state.victoria = true
-      // Ciero la partida
-      state.estado = state.estadoCerrada;
       // Selecciono el menú que tiene que estar activo
       state.menu = state.menuVictoria;
       // Despliego el menu
@@ -236,7 +237,7 @@ export default new Vuex.Store({
               state.estado = json['estado'];
               state.turno = json['turno'];
               state.jugadorActivo = json['juega'];
-              state.ganador = json['victoria'];
+              state.victoria = json['victoria'];
               state.tableroJuego = _.cloneDeep(JSON.parse(json['tablero']))
               state.ultimoCambio = json['fecha_ultima_actualizacion'];
             }
@@ -254,7 +255,7 @@ export default new Vuex.Store({
               "estado": state.estado,
               "turno": state.turno,
               "juega": state.jugadorActivo,
-              "victoria": state.ganador,
+              "victoria": state.victoria,
               "tablero": JSON.stringify(state.tableroJuego),
               "state.ultimoCambio": state.ultimoCambio,
             }
@@ -270,7 +271,7 @@ export default new Vuex.Store({
               state.estado = json['estado'];
               state.turno = json['turno'];
               state.jugadorActivo = json['juega'];
-              state.ganador = json['victoria'];
+              state.victoria = json['victoria'];
               state.tableroJuego = _.cloneDeep(JSON.parse(json['tablero']))
               state.ultimoCambio = json['fecha_ultima_actualizacion'];
             }
@@ -288,13 +289,12 @@ export default new Vuex.Store({
               state.estado = json['estado'];
               state.turno = json['turno'];
               state.jugadorActivo = json['juega'];
-              state.ganador = json['victoria'];
+              state.victoria = json['victoria'];
               state.tableroJuego = _.cloneDeep(JSON.parse(json['tablero']))
               state.ultimoCambio = json['fecha_ultima_actualizacion'];
             }
           });
     },
-
 
     turno: state => {
       // Compruebo quien tiene el turno
@@ -345,6 +345,20 @@ export default new Vuex.Store({
       context.commit('modoJuego');
       context.commit('unirseAPartida');
     },
+    comprobarCambios: (context) => {
+      if (context.state.tipoDePartida === context.state.partidaOnline) {
+        if (context.state.estado === context.state.estadoActiva && context.state.turno === 0) {
+          context.commit('modoJuego');
+        }
+        context.commit('pedirCambios');
+        console.log('buscando')
+        if (context.state.victoria !== 0) {
+          context.commit('modoVictoria')
+          console.log('victoria')
+        }
+      }
+      console.log('activo')
+    },
     revancha: (context) => {
       context.commit('reset');
       context.commit('inicioConCambio');
@@ -358,5 +372,5 @@ export default new Vuex.Store({
     },
   },
   modules: {
-  }
+  },
 })

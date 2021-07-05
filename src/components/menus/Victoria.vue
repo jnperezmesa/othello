@@ -27,6 +27,25 @@ import contarFichas from "../../mixins/contarFichas";
 
 export default {
   name: 'Victoria',
+  mounted: function () {
+    this.guardarGanador()
+    this.$store.commit('actualizarPartida');
+  },
+  methods: {
+    guardarGanador: function () {
+      // Ciero la partida
+      this.$store.state.estado = this.$store.state.estadoCerrada;
+      if (this.fichasNegras < this.fichasBlancas) {
+        return this.$store.state.victoria = this.$store.state.fichaBlanca;
+      }
+      if (this.fichasNegras > this.fichasBlancas) {
+        return this.$store.state.victoria = this.$store.state.fichaNegra;
+      }
+      if (this.fichasNegras === this.fichasBlancas) {
+        return this.$store.state.victoria = this.$store.state.empate;
+      }
+    }
+  },
   components: {
     CabeceraMenus,
     BotonSetMenu,
