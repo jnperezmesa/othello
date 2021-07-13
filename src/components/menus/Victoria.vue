@@ -8,7 +8,7 @@
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
           <!--- Botones del menu --->
-          <span v-if="this.$store.state.tipoDePartida = this.$store.state.partidaLocal" @click="$store.dispatch('revancha')"><BotonJuego ir="Local" texto="revancha"/></span>
+          <span v-if="this.$store.state.tipoDePartida === this.$store.state.partidaLocal" @click="$store.dispatch('revancha')"><BotonJuego ir="Local" texto="revancha"/></span>
           <span @click="$store.commit('reset')"><BotonSetMenu :ir="this.$store.state.menuInicio" texto="salir"/></span>
           <!--- Fin otones del menu --->
         </ul>

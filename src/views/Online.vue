@@ -20,12 +20,21 @@ export default {
   },
   mounted: function () {
     this.activarIntervalo()
+    this.unirsePorUrl()
   },
   methods: {
     activarIntervalo: function () {
       return setInterval(() => {
         this.$store.dispatch('comprobarCambios');
       }, 2000);
+    },
+    unirsePorUrl: function () {
+      if (this.$route.query.id_partida) {
+        this.$store.state.idPatida = this.$route.query.id_partida
+        setTimeout(() => {
+         this.$store.dispatch('unirseAPartidaOnline')
+        }, 1)
+      }
     }
   },
   computed: {

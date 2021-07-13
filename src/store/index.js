@@ -80,12 +80,10 @@ export default new Vuex.Store({
 
     menuInicio: 0,
     menuNuevaPartida: 1,
-    menuOnlineOpciones: 2,
-    menuOnlineCrear: 3,
-    menuOnlineUnirse: 4,
-    menuJugando: 5,
-    menuPersonalizar: 6,
-    menuVictoria: 7,
+    menuOnlineCrear: 2,
+    menuJugando: 3,
+    menuPersonalizar: 4,
+    menuVictoria: 5,
 
     idPatida: '',
     idJugador: '',
@@ -93,10 +91,13 @@ export default new Vuex.Store({
     juegasCon: 0,
     juegasConDefault: 0,
 
+    abandono: false,
+
   },
   mutations: {
     // Reinicio del juego
     reset: state => {
+      state.abandono = false;
       // Reestablezco el tablero
       state.tableroJuego = _.cloneDeep(tableroInicial);
       // Establezco que nadie tiene la victoria
@@ -175,6 +176,14 @@ export default new Vuex.Store({
       state.menuEstado = false;
     },
     modoVictoria: state => {
+      // Selecciono el menú que tiene que estar activo
+      state.menu = state.menuVictoria;
+      // Despliego el menu
+      state.menuEstado = false;
+    },
+    modoAbandono: state => {
+      // Establezco abandono
+      state.abandono = true;
       // Selecciono el menú que tiene que estar activo
       state.menu = state.menuVictoria;
       // Despliego el menu
@@ -364,8 +373,7 @@ export default new Vuex.Store({
       context.commit('inicioConCambio');
     },
     rendirse: (context) => {
-      context.commit('reset');
-      context.commit('modoMenu');
+      context.commit('modoVictoria');
     },
     victoria: (context) => {
       context.commit('modoVictoria');
