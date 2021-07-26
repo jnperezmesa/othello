@@ -39,8 +39,8 @@ export default new Vuex.Store({
       [0, 0, 0, 0, 0, 0, 0, 0]
     ],
 
-    fichaBlanca: 1,
-    fichaNegra: 2,
+    fichaNegra: 1,
+    fichaBlanca: 2,
     empate: 3,
     casillaVacia: 0,
 
@@ -63,9 +63,9 @@ export default new Vuex.Store({
     victoria: 0,
 
 
-    jugador1: 2,
-    jugador2: 1,
-    jugadorActivo: 2,
+    jugador1: 1,
+    jugador2: 2,
+    jugadorActivo: 1,
 
     turno: 0,
     ultimoCambio: '',

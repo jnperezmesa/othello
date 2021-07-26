@@ -9,7 +9,7 @@
           <button v-clipboard:copy="url">Copiar link</button>
         </div>
         <ul class="menu__nav__ul">
-          <BotonJuegoOnline ir="Home" :ir_menu="this.$store.state.menuOnlineOpciones" texto="Volver"/>
+          <BotonJuegoOnline ir="Home" :ir_menu="this.$store.state.menuNuevaPartida" texto="Volver"/>
         </ul>
       </nav>
     </div>
