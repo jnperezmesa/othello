@@ -5,8 +5,11 @@
       <nav class="menu__nav">
 
         <div class="menu__crear-partida__codigo" v-if="this.$store.state.idPatida">
-          <vue-qr :text="url" :size="200"></vue-qr>
-          <button v-clipboard:copy="url">Copiar link</button>
+          <vue-qr class="menu__crear-partida__codigo__qr" :text="url" :size="200"></vue-qr>
+          <button class="menu__crear-partida__codigo__boton" @click="copiado = true" v-clipboard:copy="url">
+            <span class="menu__crear-partida__codigo__copiar" v-if="!copiado">Copiar link</span>
+            <span class="menu__crear-partida__codigo__copiar menu__crear-partida__codigo__copiar--copiado" v-else>¡Copiado!</span>
+          </button>
         </div>
         <ul class="menu__nav__ul">
           <BotonJuegoOnline ir="Home" :ir_menu="this.$store.state.menuNuevaPartida" texto="Volver"/>
@@ -29,6 +32,11 @@ export default {
     BotonJuegoOnline,
     VueQr,
   },
+  data: function () {
+    return {
+      copiado: false,
+    }
+  },
   mounted: function () {
     // Regenero el id del jugador
     this.comprobarIdJugador();
@@ -37,6 +45,7 @@ export default {
   },
   computed: {
     url: function () {
+      // Construyo la url en base al codigo
       return ''.concat(window.location.origin, this.$router.resolve({name: 'Online'}).href, '?id_partida=', this.$store.state.idPatida)
     }
   }

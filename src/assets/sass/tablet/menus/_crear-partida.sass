@@ -11,3 +11,21 @@
         text-transform: uppercase
         display: flex
         flex-direction: column
+        border-radius: .5rem
+        &__boton
+          border: 0
+          background-color: transparent
+        &__copiar
+          font-size: 1rem
+          font-weight: bold
+          display: inline-block
+          border: solid $color-negro 2px
+          border-radius: .5rem
+          padding: .5rem 1rem
+          margin: 0 0 .5rem 0
+          min-width: 200px
+          &--copiado
+            border-color: transparentize($color-verde, .2)
+            color: transparentize($color-verde, .2)
+
+

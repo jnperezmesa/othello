@@ -85,7 +85,7 @@ export default new Vuex.Store({
     menuPersonalizar: 4,
     menuVictoria: 5,
 
-    idPatida: '',
+    idPatida: 'Lq1S88u0tM98ss',
     idJugador: '',
 
     juegasCon: 0,

@@ -1,8 +1,8 @@
 <template>
   <main class="main main_online">
-    <Contador :tipo="2" :jugador="this.$store.state.jugador2" :puntuacionNegras="fichasNegras" :puntuacionBlancas="fichasBlancas"/>
+    <Contador :tipo="3" :jugador="oponente" :puntuacionNegras="fichasNegras" :puntuacionBlancas="fichasBlancas"/>
     <Tablero/>
-    <Contador :tipo="1" :jugador="this.$store.state.jugador1" :puntuacionNegras="fichasNegras" :puntuacionBlancas="fichasBlancas"/>
+    <Contador :tipo="1" :jugador="this.$store.state.juegasCon" :puntuacionNegras="fichasNegras" :puntuacionBlancas="fichasBlancas"/>
   </main>
 </template>
 
@@ -19,8 +19,14 @@ export default {
     Contador
   },
   mounted: function () {
+    this.$forceUpdate()
     this.activarIntervalo()
     this.unirsePorUrl()
+  },
+  data: function () {
+    return {
+      invitado: 2,
+    }
   },
   methods: {
     activarIntervalo: function () {
@@ -38,6 +44,13 @@ export default {
     }
   },
   computed: {
+    oponente: function () {
+      if (this.$store.state.juegasCon === this.$store.state.fichaNegra) {
+        return this.$store.state.fichaBlanca
+      } else {
+        return this.$store.state.fichaNegra
+      }
+    }
   },
   watch: {
   },

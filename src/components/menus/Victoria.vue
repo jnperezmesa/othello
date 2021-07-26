@@ -9,7 +9,7 @@
         <ul class="menu__nav__ul">
           <!--- Botones del menu --->
           <span v-if="this.$store.state.tipoDePartida === this.$store.state.partidaLocal" @click="$store.dispatch('revancha')"><BotonJuego ir="Local" texto="revancha"/></span>
-          <span @click="$store.commit('reset')"><BotonSetMenu :ir="this.$store.state.menuInicio" texto="salir"/></span>
+          <span @click="$store.commit('reset')"><BotonJuegoOnline :ir_menu="this.$store.state.menuInicio" ir="home" texto="Salir"/></span>
           <!--- Fin otones del menu --->
         </ul>
       </nav>
@@ -20,7 +20,7 @@
 <script>
 // Componentes
 import BotonJuego from "../botones/BotonJuego";
-import BotonSetMenu from "../botones/BotonSetMenu";
+import BotonJuegoOnline from "../botones/BotonJuegoOnline";
 import CabeceraMenus from "../textos/CabeceraMenus";
 // Mixins
 import contarFichas from "../../mixins/contarFichas";
@@ -48,7 +48,7 @@ export default {
   },
   components: {
     CabeceraMenus,
-    BotonSetMenu,
+    BotonJuegoOnline,
     BotonJuego,
   },
   mixins: [

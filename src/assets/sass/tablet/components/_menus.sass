@@ -40,10 +40,17 @@
         padding: 0
         text-align: center
         list-style: none
+      // Botones del menu
       &__link
         display: inline-block
-        font-size: 1.5rem
+        font-size: 1.2rem
         font-weight: bold
         color: $color-negro
+        border: solid $color-negro 2px
+        border-radius: .5rem
+        padding: .5rem 1rem
+        min-width: 200px
         text-transform: capitalize
         margin: .5rem 0
+        &--cerrar
+          background-color: transparentize($color-rojo, .2)

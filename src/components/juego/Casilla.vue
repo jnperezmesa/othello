@@ -29,6 +29,7 @@ export default {
             this.$store.state.juegasCon === this.$store.state.jugadorActivo ||
             this.$store.state.juegasCon === this.$store.state.juegasConDefault
         ) {
+
           // Comprbar victoria
           this.esVictoria();
 
