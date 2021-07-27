@@ -44,6 +44,7 @@ export default new Vuex.Store({
     empate: 3,
     casillaVacia: 0,
 
+    disenyos: ['classic', 'simple'],
     disenyoTablero: 'classic',
     disenyoFichaNegra: 'classic',
     disenyoFichaBlanca: 'classic',

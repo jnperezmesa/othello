@@ -4,6 +4,16 @@
   .menus
     .menu
       &__nav
+        .tablero
+          max-width: 9rem
+          max-height: 9rem
+          display: grid
+          grid-template-columns: repeat(2, 1fr)
+          grid-template-rows: repeat(2, 1fr)
+          padding: .5rem
+        .casilla
+          margin: .2rem
+          @include cuadrado(4rem)
         .fichas
           display: flex
           position: relative

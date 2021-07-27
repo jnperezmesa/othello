@@ -26,6 +26,24 @@
                   :class="{ 'classic__ficha--negra' : this.$store.state.disenyoFichaBlanca === 'classic'}"
               ></div>
             </div>
+            <div
+                class="casilla"
+                :class="{ 'classic__casilla' : this.$store.state.disenyoTablero === 'classic'}"
+            >
+              <div
+                  class="fichas-opcion ficha"
+                  :class="{ 'classic__ficha--negra' : this.$store.state.disenyoFichaBlanca === 'classic'}"
+              ></div>
+            </div>
+            <div
+                class="casilla"
+                :class="{ 'classic__casilla' : this.$store.state.disenyoTablero === 'classic'}"
+            >
+              <div
+                  class="fichas-opcion ficha"
+                  :class="{ 'classic__ficha--blanca' : this.$store.state.disenyoFichaBlanca === 'classic'}"
+              ></div>
+            </div>
           </li>
           <BotonSetMenu :ir="this.$store.state.menuInicio" texto="aplicar"/>
         </ul>
@@ -38,8 +56,6 @@
 // @ is an alias to /src
 import CabeceraMenus from "../textos/CabeceraMenus";
 import BotonSetMenu from "../botones/BotonSetMenu";
-// Dependencias
-import _ from 'lodash'
 
 export default {
   name: 'Personalizar',
@@ -49,7 +65,7 @@ export default {
   },
   data: function () {
     return {
-      columnas: _.range(2),
+      columnas: []
     }
   },
 }
