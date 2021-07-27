@@ -3,7 +3,7 @@
     <div class="main__tablero__columna"
          :key="indiceX"
          v-for="(x, indiceX) in estadoTablero">
-        <Casilla class="main__tablero__casilla classic__casilla"
+        <Casilla class="main__tablero__casilla"
                v-for="(y, indiceY) in x"
                :key="indiceX + indiceY"
                :contenido="y"

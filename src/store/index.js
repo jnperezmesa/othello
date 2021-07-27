@@ -76,7 +76,7 @@ export default new Vuex.Store({
     posiciones: 0,
 
     menuEstado: false,
-    menu: 0,
+    menu: 4,
 
     menuInicio: 0,
     menuNuevaPartida: 1,
@@ -85,7 +85,7 @@ export default new Vuex.Store({
     menuPersonalizar: 4,
     menuVictoria: 5,
 
-    idPatida: 'Lq1S88u0tM98ss',
+    idPatida: '',
     idJugador: '',
 
     juegasCon: 0,
@@ -126,11 +126,10 @@ export default new Vuex.Store({
         // Jugador 1 pasa a llevar negras y jugador 2 blancas
         state.jugador1 = state.fichaNegra;
         state.jugador2 = state.fichaBlanca;
-      }
-      if (state.jugador1 === state.fichaNegra) {
+      } else {
         // Jugador 1 pasa a llevar blancas y jugador 2 negras
-        state.jugador2 = state.fichaNegra;
         state.jugador1 = state.fichaBlanca;
+        state.jugador2 = state.fichaNegra;
       }
     },
 
@@ -370,7 +369,10 @@ export default new Vuex.Store({
     },
     revancha: (context) => {
       context.commit('reset');
+      context.commit('tipoLocal');
       context.commit('inicioConCambio');
+      context.commit('modoJuego');
+      context.commit('crearPartida');
     },
     rendirse: (context) => {
       context.commit('modoVictoria');

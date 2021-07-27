@@ -1,5 +1,5 @@
 <template>
-  <div class="main__tablero__casilla classic__casilla" @click="colocarFicha(posicionX, positionY)">
+  <div class="main__tablero__casilla" :class="{ 'classic__casilla' : this.$store.state.disenyoTablero === 'classic'}" @click="colocarFicha(posicionX, positionY)">
     <div v-if="contenido === $store.state.fichaBlanca" class="ficha" :class="{ 'classic__ficha--blanca' : this.$store.state.disenyoFichaBlanca === 'classic'}"></div>
     <div v-if="contenido === $store.state.fichaNegra" class="ficha" :class="{ 'classic__ficha--negra' : this.$store.state.disenyoFichaNegra === 'classic'}"></div>
   </div>
