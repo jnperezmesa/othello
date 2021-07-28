@@ -2,45 +2,66 @@
 
 .header
   .menus
-    .menu
-      &__nav
+    .personalizar
+      min-width: 400px
+      max-width: 530px
+      &__contenedor
         .tablero
-          max-width: 9rem
-          max-height: 9rem
+          margin: 0 auto
+          max-width: 7rem
+          max-height: 7rem
           display: grid
           grid-template-columns: repeat(2, 1fr)
           grid-template-rows: repeat(2, 1fr)
           padding: .5rem
         .casilla
           margin: .2rem
-          @include cuadrado(4rem)
-        .fichas
+          @include cuadrado(3rem)
+        .ficha
           display: flex
           position: relative
-          height: 10rem
+          background:
+            repeat: no-repeat
+            size: 86%
+            position: .3rem .3rem
           &--negras
-            width: 50%
-            background-color: $color-gris
-            margin-right: .5rem
-            border-radius: .5rem
-            &-texto
-              color: $color-negro
-              font-weight: bold
+            width: 40%
           &--blancas
-            width: 50%
-            background-color: $color-gris
-            margin-left: .5rem
+            width: 40%
+        .opciones
+          border-radius: .5rem
+          margin: 1rem 0
+          &__titulo
+            display: inline-block
+            font-size: 1.2rem
+            font-weight: bold
+            color: $color-negro
             border-radius: .5rem
-            &-texto
-              color: $color-blanco
-              font-weight: bold
-          &-opciones
+            min-width: 200px
+            text-transform: capitalize
+            margin-top: .5rem
+            margin-bottom: 0
+          &__selecionar
             display: flex
             justify-content: center
-            width: 100%
-            list-style: none
-            padding: 0
-          &-opcion
-            @include cuadrado(3.5rem)
-            margin: .5rem
-            background-position: center
+            align-items: center
+          &__seleccionada
+            margin: .5rem 0
+            padding: .1rem 1rem
+            background-color: $color-gris
+            width: 50%
+          &__cambiar
+            background-color: $color-negro
+            color: $color-blanco
+            border: solid $color-negro 2px
+            transition: .1s
+            cursor: pointer
+            &--derecha
+              border-radius: 0 .5rem .5rem 0
+            &--izquierda
+              border-radius: .5rem 0 0 .5rem
+            &:hover
+              background-color: $color-blanco
+              color: $color-negro
+
+

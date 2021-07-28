@@ -1,48 +1,72 @@
 <template>
   <div class="menus">
-    <div class="menu menu--especial personalizar">
+    <div class="menu personalizar">
       <CabeceraMenus texto="personalizar"/>
-      <nav class="menu__nav">
-        <ul class="menu__nav__ul">
-          <li
-              class="tablero"
-              :class="{ 'classic__tablero' : this.$store.state.disenyoTablero === 'classic'}"
+      <nav class="menu__nav personalizar__contenedor">
+        <div
+            class="tablero"
+            :class="this.$store.state.disenyoTablero.concat('__tablero')"
+        >
+          <div
+              class="casilla"
+              :class="this.$store.state.disenyoTablero.concat('__casilla')"
           >
             <div
-                class="casilla"
-                :class="{ 'classic__casilla' : this.$store.state.disenyoTablero === 'classic'}"
-            >
-              <div
-                  class="fichas-opcion ficha"
-                  :class="{ 'classic__ficha--blanca' : this.$store.state.disenyoFichaBlanca === 'classic'}"
-              ></div>
-            </div>
+                class="ficha"
+                :class="this.$store.state.disenyoFichaBlanca.concat('__ficha--blanca')"
+            ></div>
+          </div>
+          <div
+              class="casilla"
+              :class="this.$store.state.disenyoTablero.concat('__casilla')"
+          >
             <div
-                class="casilla"
-                :class="{ 'classic__casilla' : this.$store.state.disenyoTablero === 'classic'}"
-            >
-              <div
-                  class="fichas-opcion ficha"
-                  :class="{ 'classic__ficha--negra' : this.$store.state.disenyoFichaBlanca === 'classic'}"
-              ></div>
-            </div>
+                class="ficha"
+                :class="this.$store.state.disenyoFichaNegra.concat('__ficha--negra')"
+            ></div>
+          </div>
+          <div
+              class="casilla"
+              :class="this.$store.state.disenyoTablero.concat('__casilla')"
+          >
             <div
-                class="casilla"
-                :class="{ 'classic__casilla' : this.$store.state.disenyoTablero === 'classic'}"
-            >
-              <div
-                  class="fichas-opcion ficha"
-                  :class="{ 'classic__ficha--negra' : this.$store.state.disenyoFichaBlanca === 'classic'}"
-              ></div>
-            </div>
+                class="ficha"
+                :class="this.$store.state.disenyoFichaNegra.concat('__ficha--negra')"
+            ></div>
+          </div>
+          <div
+              class="casilla"
+              :class="this.$store.state.disenyoTablero.concat('__casilla')"
+          >
             <div
-                class="casilla"
-                :class="{ 'classic__casilla' : this.$store.state.disenyoTablero === 'classic'}"
-            >
-              <div
-                  class="fichas-opcion ficha"
-                  :class="{ 'classic__ficha--blanca' : this.$store.state.disenyoFichaBlanca === 'classic'}"
-              ></div>
+                class="ficha"
+                :class="this.$store.state.disenyoFichaBlanca.concat('__ficha--blanca')"
+            ></div>
+          </div>
+        </div>
+        <ul class="menu__nav__ul">
+          <li class="menu__nav__li opciones">
+            <p class="opciones__titulo">Tablero</p>
+            <div class="opciones__selecionar">
+              <button class="opciones__cambiar opciones__cambiar--izquierda">⬅</button>
+              <p class="opciones__seleccionada">{{ this.$store.state.disenyoTablero.toLocaleUpperCase() }}</p>
+              <button class="opciones__cambiar opciones__cambiar--derecha">➡</button>
+            </div>
+          </li>
+          <li class="menu__nav__li opciones">
+            <p class="opciones__titulo">Ficha negra</p>
+            <div class="opciones__selecionar">
+              <button class="opciones__cambiar opciones__cambiar--izquierda">⬅</button>
+              <p class="opciones__seleccionada">{{ this.$store.state.disenyoTablero.toLocaleUpperCase() }}</p>
+              <button class="opciones__cambiar opciones__cambiar--derecha">➡</button>
+            </div>
+          </li>
+          <li class="menu__nav__li opciones">
+            <p class="opciones__titulo">Ficha blanca</p>
+            <div class="opciones__selecionar">
+              <button class="opciones__cambiar opciones__cambiar--izquierda">⬅</button>
+              <p class="opciones__seleccionada">{{ this.$store.state.disenyoTablero.toLocaleUpperCase() }}</p>
+              <button class="opciones__cambiar opciones__cambiar--derecha">➡</button>
             </div>
           </li>
           <BotonSetMenu :ir="this.$store.state.menuInicio" texto="aplicar"/>

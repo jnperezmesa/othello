@@ -15,8 +15,6 @@
     @include ajusteMenu(.5rem, 0)
     border-radius: .5rem
     z-index: 1500
-    &--especial
-      width: 70%
     &__titulo
       text-align: center
       text-transform: uppercase
@@ -51,5 +49,6 @@
         min-width: 200px
         text-transform: capitalize
         margin: .5rem 0
-        &--cerrar
-          background-color: transparentize($color-rojo, .2)
+        cursor: pointer
+        &:hover
+          background-color: $color-blanco
