@@ -69,7 +69,7 @@
               <button @click="cambiarDisenyoFichaBlancaAvanzar" class="opciones__cambiar opciones__cambiar--derecha">➡</button>
             </div>
           </li>
-          <BotonSetMenu :ir="this.$store.state.menuInicio" texto="aplicar"/>
+          <span @click="guardarEnLocal"><BotonSetMenu :ir="this.$store.state.menuInicio" texto="aplicar"/></span>
         </ul>
       </nav>
     </div>
@@ -77,6 +77,8 @@
 </template>
 
 <script>
+// Mixims
+import gestionarAlmacenamientoLocal from "../../mixins/gestionarAlmacenamientoLocal";
 // @ is an alias to /src
 import CabeceraMenus from "../textos/CabeceraMenus";
 import BotonSetMenu from "../botones/BotonSetMenu";
@@ -220,6 +222,9 @@ export default {
 
       return this.$store.state.disenyoFichaBlanca = opciones[nuevo]
     },
-  }
+  },
+  mixins: [
+    gestionarAlmacenamientoLocal
+  ]
 }
 </script>

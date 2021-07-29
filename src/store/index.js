@@ -61,6 +61,8 @@ export default new Vuex.Store({
     estadoEspera: 2,
     estadoCerrada: 3,
 
+    permitirMemoria: true,
+
     victoria: 0,
 
 
