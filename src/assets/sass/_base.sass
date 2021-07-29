@@ -22,6 +22,7 @@ a
 .classic
   &__tablero
     background-color: $color-classic
+    border-radius: .2rem
   &__casilla
     background-color: $color-classic-casilla
     box-shadow: inset 3px 3px 1px transparentize($color-negro, 0.6)
@@ -31,11 +32,14 @@ a
 
 .simple
   &__tablero
-    background-color: $color-classic
+    background-color: $color-simple
+    border-radius: .2rem
   &__casilla
-    background-color: $color-classic-casilla
-    box-shadow: inset 3px 3px 1px transparentize($color-negro, 0.6)
+    background-color: $color-simple-casilla
     @include cuadrado(90%)
+    border-radius: .2rem
+    position: relative
+
 
 /// Fichas
 .classic
