@@ -56,7 +56,10 @@ export default {
             }
           }
           // Actualizo el servidor
-          this.$store.commit('actualizarPartida');
+          setTimeout(() => {
+            this.$store.commit('actualizarPartida');
+          }, 200);
+
         }
       }
     },

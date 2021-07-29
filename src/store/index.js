@@ -1,10 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import _ from 'lodash'
+// Mixims
+import contarFichas from "../mixins/contarFichas";
 
 // URL DE CONEXION CON EL API
 const API_VERSION = 'v2'
 const API = 'http://127.0.0.1:8000/api/'.concat(API_VERSION);
+const API2 = window.location.origin.concat('/api/' ,API_VERSION);
+console.log(API2)
 const API_NUEVO_JUGADOR = API.concat('/jugador/crear/');
 const API_NUEVA_PARTIDA = API.concat('/partida/crear/');
 const API_UNIRSE_A_PARTIDA = API.concat('/partida/unirse/');
@@ -267,6 +271,8 @@ export default new Vuex.Store({
               "turno": state.turno,
               "juega": state.jugadorActivo,
               "victoria": state.victoria,
+              "contador_jugador_1": state.contadorFichasNegras,
+              "contador_jugador_2": state.contadorFichasBlancas,
               "tablero": JSON.stringify(state.tableroJuego),
               "state.ultimoCambio": state.ultimoCambio,
             }
@@ -386,4 +392,8 @@ export default new Vuex.Store({
   },
   modules: {
   },
+  mixins: [
+    // Computed
+    contarFichas
+  ],
 })
