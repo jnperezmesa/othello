@@ -14,3 +14,40 @@ a
   text-decoration: none
   font-family: Roboto-j
   font-weight: normal
+
+
+// Diseños
+
+// Tableros
+.classic
+  &__tablero
+    background-color: $color-classic
+  &__casilla
+    background-color: $color-classic-casilla
+    box-shadow: inset 3px 3px 1px transparentize($color-negro, 0.6)
+    @include cuadrado(90%)
+  &__miniatura
+    background-image: url("../img/tablero/classic-tablero.png")
+
+.simple
+  &__tablero
+    background-color: $color-classic
+  &__casilla
+    background-color: $color-classic-casilla
+    box-shadow: inset 3px 3px 1px transparentize($color-negro, 0.6)
+    @include cuadrado(90%)
+
+/// Fichas
+.classic
+  &__ficha
+    &--negra
+      background-image: url("../img/fichas/classic-negra.png")
+    &--blanca
+      background-image: url("../img/fichas/classic-blanca.png")
+
+.simple
+  &__ficha
+    &--negra
+      background-image: url("../img/fichas/classic-negra.png")
+    &--blanca
+      background-image: url("../img/fichas/classic-blanca.png")
