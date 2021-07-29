@@ -1,7 +1,7 @@
 <template>
-  <div class="main__tablero__casilla" :class="{ 'classic__casilla' : this.$store.state.disenyoTablero === 'classic'}" @click="colocarFicha(posicionX, positionY)">
-    <div v-if="contenido === $store.state.fichaBlanca" class="ficha" :class="{ 'classic__ficha--blanca' : this.$store.state.disenyoFichaBlanca === 'classic'}"></div>
-    <div v-if="contenido === $store.state.fichaNegra" class="ficha" :class="{ 'classic__ficha--negra' : this.$store.state.disenyoFichaNegra === 'classic'}"></div>
+  <div class="main__tablero__casilla" :class="this.$store.state.disenyoTablero.concat('__casilla')" @click="colocarFicha(posicionX, positionY)">
+    <div v-if="contenido === $store.state.fichaBlanca" class="ficha" :class="this.$store.state.disenyoFichaBlanca.concat('__ficha--blanca')"></div>
+    <div v-if="contenido === $store.state.fichaNegra" class="ficha" :class="this.$store.state.disenyoFichaNegra.concat('__ficha--negra')"></div>
   </div>
 </template>
 
