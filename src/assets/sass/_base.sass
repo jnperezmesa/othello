@@ -16,6 +16,24 @@ a
   font-weight: normal
 
 
+// Mensajes de error
+.mensajes
+  &__mensaje
+    font-size: 1.2rem
+    border-radius: .5rem
+    padding: .5rem 1rem
+    text-align: center
+    min-width: 200px
+    text-transform: capitalize
+    &--error
+      border: solid $color-rojo 2px
+      color: $color-rojo
+    &--informar
+      border: solid $color-verde 2px
+      color: $color-verde
+
+
+
 // Diseños
 
 // Tableros
@@ -32,9 +50,19 @@ a
 
 .simple
   &__tablero
+    background-color: $color-negro
+    border-radius: .2rem
+  &__casilla
+    background-color: $color-gris
+    @include cuadrado(90%)
+    position: relative
+
+.madera
+  &__tablero
     background-color: $color-simple
     border-radius: .2rem
   &__casilla
+    box-shadow: inset 3px 3px 1px transparentize($color-negro, 0.6)
     background-color: $color-simple-casilla
     @include cuadrado(90%)
     border-radius: .2rem
@@ -52,6 +80,13 @@ a
 .simple
   &__ficha
     &--negra
-      background-image: url("../img/fichas/classic-negra.png")
+      background-image: url("../img/fichas/simple-negra.png")
     &--blanca
-      background-image: url("../img/fichas/classic-blanca.png")
+      background-image: url("../img/fichas/simple-blanca.png")
+
+.madera
+  &__ficha
+    &--negra
+      background-image: url("../img/fichas/madera-negra.png")
+    &--blanca
+      background-image: url("../img/fichas/madera-blanca.png")

@@ -4,15 +4,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="<%= BASE_URL %>icono.png">
       <!-- CSS --->
     <link href="css/mobile.css" rel="stylesheet" media="all and (max-width: 600px)">
     <link href="css/tablet.css" rel="stylesheet" media="all and (min-width: 601px) and (max-width: 1023px)">
     <link href="css/desktop.css" rel="stylesheet" media="all and (min-width: 1024px)">
       <!-- Fin CSS --->
       <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YNCTQW4P3B"></script>
-    <script>
+    <script v-if="this.$store.state.permitirMemoria" async src="https://www.googletagmanager.com/gtag/js?id=G-YNCTQW4P3B"></script>
+    <script v-if="this.$store.state.permitirMemoria">
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());

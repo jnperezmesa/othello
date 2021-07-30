@@ -27,7 +27,8 @@ export default {
   },
   mounted: function () {
     // Regenero el id del jugador
-    this.comprobarIdJugador();
+    this.$store.commit('enviarPing')
+    this.comprobarIdJugador()
   },
   methods: {
   },

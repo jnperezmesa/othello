@@ -4,12 +4,18 @@
       <CabeceraMenus class="menu__titulo" texto="Comparte"/>
       <nav class="menu__nav">
 
-        <div class="menu__crear-partida__codigo" v-if="this.$store.state.idPatida">
-          <vue-qr class="menu__crear-partida__codigo__qr" :text="url" :size="200"></vue-qr>
-          <button class="menu__crear-partida__codigo__boton" @click="copiado = true" v-clipboard:copy="url">
-            <span class="menu__crear-partida__codigo__copiar" v-if="!copiado">Copiar link</span>
-            <span class="menu__crear-partida__codigo__copiar menu__crear-partida__codigo__copiar--copiado" v-else>¡Copiado!</span>
-          </button>
+        <div v-if="this.$store.state.estadoDelServidor">
+          <div class="menu__crear-partida__codigo" v-if="this.$store.state.idPatida">
+            <vue-qr class="menu__crear-partida__codigo__qr" :text="url" :size="200"></vue-qr>
+            <button class="menu__crear-partida__codigo__boton" @click="copiado = true" v-clipboard:copy="url">
+              <span class="menu__crear-partida__codigo__copiar" v-if="!copiado">Copiar link</span>
+              <span class="menu__crear-partida__codigo__copiar menu__crear-partida__codigo__copiar--copiado" v-else>¡Copiado!</span>
+            </button>
+          </div>
+        </div>
+        <div v-else class="mensajes">
+          <p v-if="!this.$store.state.estadoDelServidor" class="mensajes__mensaje mensajes__mensaje--error">servidor no disponible</p>
+          <p v-if="this.$store.state.estadoDelServidor" class="mensajes__mensaje mensajes__mensaje--informar">Esperando respuesta</p>
         </div>
         <ul class="menu__nav__ul">
           <BotonJuegoOnline ir="Home" :ir_menu="this.$store.state.menuNuevaPartida" texto="Volver"/>
@@ -36,10 +42,6 @@ export default {
     return {
       copiado: false,
     }
-  },
-  mounted: function () {
-    // Regenero el id del jugador
-    this.comprobarIdJugador();
   },
   methods: {
   },

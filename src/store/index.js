@@ -48,7 +48,7 @@ export default new Vuex.Store({
     empate: 3,
     casillaVacia: 0,
 
-    disenyos: ['classic', 'simple'],
+    disenyos: ['classic', 'simple', 'madera'],
     disenyoTablero: 'classic',
     disenyoFichaNegra: 'classic',
     disenyoFichaBlanca: 'classic',
@@ -66,6 +66,7 @@ export default new Vuex.Store({
     estadoCerrada: 3,
 
     permitirMemoria: true,
+    estadoDelServidor: false,
 
     victoria: 0,
 
@@ -83,7 +84,7 @@ export default new Vuex.Store({
     posiciones: 0,
 
     menuEstado: false,
-    menu: 4,
+    menu: 0,
 
     menuInicio: 0,
     menuNuevaPartida: 1,
@@ -197,6 +198,27 @@ export default new Vuex.Store({
     },
 
     // Conexion con el api
+    enviarPing: state => {
+      fetch(API.concat("/ping/"), {
+        headers: {
+          'Content-type': 'application/json',
+          "Access-Control-Allow-Origin": "*",
+        },
+        method: 'GET',
+        body: JSON.stringify()
+      })
+          .then((response) => {
+            // Transforma la respuesta. En este caso lo convierte a JSON
+            return response.json();
+          })
+          .then((json) => {
+            // Usamos la información recibida como necesitemos
+            if (json['response'] === "pong") {
+              return state.estadoDelServidor = json['response']
+            }
+          });
+      return state.estadoDelServidor = false
+    },
     crearIdJugador: state => {
       fetch(API_NUEVO_JUGADOR, {
         headers: {
@@ -348,6 +370,7 @@ export default new Vuex.Store({
       context.commit('crearPartida');
     },
     nuevaPartidaOnline: (context) => {
+      context.commit('enviarPing')
       context.commit('reset');
       context.commit('tipoOnline');
       context.commit('inicio');
@@ -368,13 +391,10 @@ export default new Vuex.Store({
           context.commit('modoJuego');
         }
         context.commit('pedirCambios');
-        console.log('buscando')
         if (context.state.victoria !== 0) {
           context.commit('modoVictoria')
-          console.log('victoria')
         }
       }
-      console.log('activo')
     },
     revancha: (context) => {
       context.commit('reset');
