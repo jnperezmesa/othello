@@ -8,8 +8,14 @@
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
           <!--- Botones del menu --->
+          <div class="mensajes">
+            <p v-if="this.$store.state.ofertaRevancha && !revancha" class="mensajes__mensaje mensajes__mensaje--informar">¿Jugamos otra?</p>
+            <p v-if="revancha" class="mensajes__mensaje mensajes__mensaje--informar">Esperando</p>
+          </div>
           <span v-if="this.$store.state.tipoDePartida === this.$store.state.partidaLocal" @click="$store.dispatch('revancha')"><BotonJuego ir="Local" texto="revancha"/></span>
-          <span v-if="this.$store.state.tipoDePartida === this.$store.state.partidaOnline" @click="$store.dispatch('revanchaOnline')"><BotonJuego ir="Online" texto="revancha"/></span>
+          <span v-if="this.$store.state.tipoDePartida === this.$store.state.partidaOnline" @click="$store.dispatch('revanchaOnline')">
+            <span  v-if="!revancha" @click="revancha = true"><BotonJuego ir="Online" texto="revancha"/></span>
+          </span>
           <span @click="$store.commit('reset')"><BotonJuegoOnline :ir_menu="this.$store.state.menuInicio" ir="home" texto="Salir"/></span>
           <!--- Fin otones del menu --->
         </ul>
@@ -31,6 +37,11 @@ export default {
   mounted: function () {
     this.guardarGanador()
     this.$store.commit('actualizarPartida');
+  },
+  data: function () {
+    return {
+      revancha: false,
+    }
   },
   methods: {
     guardarGanador: function () {

@@ -68,6 +68,7 @@ export default new Vuex.Store({
 
     permitirMemoria: true,
     estadoDelServidor: false,
+    ofertaRevancha: false,
 
     victoria: 0,
 
@@ -314,6 +315,9 @@ export default new Vuex.Store({
               state.victoria = json['victoria'];
               state.tableroJuego = _.cloneDeep(JSON.parse(json['tablero']))
               state.ultimoCambio = json['fecha_ultima_actualizacion'];
+              if (json['nueva_partida'] !== null) {
+                state.ofertaRevancha = true;
+              }
             }
           });
     },
@@ -438,7 +442,6 @@ export default new Vuex.Store({
     revanchaOnline: (context) => {
       context.commit('reset');
       context.commit('tipoOnline');
-      context.commit('modoJuego');
       context.commit('unirseARevancha');
     },
     rendirse: (context) => {
