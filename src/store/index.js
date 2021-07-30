@@ -12,6 +12,7 @@ console.log(API2)
 const API_NUEVO_JUGADOR = API.concat('/jugador/crear/');
 const API_NUEVA_PARTIDA = API.concat('/partida/crear/');
 const API_UNIRSE_A_PARTIDA = API.concat('/partida/unirse/');
+const API_REVANCHA = API.concat('/partida/revancha/');
 const API_JUGAR_A_PARTIDA = API.concat('/partida/jugar/');
 const API_VER_PARTIDA = API.concat('/partida/');
 
@@ -334,6 +335,37 @@ export default new Vuex.Store({
             }
           });
     },
+    unirseARevancha: state => {
+      fetch(API_REVANCHA.concat(state.idPatida, '/', state.idJugador, '/'), {
+        headers: {
+          'Content-type': 'application/json',
+          "Access-Control-Allow-Origin": "*",
+        },
+        method: 'PUT',
+      })
+          .then((response) => {
+            // Transforma la respuesta. En este caso lo convierte a JSON
+            return response.json();
+          })
+          .then((json) => {
+            // Usamos la información recibida como necesitemos
+            if (state.ultimoCambio !== json['fecha_ultima_actualizacion']) {
+              state.idPatida = json['id_partida'];
+              state.estado = json['estado'];
+              state.turno = json['turno'];
+              state.jugadorActivo = json['juega'];
+              state.victoria = json['victoria'];
+              state.tableroJuego = _.cloneDeep(JSON.parse(json['tablero']))
+              if (json['id_jugador_1'] === state.idJugador) {
+                state.juegasCon = state.jugador1;
+              }
+              if (json['id_jugador_2'] === state.idJugador) {
+                state.juegasCon = state.jugador2;
+              }
+              state.ultimoCambio = json['fecha_ultima_actualizacion'];
+            }
+          });
+    },
 
     turno: state => {
       // Compruebo quien tiene el turno
@@ -402,6 +434,12 @@ export default new Vuex.Store({
       context.commit('inicioConCambio');
       context.commit('modoJuego');
       context.commit('crearPartida');
+    },
+    revanchaOnline: (context) => {
+      context.commit('reset');
+      context.commit('tipoOnline');
+      context.commit('modoJuego');
+      context.commit('unirseARevancha');
     },
     rendirse: (context) => {
       context.commit('modoVictoria');

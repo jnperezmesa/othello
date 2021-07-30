@@ -9,6 +9,7 @@
         <ul class="menu__nav__ul">
           <!--- Botones del menu --->
           <span v-if="this.$store.state.tipoDePartida === this.$store.state.partidaLocal" @click="$store.dispatch('revancha')"><BotonJuego ir="Local" texto="revancha"/></span>
+          <span v-if="this.$store.state.tipoDePartida === this.$store.state.partidaOnline" @click="$store.dispatch('revanchaOnline')"><BotonJuego ir="Online" texto="revancha"/></span>
           <span @click="$store.commit('reset')"><BotonJuegoOnline :ir_menu="this.$store.state.menuInicio" ir="home" texto="Salir"/></span>
           <!--- Fin otones del menu --->
         </ul>
