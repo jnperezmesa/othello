@@ -102,11 +102,15 @@ export default new Vuex.Store({
     juegasConDefault: 0,
 
     abandono: false,
+    esperando: true,
 
   },
   mutations: {
     // Reinicio del juego
     reset: state => {
+      // Me pongo en modo espera
+      state.esperando = true
+      // Resetablezco si ha habido abandono de partida
       state.abandono = false;
       // Reestablezco el tablero
       state.tableroJuego = _.cloneDeep(tableroInicial);
@@ -315,9 +319,6 @@ export default new Vuex.Store({
               state.victoria = json['victoria'];
               state.tableroJuego = _.cloneDeep(JSON.parse(json['tablero']))
               state.ultimoCambio = json['fecha_ultima_actualizacion'];
-              if (json['nueva_partida'] !== null) {
-                state.ofertaRevancha = true;
-              }
             }
           });
     },
@@ -336,6 +337,9 @@ export default new Vuex.Store({
               state.victoria = json['victoria'];
               state.tableroJuego = _.cloneDeep(JSON.parse(json['tablero']))
               state.ultimoCambio = json['fecha_ultima_actualizacion'];
+              if (json['nueva_partida'] !== null) {
+                state.ofertaRevancha = true;
+              }
             }
           });
     },
@@ -423,7 +427,8 @@ export default new Vuex.Store({
     },
     comprobarCambios: (context) => {
       if (context.state.tipoDePartida === context.state.partidaOnline) {
-        if (context.state.estado === context.state.estadoActiva && context.state.turno === 0) {
+        if (context.state.estado === context.state.estadoActiva && context.state.turno === 0 && context.state.esperando) {
+          context.state.esperando = false
           context.commit('modoJuego');
         }
         context.commit('pedirCambios');
