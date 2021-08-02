@@ -1,8 +1,8 @@
 <template>
-  <main class="main main_local">
-    <Contador :tipo="2" :jugador="this.$store.state.jugador2" :puntuacionNegras="fichasNegras" :puntuacionBlancas="fichasBlancas"/>
+  <main class="main main_online">
+    <Contador :tipo="3" :jugador="oponente" :puntuacionNegras="fichasNegras" :puntuacionBlancas="fichasBlancas"/>
     <Tablero/>
-    <Contador :tipo="1" :jugador="this.$store.state.jugador1" :puntuacionNegras="fichasNegras" :puntuacionBlancas="fichasBlancas"/>
+    <Contador :tipo="1" :jugador="this.$store.state.juegasCon" :puntuacionNegras="fichasNegras" :puntuacionBlancas="fichasBlancas"/>
   </main>
 </template>
 
@@ -13,27 +13,46 @@ import Contador from "../components/juego/Contador";
 import contarFichas from "../mixins/contarFichas";
 
 export default {
-  name: 'Local',
+  name: 'Online',
   components: {
     Tablero,
     Contador
   },
-  computed: {
-    // Jugador Activo
-    jugadorActivoLocal: function () {
-      // Traigo localmente el estado del jugador activo
-      return this.$store.state.jugadorActivo
-    },
+  mounted: function () {
+    this.$forceUpdate()
+    this.activarIntervalo()
+    this.unirsePorUrl()
   },
-  watch: {
-    // Vigilo si se ha producido la victoria
-    jugadorActivoLocal: function () {
-      // Observo el jugador activo para analizar el estado del tablero, si no hay casillas vacias entro
-      if (this.$store.state.victoria === true) {
-        // Voy a la vista de victoria
-        this.$router.push('Victoria')
+  data: function () {
+    return {
+      invitado: 2,
+    }
+  },
+  methods: {
+    activarIntervalo: function () {
+      return setInterval(() => {
+        this.$store.dispatch('comprobarCambios');
+      }, 2000);
+    },
+    unirsePorUrl: function () {
+      if (this.$route.query.id_partida) {
+        this.$store.state.idPatida = this.$route.query.id_partida
+        setTimeout(() => {
+         this.$store.dispatch('unirseAPartidaOnline')
+        }, 1)
       }
     }
+  },
+  computed: {
+    oponente: function () {
+      if (this.$store.state.juegasCon === this.$store.state.fichaNegra) {
+        return this.$store.state.fichaBlanca
+      } else {
+        return this.$store.state.fichaNegra
+      }
+    }
+  },
+  watch: {
   },
   mixins: [
     // Computed

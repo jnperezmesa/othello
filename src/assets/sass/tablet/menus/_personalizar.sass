@@ -1,0 +1,62 @@
+// Ajustes
+
+.header
+  .menus
+    .personalizar
+      min-width: 400px
+      max-width: 530px
+      &__contenedor
+        .tablero
+          margin: 0 auto
+          max-width: 7rem
+          max-height: 7rem
+          display: grid
+          grid-template-columns: repeat(2, 1fr)
+          grid-template-rows: repeat(2, 1fr)
+          padding: .5rem
+        .casilla
+          margin: .2rem
+          @include cuadrado(3rem)
+        .ficha
+          display: flex
+          position: relative
+          background:
+            repeat: no-repeat
+            size: 86%
+            position: .3rem .3rem
+          &--negras
+            width: 40%
+          &--blancas
+            width: 40%
+        .opciones
+          border-radius: .5rem
+          margin: 1rem 0
+          &__titulo
+            display: inline-block
+            font-size: 1.2rem
+            font-weight: bold
+            color: $color-negro
+            border-radius: .5rem
+            min-width: 200px
+            text-transform: capitalize
+            margin-top: .5rem
+            margin-bottom: 0
+          &__selecionar
+            display: flex
+            justify-content: center
+            align-items: center
+          &__seleccionada
+            margin: .5rem 0
+            padding: .1rem 1rem
+            background-color: $color-gris
+            width: 50%
+          &__cambiar
+            background-color: $color-negro
+            color: $color-blanco
+            border: solid $color-negro 2px
+            transition: .1s
+            cursor: pointer
+            &--derecha
+              border-radius: 0 .5rem .5rem 0
+            &--izquierda
+              border-radius: .5rem 0 0 .5rem

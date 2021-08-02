@@ -1,3 +1,4 @@
+// Dependencias
 import _ from "lodash";
 
 export default {
@@ -157,8 +158,8 @@ export default {
 
                 // Compruebo que en esa dirección haya una ficha mia
                 let copiarSubir = false
-                subir.forEach(function (casilla) {
-                    if (casilla.valor === 2) {
+                subir.forEach((casilla) => {
+                    if (casilla.valor === this.$store.state.fichaNegra) {
                         copiarSubir = true
                         return copiarSubir
                     }
@@ -170,14 +171,14 @@ export default {
                     // Guardo temporalmente las casillas
                     let casillasSubir = []
                     // Itero el array de subida buscando fichas del color contrario
-                    subir.forEach(function (casilla) {
-                        // Si no es de mi color pasa
-                        if (casilla.valor === 1 && pasoSubir === true) {
+                    subir.forEach((casilla) => {
+                        // Si no es de mi color pasa y detiene la exploración
+                        if (casilla.valor === this.$store.state.fichaBlanca && pasoSubir === true) {
                             casillasSubir.push(casilla)
                             return casillasSubir
                         } else {
                             // Si la casilla es 0, borro el array
-                            if (casilla.valor === 0 && pasoSubir === true) {
+                            if (casilla.valor === this.$store.state.casillaVacia && pasoSubir === true) {
                                 casillasSubir = []
                                 pasoSubir = false
                                 return casillasSubir
@@ -194,8 +195,8 @@ export default {
 
                 // Compruebo que en esa dirección haya una ficha mia
                 let copiarBajar = false
-                bajar.forEach(function (casilla) {
-                    if (casilla.valor === 2) {
+                bajar.forEach((casilla) => {
+                    if (casilla.valor === this.$store.state.fichaNegra) {
                         copiarBajar = true
                         return copiarBajar
                     }
@@ -207,14 +208,14 @@ export default {
                     // Guardo temporalmente las casillas
                     let casillasBajar = []
                     // Itero el array de bajada buscando fichas del color contrario
-                    bajar.forEach(function (casilla) {
-                        // Si no es de mi color pasa
-                        if (casilla.valor === 1 && pasoBajar === true) {
+                    bajar.forEach((casilla) => {
+                        // Si no es de mi color pasa y detiene la exploración
+                        if (casilla.valor === this.$store.state.fichaBlanca && pasoBajar === true) {
                             casillasBajar.push(casilla)
                             return casillasBajar
                         } else {
                             // Si la casilla es 0, borro el array
-                            if (casilla.valor === 0 && pasoBajar === true) {
+                            if (casilla.valor === this.$store.state.casillaVacia && pasoBajar === true) {
                                 casillasBajar = []
                                 pasoBajar = false
                                 return casillasBajar
@@ -234,8 +235,8 @@ export default {
 
                 // Compruebo que en esa dirección haya una ficha mia
                 let copiarSubir = false
-                subir.forEach(function (casilla) {
-                    if (casilla.valor === 1) {
+                subir.forEach((casilla) => {
+                    if (casilla.valor === this.$store.state.fichaBlanca) {
                         copiarSubir = true
                         return copiarSubir
                     }
@@ -247,14 +248,14 @@ export default {
                     // Guardo temporalmente las casillas
                     let casillasSubir = []
                     // Itero el array de subida buscando fichas del color contrario
-                    subir.forEach(function (casilla) {
-                        // Si no es de mi color pasa
-                        if (casilla.valor === 2 && pasoSubir === true) {
+                    subir.forEach((casilla) => {
+                        // Si no es de mi color pasa y detiene la exploración
+                        if (casilla.valor === this.$store.state.fichaNegra && pasoSubir === true) {
                             casillasSubir.push(casilla)
                             return casillasSubir
                         } else {
                             // Si la casilla es 0, borro el array
-                            if (casilla.valor === 0 && pasoSubir === true) {
+                            if (casilla.valor === this.$store.state.casillaVacia && pasoSubir === true) {
                                 casillasSubir = []
                                 pasoSubir = false
                                 return casillasSubir
@@ -269,8 +270,8 @@ export default {
 
                 // Compruebo que en esa dirección haya una ficha mia
                 let copiarBajar = false
-                bajar.forEach(function (casilla) {
-                    if (casilla.valor === 1) {
+                bajar.forEach((casilla) => {
+                    if (casilla.valor === this.$store.state.fichaBlanca) {
                         copiarBajar = true
                         return copiarBajar
                     }
@@ -282,14 +283,14 @@ export default {
                     // Guardo temporalmente las casillas
                     let casillasBajar = []
                     // Itero el array de bajada buscando fichas del color contrario
-                    bajar.forEach(function (casilla) {
+                    bajar.forEach((casilla) => {
                         // Si no es de mi color pasa
-                        if (casilla.valor === 2 && pasoBajar === true) {
+                        if (casilla.valor === this.$store.state.fichaNegra && pasoBajar === true) {
                             casillasBajar.push(casilla)
                             return casillasBajar
                         } else {
                             // Si la casilla es 0, borro el array
-                            if (casilla.valor === 0 && pasoBajar === true) {
+                            if (casilla.valor === this.$store.state.casillaVacia && pasoBajar === true) {
                                 casillasBajar = []
                                 pasoBajar = false
                                 return casillasBajar

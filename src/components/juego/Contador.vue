@@ -1,5 +1,5 @@
 <template>
-  <section :class="{'main__adversario': tipo === 2, 'main__jugador': tipo === 1 }">
+  <section :class="{'main__adversario': tipo === 2, 'main__jugador': tipo === 1, 'main__adversario main__adversario--online': tipo === 3 }">
     <div :class="{'contador__negro': jugador === this.$store.state.fichaNegra , 'contador__blanco': jugador === this.$store.state.fichaBlanca}" class="contador">
       <span v-if="jugador === this.$store.state.fichaNegra">{{ puntuacionNegras }}</span>
       <span v-if="jugador === this.$store.state.fichaBlanca">{{ puntuacionBlancas }}</span>

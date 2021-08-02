@@ -4,8 +4,8 @@
       <CabeceraMenus texto="menu"/>
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
-          <span @click="$store.dispatch('rendirse')"><BotonJuego ir="Home" texto="Rendirse"/></span>
-          <BotonSeguirJuego texto="Volver"/>
+          <a class="menu__nav__link" @click="$store.dispatch('rendirse')">Rendirse</a>
+          <BotonSeguirJuego texto="Seguir"/>
         </ul>
       </nav>
     </div>
@@ -14,7 +14,6 @@
 
 <script>
 // @ is an alias to /src
-import BotonJuego from "../botones/BotonJuego";
 import BotonSeguirJuego from "../botones/BotonSeguirJuego";
 import CabeceraMenus from "../textos/CabeceraMenus";
 
@@ -22,7 +21,6 @@ export default {
   name: 'Jugando',
   components: {
     CabeceraMenus,
-    BotonJuego,
     BotonSeguirJuego,
   }
 }

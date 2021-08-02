@@ -13,5 +13,11 @@ export default {
   components: {
     Tablero,
   },
+  mounted: function () {
+    // Evito que no se carge el menú cuando se pulsa atras en el navegador
+    this.$store.commit('modoMenu');
+  },
+  methods: {
+  }
 }
 </script>

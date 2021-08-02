@@ -5,7 +5,7 @@
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
           <span @click="$store.dispatch('nuevaPartida')"><BotonJuego ir="Local" texto="Local"/></span>
-          <BotonSetMenu style="display: none" :ir="this.$store.state.menuOnlineOpciones" texto="Online"/>
+          <span @click="$store.dispatch('nuevaPartidaOnline')"><BotonJuegoOnline ir="Online" :ir_menu="this.$store.state.menuOnlineCrear" texto="Online"/></span>
           <BotonSetMenu :ir="this.$store.state.menuInicio" texto="Volver"/>
         </ul>
       </nav>
@@ -16,6 +16,7 @@
 <script>
 // @ is an alias to /src
 import BotonJuego from "../botones/BotonJuego";
+import BotonJuegoOnline from "../botones/BotonJuegoOnline";
 import BotonSetMenu from "../botones/BotonSetMenu";
 import CabeceraMenus from "../textos/CabeceraMenus";
 
@@ -24,7 +25,8 @@ export default {
   components: {
     CabeceraMenus,
     BotonSetMenu,
-    BotonJuego
+    BotonJuegoOnline,
+    BotonJuego,
   },
 }
 </script>

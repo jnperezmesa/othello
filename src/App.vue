@@ -13,6 +13,9 @@
 </template>
 
 <script>
+// Mixins
+import gestionarAlmacenamientoLocal from "./mixins/gestionarAlmacenamientoLocal";
+// Componentes
 import BotonHamburgesa from "./components/botones/BotonHamburguesa";
 import Menu from "./components/Menu";
 
@@ -22,14 +25,16 @@ export default {
     BotonHamburgesa,
     Menu,
   },
-  data: function () {
-    return {
-    }
-  },
   mounted: function () {
+    // Regenero el id del jugador
+    this.$store.commit('enviarPing')
+    this.comprobarIdJugador()
   },
   methods: {
-  }
+  },
+  mixins: [
+    gestionarAlmacenamientoLocal
+  ]
 }
 </script>
 

@@ -9,7 +9,7 @@ export default {
                 return casilla === this.$store.state.fichaNegra;
             });
             // Devuelvo el total de posiciones
-            return fichas.length;
+            return this.$store.state.contadorFichasNegras = fichas.length;
         },
         // Contador de fichas blancas
         fichasBlancas: function () {
@@ -20,7 +20,7 @@ export default {
                 return casilla === this.$store.state.fichaBlanca;
             });
             // Devuelvo el total de posiciones
-            return fichas.length;
+            return this.$store.state.contadorFichasBlancas = fichas.length;
         }
     }
 }

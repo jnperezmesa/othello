@@ -1,0 +1,56 @@
+// Menus
+
+
+.menus
+  display: flex
+  justify-content: center
+  align-items: center
+  z-index: 500
+  @include pin
+  background-color: transparentize($color-negro, .8)
+  .menu
+    min-width: 14rem
+    display: block
+    position: absolute
+    background-color: $color-gris
+    @include ajusteMenu(.5rem, 0)
+    border-radius: .5rem
+    z-index: 1500
+    &__titulo
+      text-align: center
+      text-transform: uppercase
+      color: $color-negro
+      font-family: Roboto-j
+      text-shadow: .17rem .17rem $color-blanco
+      &--especial
+        text-align: center
+        text-transform: uppercase
+        color: $color-blanco
+        font-family: Roboto-j
+        text-shadow: .17rem .17rem $color-negro
+    &__nav
+      background-color: $color-mesa
+      padding: 1rem
+      border-radius: .5rem
+      &__subtitulo
+        color: darken($color-mesa, 40%)
+      &__ul
+        margin: 0
+        padding: 0
+        text-align: center
+        list-style: none
+      // Botones del menu
+      &__link
+        display: inline-block
+        font-size: 1.2rem
+        font-weight: bold
+        color: $color-negro
+        border: solid $color-negro 2px
+        border-radius: .5rem
+        padding: .5rem 1rem
+        min-width: 200px
+        text-transform: capitalize
+        margin: .5rem 0
+        cursor: pointer
+        &--cerrar
+          background-color: transparentize($color-rojo, .2)

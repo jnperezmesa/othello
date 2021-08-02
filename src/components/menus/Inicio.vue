@@ -5,7 +5,7 @@
       <nav class="menu__nav">
         <ul class="menu__nav__ul">
           <BotonSetMenu :ir="this.$store.state.menuNuevaPartida" texto="nueva partida"/>
-          <BotonSetMenu style="display: none" :ir="this.$store.state.menuPersonalizar" texto="Personalizar"/>
+          <BotonSetMenu :ir="this.$store.state.menuPersonalizar" texto="Personalizar"/>
         </ul>
       </nav>
     </div>
