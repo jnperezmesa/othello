@@ -6,7 +6,8 @@ import contarFichas from "../mixins/contarFichas";
 
 // URL DE CONEXION CON EL API
 const API_VERSION = 'v2'
-const API = 'http://127.0.0.1:8000/api/'.concat(API_VERSION);
+//const API = 'http://127.0.0.1:8000/api/'.concat(API_VERSION);
+const API = 'hola'.concat(API_VERSION);
 //const API = window.location.origin.concat('/api/' ,API_VERSION);
 //const API = 'https://api.othellogame.app'.concat('/api/' ,API_VERSION);
 const API_NUEVO_JUGADOR = API.concat('/jugador/crear/');
