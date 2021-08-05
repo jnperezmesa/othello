@@ -20,24 +20,23 @@ export default {
         },
         guardarEnLocal: function () {
             if (this.$store.state.permitirMemoria) {
-                let datos = [
+                return this.local.setItem('othello', JSON.stringify(
                     {
                         "id_jugador": this.$store.state.idJugador,
                         "disenyoTablero": this.$store.state.disenyoTablero,
                         "disenyoFichaNegra": this.$store.state.disenyoFichaNegra,
-                        "disenyoFichaBlanca": this.$store.state.disenyoFichaBlanca,
+                        "disenyoFichaBlanca": this.$store.state.disenyoFichaBlanca
                     }
-                ]
-                return this.local.setItem('othello', JSON.stringify(datos))
+                ))
             }
         },
         recuperarLocal: function () {
             if (this.local.getItem('othello') !== null) {
                 let datos = JSON.parse(this.local.getItem('othello'))[0]
-                this.$store.state.idJugador = datos['id_jugador'];
-                this.$store.state.disenyoTablero = datos['disenyoTablero'];
-                this.$store.state.disenyoFichaNegra = datos['disenyoFichaNegra'];
-                this.$store.state.disenyoFichaBlanca = datos['disenyoFichaBlanca'];
+                this.$store.state.idJugador = datos["id_jugador"];
+                this.$store.state.disenyoTablero = datos["disenyoTablero"];
+                this.$store.state.disenyoFichaNegra = datos["disenyoFichaNegra"];
+                this.$store.state.disenyoFichaBlanca = datos["disenyoFichaBlanca"];
             }
         },
     }

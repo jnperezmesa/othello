@@ -6,10 +6,8 @@ import contarFichas from "../mixins/contarFichas";
 
 // URL DE CONEXION CON EL API
 const API_VERSION = 'v2'
-//const API = 'http://127.0.0.1:8000/api/'.concat(API_VERSION);
-const API = 'hola'.concat(API_VERSION);
-//const API = window.location.origin.concat('/api/' ,API_VERSION);
-//const API = 'https://api.othellogame.app'.concat('/api/' ,API_VERSION);
+//const API = 'http://127.0.0.1:8000/'.concat(API_VERSION);
+const API = 'https://api.othellogame.app/'.concat(API_VERSION);
 const API_NUEVO_JUGADOR = API.concat('/jugador/crear/');
 const API_NUEVA_PARTIDA = API.concat('/partida/crear/');
 const API_UNIRSE_A_PARTIDA = API.concat('/partida/unirse/');
@@ -109,6 +107,8 @@ export default new Vuex.Store({
   mutations: {
     // Reinicio del juego
     reset: state => {
+      // Reestablezco revancha
+      state.ofertaRevancha = false
       // Me pongo en modo espera
       state.esperando = true
       // Resetablezco si ha habido abandono de partida
@@ -220,8 +220,8 @@ export default new Vuex.Store({
           })
           .then((json) => {
             // Usamos la información recibida como necesitemos
-            if (json['response'] === "pong") {
-              return state.estadoDelServidor = json['response']
+            if (json["response"] === "pong") {
+              return state.estadoDelServidor = json["response"]
             }
           });
       return state.estadoDelServidor = false
@@ -241,7 +241,7 @@ export default new Vuex.Store({
           })
           .then((json) => {
             // Usamos la información recibida como necesitemos
-            return state.idJugador = json['id_jugador'];
+            return state.idJugador = json["id_jugador"];
           });
     },
     crearPartida: state => {
@@ -259,8 +259,8 @@ export default new Vuex.Store({
           })
           .then((json) => {
             // Usamos la información recibida como necesitemos
-            state.idPatida = json['id_partida'];
-            state.ultimoCambio = json['fecha_ultima_actualizacion'];
+            state.idPatida = json["id_partida"];
+            state.ultimoCambio = json["fecha_ultima_actualizacion"];
           });
     },
     unirseAPartida: state => {
@@ -277,13 +277,13 @@ export default new Vuex.Store({
           })
           .then((json) => {
             // Usamos la información recibida como necesitemos
-            if (state.ultimoCambio !== json['fecha_ultima_actualizacion']) {
-              state.estado = json['estado'];
-              state.turno = json['turno'];
-              state.jugadorActivo = json['juega'];
-              state.victoria = json['victoria'];
-              state.tableroJuego = _.cloneDeep(JSON.parse(json['tablero']))
-              state.ultimoCambio = json['fecha_ultima_actualizacion'];
+            if (state.ultimoCambio !== json["fecha_ultima_actualizacion"]) {
+              state.estado = json["estado"];
+              state.turno = json["turno"];
+              state.jugadorActivo = json["juega"];
+              state.victoria = json["victoria"];
+              state.tableroJuego = _.cloneDeep(JSON.parse(json["tablero"]))
+              state.ultimoCambio = json["fecha_ultima_actualizacion"];
             }
           });
     },
@@ -303,7 +303,7 @@ export default new Vuex.Store({
               "contador_jugador_1": state.contadorFichasNegras,
               "contador_jugador_2": state.contadorFichasBlancas,
               "tablero": JSON.stringify(state.tableroJuego),
-              "state.ultimoCambio": state.ultimoCambio,
+              "state.ultimoCambio": state.ultimoCambio
             }
         )
       })
@@ -313,13 +313,13 @@ export default new Vuex.Store({
           })
           .then((json) => {
             // Usamos la información recibida como necesitemos
-            if (state.ultimoCambio !== json['fecha_ultima_actualizacion']) {
-              state.estado = json['estado'];
-              state.turno = json['turno'];
-              state.jugadorActivo = json['juega'];
-              state.victoria = json['victoria'];
-              state.tableroJuego = _.cloneDeep(JSON.parse(json['tablero']))
-              state.ultimoCambio = json['fecha_ultima_actualizacion'];
+            if (state.ultimoCambio !== json["fecha_ultima_actualizacion"]) {
+              state.estado = json["estado"];
+              state.turno = json["turno"];
+              state.jugadorActivo = json["juega"];
+              state.victoria = json["victoria"];
+              state.tableroJuego = _.cloneDeep(JSON.parse(json["tablero"]))
+              state.ultimoCambio = json["fecha_ultima_actualizacion"];
             }
           });
     },
@@ -331,14 +331,14 @@ export default new Vuex.Store({
           })
           .then((json) => {
             // Usamos la información recibida como necesitemos
-            if (state.ultimoCambio !== json['fecha_ultima_actualizacion']) {
-              state.estado = json['estado'];
-              state.turno = json['turno'];
-              state.jugadorActivo = json['juega'];
-              state.victoria = json['victoria'];
-              state.tableroJuego = _.cloneDeep(JSON.parse(json['tablero']))
-              state.ultimoCambio = json['fecha_ultima_actualizacion'];
-              if (json['nueva_partida'] !== null) {
+            if (state.ultimoCambio !== json["fecha_ultima_actualizacion"]) {
+              state.estado = json["estado"];
+              state.turno = json["turno"];
+              state.jugadorActivo = json["juega"];
+              state.victoria = json["victoria"];
+              state.tableroJuego = _.cloneDeep(JSON.parse(json["tablero"]))
+              state.ultimoCambio = json["fecha_ultima_actualizacion"];
+              if (json["nueva_partida"] !== null) {
                 state.ofertaRevancha = true;
               }
             }
@@ -358,20 +358,20 @@ export default new Vuex.Store({
           })
           .then((json) => {
             // Usamos la información recibida como necesitemos
-            if (state.ultimoCambio !== json['fecha_ultima_actualizacion']) {
-              state.idPatida = json['id_partida'];
-              state.estado = json['estado'];
-              state.turno = json['turno'];
-              state.jugadorActivo = json['juega'];
-              state.victoria = json['victoria'];
-              state.tableroJuego = _.cloneDeep(JSON.parse(json['tablero']))
-              if (json['id_jugador_1'] === state.idJugador) {
+            if (state.ultimoCambio !== json["fecha_ultima_actualizacion"]) {
+              state.idPatida = json["id_partida"];
+              state.estado = json["estado"];
+              state.turno = json["turno"];
+              state.jugadorActivo = json["juega"];
+              state.victoria = json["victoria"];
+              state.tableroJuego = _.cloneDeep(JSON.parse(json["tablero"]))
+              if (json["id_jugador_1"] === state.idJugador) {
                 state.juegasCon = state.jugador1;
               }
-              if (json['id_jugador_2'] === state.idJugador) {
+              if (json["id_jugador_2"] === state.idJugador) {
                 state.juegasCon = state.jugador2;
               }
-              state.ultimoCambio = json['fecha_ultima_actualizacion'];
+              state.ultimoCambio = json["fecha_ultima_actualizacion"];
             }
           });
     },
