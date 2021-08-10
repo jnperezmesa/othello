@@ -32,7 +32,7 @@ export default {
         },
         recuperarLocal: function () {
             if (this.local.getItem('othello') !== null) {
-                let datos = JSON.parse(this.local.getItem('othello'))[0]
+                let datos = JSON.parse(this.local.getItem('othello'));
                 this.$store.state.idJugador = datos["id_jugador"];
                 this.$store.state.disenyoTablero = datos["disenyoTablero"];
                 this.$store.state.disenyoFichaNegra = datos["disenyoFichaNegra"];
