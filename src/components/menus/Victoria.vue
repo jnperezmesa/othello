@@ -14,7 +14,7 @@
           </div>
           <span v-if="this.$store.state.tipoDePartida === this.$store.state.partidaLocal" @click="$store.dispatch('revancha')"><BotonJuego ir="Local" texto="revancha"/></span>
           <span v-if="this.$store.state.tipoDePartida === this.$store.state.partidaOnline" @click="$store.dispatch('revanchaOnline')">
-            <span  v-if="!revancha" @click="revancha = true"><BotonJuego ir="Online" texto="revancha"/></span>
+            <span  v-if="!revancha" @click="revancha = true"><BotonJuego ir="Online" :texto="this.$store.state.ofertaRevancha ? 'jugemos' : 'revancha'"/></span>
           </span>
           <span @click="$store.commit('reset')"><BotonJuegoOnline :ir_menu="this.$store.state.menuInicio" ir="home" texto="Salir"/></span>
           <!--- Fin otones del menu --->
