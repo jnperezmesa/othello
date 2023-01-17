@@ -11,6 +11,7 @@
 import Tablero from "../components/juego/Tablero";
 import Contador from "../components/juego/Contador";
 import contarFichas from "../mixins/contarFichas";
+import gestionarAlmacenamientoLocal from "../mixins/gestionarAlmacenamientoLocal";
 
 export default {
   name: 'Online',
@@ -20,8 +21,9 @@ export default {
   },
   mounted: function () {
     this.$forceUpdate()
-    this.activarIntervalo()
+    this.comprobarIdJugador()
     this.unirsePorUrl()
+    this.activarIntervalo()
   },
   data: function () {
     return {
@@ -39,7 +41,7 @@ export default {
         this.$store.state.idPatida = this.$route.query.id_partida
         setTimeout(() => {
          this.$store.dispatch('unirseAPartidaOnline')
-        }, 1)
+        }, 100)
       }
     }
   },
@@ -56,7 +58,9 @@ export default {
   },
   mixins: [
     // Computed
-    contarFichas
+    contarFichas,
+    // Almacenamiento local e id
+    gestionarAlmacenamientoLocal
   ],
 }
 </script>
